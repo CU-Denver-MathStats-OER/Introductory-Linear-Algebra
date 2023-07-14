@@ -1,0 +1,642 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Vector Spaces and Subspaces}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Introduction}
+  \bigskip
+  
+  We have seen that \alert{vector addition} and \blue{scalar multiplication} are key concepts for \green{linear} algebra:
+  \medskip
+  
+  \begin{itemize}
+    \item linear combinations,
+    \item vector equations (linear systems and matrix equations),
+    \item linear transformations.
+  \end{itemize}
+  \bigskip
+  
+  \pause
+  So far our vectors have been vectors in \blue{$\R^n$}.
+  \medskip
+  
+  We will now generalize \alert{``vectors''} to be any objects that we can \alert{add} and do \blue{scalar mult}.
+\end{frame}
+
+
+\begin{frame}{Vector Spaces}
+  A \green{vector space} is a nonempty set $V$ of objects called \textbf{vectors} on which we define two operations, called \alert{addition} and \blue{scalar multiplication}, for which the following properties hold for \green{all vectors} $\u$, $\v$, and $\w$ in $V$ and \green{all scalars} $c$ and $d$:
+  \medskip
+
+  \begin{columns}[T]
+  \column{0.5\tw}
+  \begin{enumerate}
+    \item \alert{Closed under addition:} \\ \quad $\u + \v$ is in $V$.
+    \item \alert{Addition is commutative:} \\ \quad $\u + \v = \v + \u$
+    \item \alert{Addition is associative:} \\ \quad $(\u + \v) + \mathbf{w} = \u + (\v + \mathbf{w})$
+    \item \alert{Additive identity (zero vector):} \\ There exists $\mathbf{0}$ in $V$ such that $\u + \mathbf{0} = \u$.
+    \item \alert{Additive inverse:} For each $\u$ in $V$, there exists a $- \u$ in $V$ where $\u + (- \u) = \mathbf{0}$.
+  \end{enumerate}
+
+  \column{0.5\tw}
+  \begin{enumerate}
+  \addtocounter{enumi}{5}
+    \item \blue{Closed under scalar multiplication:} \\ \quad $c \u$ is in $V$.
+    \item \blue{Distributive property 2:} \\ \quad $(c+d)  \u = c \u + d \u$
+    \item \blue{Distributive property 1:} \\ \quad $c( \u + \v ) = c \u + c \v$
+    \item \blue{Scalar multiplication is associative:} \\ \quad $c (d \u) = (cd) \u$
+    \item \blue{Multiplicative identity:}  \\ \quad $1 \u = \u$
+  \end{enumerate}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Examples}
+$V = \mathbb{R}^2$ with usual vector addition and scalar multiplication.
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+\bb
+\ii $\mathbf{u} + \mathbf{v}$ is in $\mathbb{R}^2$. \ms
+\ii $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$ \ms
+\ii $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$ \ms
+\ii $\mathbf{u} + \mathbf{0} = \mathbf{u}$. \ms
+\ii $\mathbf{u} + (- \mathbf{u}) = \mathbf{0}$. \ms
+\ee
+
+\column{0.5\tw}
+
+\bb
+\addtocounter{enumi}{5}
+\ii $c \mathbf{u}$ is in $\mathbb{R}^2$. \ms
+\ii $c( \mathbf{u} + \mathbf{v} ) = c \mathbf{u} + c \mathbf{v}$ \ms
+\ii $(c+d)  \mathbf{u} = c \mathbf{u} + d \mathbf{u}$ \ms
+\ii $c (d \mathbf{u}) = (cd) \mathbf{u}$ \ms
+\ii $1 \mathbf{u} = \mathbf{u}$ \ms
+\ee
+
+\end{columns}
+
+\vspace{2in}
+
+\end{frame}
+
+
+\begin{frame}{Examples}
+
+
+$V = \mathbb{P}_2$ denote the set of all polynomials of degree at most two, with the usual operations.
+\[ V = \{a_2 x^2 + a_1 x + a_0 : a_2,a_1,a_0 \in \mathbb{R} \}\]
+
+\pause
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+\bb
+\ii $(a_2x^2+a_1x+a_0) + (b_2x^2+b_1x+b_0) = (a_2+b_2)x^2+(a_1+b_1)x+(a_0+b_0)$ \ms
+\ii $f(x) + g(x) = g(x)+f(x)$ \ms
+\ii $(f(x) + g(x)) + h(x)  = f(x)+(g(x)+h(x))$ \ms
+\ii  $\mathbf{0} = 0x^2+0x+0= 0$ \ms
+\ii $- f(x) = -a_2x^2-a_1x-a_0$. \ms
+\ee
+
+\column{0.5\tw}
+
+\bb
+\addtocounter{enumi}{5}
+\ii $c f(x) = ca_2x^2+ca_1x+ca_0$ in  $\mathbb{P}_2$ \vspace{0.3in}
+\ii $c( f(x) + g(x)) = cf(x)+cg(x)$ \ms
+\ii $(c+d) f(x) = cf(x) + df(x)$ \vspace{0.25in}
+\ii $c (d f(x)) = (cd) f(x)$ \ms
+\ii $1 f(x) = f(x)$ \ms
+\ee
+
+
+\end{columns}
+
+\vspace{2in}
+
+\end{frame}
+
+\begin{frame}{Is it a Vector Space?}
+\bigskip
+
+{\small $V = \mathbb{R}^3$ with usual scalar multiplication and
+$\dsty \mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1 + v_2 \\ u_2 + v_2 \\ u_3 + v_2 \end{bmatrix}$.}
+
+\bigskip
+
+\pause
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+\bb
+\ii \colorg{$\mathbf{u} + \mathbf{v}$ is in $\mathbb{R}^3$.} \ms
+
+\ii \alert{$\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1 + v_2 & u_2 + v_2 & u_3 + v_2 \end{bmatrix}$\\
+$\mathbf{v} + \mathbf{u} = \begin{bmatrix} v_1 + u_2 & v_2 + u_2 & v_3 + u_2 \end{bmatrix}$.} \ss
+
+\ii {\tiny \colorg{$(\mathbf{u} + \mathbf{v}) + \mathbf{w} =  \begin{bmatrix} (u_1 + v_2)+w_2 & (u_2 + v_2)+w_2 & (u_3 + v_2)+w_2 \end{bmatrix}$\\
+$\mathbf{u} + (\mathbf{v} + \mathbf{w}) =  \begin{bmatrix} u_1 + (v_2+w_2) & u_2 + (v_2+w_2) & u_3 + (v_2+w_2) \end{bmatrix}$} } \ss
+
+\ii \alert{$\mathbf{u} + \mathbf{0} = \mathbf{u}$, then $\mathbf{0} = \begin{bmatrix} a & 0 & b \end{bmatrix}$.} \ss
+
+\ii \alert{$\mathbf{u} = \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}$ has no additive inverse.}
+\ee
+
+\column{0.5\tw}
+
+\bb
+\addtocounter{enumi}{5}
+\ii \colorg{$c \mathbf{u}$ is in $\mathbb{R}^3$.} \ms
+
+\ii {\scriptsize \colorg{$c( \mathbf{u} + \mathbf{v} ) = \begin{bmatrix} c(u_1+v_2) & c(u_2 + v_2) & c (u_3+v_2) \end{bmatrix}$\\
+$c \mathbf{u} + c \mathbf{v}= \begin{bmatrix} cu_1+cv_2 & cu_2 + cv_2 & cu_3+cv_2 \end{bmatrix}$ }} \ms
+
+\ii {\scriptsize \alert{$(c+d)  \mathbf{u} =  \begin{bmatrix} (c+d)u_1 & (c+d) u_2  & (c+d) u_3 \end{bmatrix}$\\
+$c \mathbf{u} + d \mathbf{u}= \begin{bmatrix} cu_1 + du_2 & cu_2 + du_2 & cu_3 + du_2 \end{bmatrix}$} }\ms
+
+\ii \colorg{$c (d \mathbf{u}) = (cd) \mathbf{u}$} \ms
+
+\ii \colorg{$1 \mathbf{u} = \mathbf{u}$}
+\ee
+
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Uniqueness of Zero Vector and Additive Inverse}
+
+\bbox
+If $V$ is a vector space, then there exists a unique zero vector $\mathbf{0}$.
+\ebox
+
+\blue{Proof.}
+Suppose $\mathbf{w}$ in $V$ with $\colorb{\mathbf{u} + \mathbf{w}} =  \mathbf{u} = \alert{\mathbf{w} + \mathbf{u}}$ for all $\mathbf{u}$ in $V$. 
+
+Thus, if $\mathbf{u} = \mathbf{0}$, then we have $\colorb{ \mathbf{0} + \mathbf{w}} = \mathbf{0}$,
+and so $\mathbf{w} = \mathbf{0}$.
+
+\bigskip
+
+\pause
+\bbox
+If $V$ is a vector space, then for each $\mathbf{u}$ in $V$ there exists a unique additive inverse $-\mathbf{u}$.
+\ebox
+
+\blue{Proof.}
+Suppose for $\mathbf{u}$ in $V$, $\mathbf{u}+\colorb{\mathbf{w}}=\mathbf{0}=\mathbf{u}+\colorr{\mathbf{z}}$.
+
+Add $\colorr{\mathbf{z}}$ to both sides of $\mathbf{u}+\colorb{\mathbf{w}}=\mathbf{0}$.
+$\implies \colorb{\mathbf{w}}=\colorr{\mathbf{z}}$.
+
+\end{frame}
+
+
+\begin{frame}{Is it a Vector Space?}
+\bigskip
+
+$V = \mathbb{R}^3$ with usual addition and 
+$\dsty c \mathbf{u} = \begin{bmatrix} -cu_1 \\ -cu_2 \\ -cu_3 \end{bmatrix}$.
+
+\bigskip
+
+\pause
+\begin{columns}[T]
+
+\column{0.4\tw}
+
+\bb
+\ii \colorg{$\mathbf{u} + \mathbf{v}$ is in $\mathbb{R}^3$.} \ms
+
+\ii  \colorg{$\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$} \ms 
+
+\ii \colorg{$(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{v} + (\mathbf{u} + \mathbf{w}$)} \ms 
+ 
+
+\ii \colorg{ $\mathbf{0} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$.} \ss
+
+\ii \colorg{$-\mathbf{u} = \begin{bmatrix} -u_1 \\ -u_2 \\ -u_3 \end{bmatrix}$}
+\ee
+
+\column{0.6\tw}
+
+\bb
+\addtocounter{enumi}{5}
+\ii \colorg{$c \mathbf{u}$ is in $\mathbb{R}^3$.} \ms
+
+\ii {\scriptsize \colorg{$c( \mathbf{u} + \mathbf{v} ) = \begin{bmatrix} -c(u_1+v_1) & -c(u_2 + v_2) & -c (u_3+v_3) \end{bmatrix}$\\
+$c \mathbf{u} + c \mathbf{v}= \begin{bmatrix} -cu_1-cv_1 & -cu_2 - cv_2 & -cu_3-cv_3 \end{bmatrix}$ }} \ms
+
+\ii {\scriptsize \colorg{$(c+d)  \mathbf{u} =  \begin{bmatrix} -(c+d)u_1 & -(c+d) u_2  & -(c+d) u_3 \end{bmatrix}$\\
+$c \mathbf{u} + d \mathbf{u}= \begin{bmatrix} -cu_1 - du_1 & -cu_2 - du_2 & -cu_3 - du_3 \end{bmatrix}$} }\ms
+
+\ii \alert{$c (d \mathbf{u}) \ne (cd) \mathbf{u}$} \ms
+
+\ii \colorr{Multiplicative identity fails since $1 \mathbf{u} \ne \mathbf{u}$.}
+\ee
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Is it a Vector Space?}
+\bigskip
+
+$V=$ $3 \times 3$ matrices with usual operations.
+\bigskip
+
+\pause
+Let $A$, $B$, and $C$ denote $3 \times 3$ matrices and $c$ and $d$ scalars.
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+\bb
+\ii \colorg{$A+B$ is a $3 \times 3$ matrix.} \smallskip
+\ii \colorg{$A+B=B+A$} \smallskip
+\ii \colorg{$(A+B)+C=A+(B+C)$}
+\ii \colorg{$\mathbf{0} = \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$}
+\ii  \colorg{$-A = \begin{bmatrix} -a_{11} & -a_{12} & -a_{13} \\  -a_{21} & -a_{22} & -a_{23} \\  -a_{31} & -a_{32} & -a_{33} \end{bmatrix}$}
+\ee
+
+\column{0.5\tw}
+
+\bb
+\addtocounter{enumi}{5}
+\ii \colorg{$cA$ is a $3 \times 3$ matrix.} \ms
+\ii  \colorg{$c(A+B)=cA+cB$} \ms
+\ii  \colorg{$(c+d)A=cA+dA$} \ms 
+\ii \colorg{$(cd)A=c(dA)$} \ms
+\ii \colorg{$1 A = A$}
+\ee
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Is it a Vector Space?}
+\bigskip
+
+$V$ is all $3 \times 3$ matrices with \alert{determinant $1$}.
+\bigskip
+
+\begin{enumerate}\setlength{\itemsep}{.3em}
+\ii $\mathbf{u} + \mathbf{v}$ is in $V$. \onslide<2->{\quad \alert{No!} $\det(I+I)=2^3$}
+\ii $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
+\ii $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$
+\ii $\mathbf{u} + \mathbf{0} = \mathbf{u}$.
+\ii $\mathbf{u} + (- \mathbf{u}) = \mathbf{0}$.
+\ii $c \mathbf{u}$ is in $V$.
+\ii $c( \mathbf{u} + \mathbf{v} ) = c \mathbf{u} + c \mathbf{v}$
+\ii $(c+d)  \mathbf{u} = c \mathbf{u} + d \mathbf{u}$
+\ii $c (d \mathbf{u}) = (cd) \mathbf{u}$
+\ii $1 \mathbf{u} = \mathbf{u}$
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Is it a Vector Space?}
+\begin{columns}[T]
+
+\column{0.33\tw}
+
+\bb
+\ii $\mathbf{u} + \mathbf{v}$ is in $V$.
+\ii $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
+\ii $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$
+\ii $\mathbf{u} + \mathbf{0} = \mathbf{u}$.
+\ii $\mathbf{u} + (- \mathbf{u}) = \mathbf{0}$.
+\ii $c \mathbf{u}$ is in $V$.
+\ii $c( \mathbf{u} + \mathbf{v} ) = c \mathbf{u} + c \mathbf{v}$
+\ii $(c+d)  \mathbf{u} = c \mathbf{u} + d \mathbf{u}$
+\ii $c (d \mathbf{u}) = (cd) \mathbf{u}$
+\ii $1 \mathbf{u} = \mathbf{u}$
+\ee
+
+\column{0.67\tw}
+
+  $V$ is all continuous functions $f\colon\mathbb{R} \to \mathbb{R}$ with usual operations.
+  \medskip
+ 
+  \pause \colorg{YES!}
+ 
+  \vspace*{2em}
+ 
+  \pause
+  $V$ is all continuous functions $f\colon\mathbb{R} \to \mathbb{R}$ with usual scalar multiplication and $f(x) + g(x) = f(g(x))$.
+  \medskip
+  
+  \pause
+  \alert{No!}
+  
+  Addition is not commutative: $\sin(x^2)\ne (\sin x)^2$.
+\end{columns}
+
+\end{frame}
+
+
+% \begin{frame}{Is it a Vector Space?}
+%   \begin{columns}[T]
+%   \column{0.33\tw}
+%     \bb
+%     \ii $\mathbf{u} + \mathbf{v}$ is in $V$.
+%     \ii $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
+%     \ii $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$
+%     \ii $\mathbf{u} + \mathbf{0} = \mathbf{u}$.
+%     \ii $\mathbf{u} + (- \mathbf{u}) = \mathbf{0}$.
+%     \ii $c \mathbf{u}$ is in $V$.
+%     \ii $c( \mathbf{u} + \mathbf{v} ) = c \mathbf{u} + c \mathbf{v}$
+%     \ii $(c+d)  \mathbf{u} = c \mathbf{u} + d \mathbf{u}$
+%     \ii $c (d \mathbf{u}) = (cd) \mathbf{u}$
+%     \ii $1 \mathbf{u} = \mathbf{u}$
+%     \ee
+% 
+%   \column{0.67\tw}
+%   \end{columns}
+%   \vspace{2in}
+% \end{frame}
+
+
+\begin{frame}{Is it a Vector Space?}
+\bigskip
+
+$V$ is all triangular $2 \times 2$ matrices with usual operations.
+
+\pause
+ \[ \begin{bmatrix} a_{11} & a_{12} \\ 0 & a_{22} \end{bmatrix} + \begin{bmatrix} b_{11} & 0 \\ b_{21} & b_{22} \end{bmatrix}  = \begin{bmatrix} a_{11}+b_{11} & a_{12} \\ b_{21} & a_{22}+b_{22} \end{bmatrix} \]
+ \qquad So \alert{not} closed under addition!
+
+
+\vspace{0.5in}
+
+\pause
+$V$ is all \colorb{upper} triangular $2 \times 2$ matrices with usual operations. \quad 
+\pause\colorg{YES!}
+
+\end{frame}
+
+
+\begin{frame}{Subspaces}
+
+\begin{definition}
+  A \alert{subspace} of a vector space $V$ is a subset $H$ of $V$ such that 
+  
+  \quad $H$ along with the addition and scalar multiplication of $V$ forms a vector space.
+\end{definition}
+
+\pause
+Some of the vector space properties are satisfied for $H$ since $V$ is a vector space.
+
+  {\small
+  \bbox
+  If a subset $H$ of a vector space $V$ has the following three properties, it is a \alert{subspace}.
+  \bb
+    \item \blue{Nonempty.} There exists some vector $\u$ in $H$.
+    \item \blue{Closed under vector addition.} If $\mathbf{u}$ and $\mathbf{v}$ are both in $H$, then their sum $\mathbf{u} + \mathbf{v}$ is in $H$.
+    \item \blue{Closed under scalar multiplication.} If $\mathbf{u}$ is in $H$, then for all scalars $c$, $c\mathbf{u}$ is in $H$.
+  \ee
+  \ebox
+  }
+
+Let $V = \mathbb{R}^3$ with usual operations. Consider the subset $\dsty H = \left\{ \begin{bmatrix} x \\ y \\ 0 \end{bmatrix} : x, y \in \mathbb{R}  \right\}$.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The Zero Vector and Additive Inverses}
+  \begin{theorem}
+    Let $V$ be a vector space.  For any vector $\mathbf{u}$ in $V$, $0\mathbf{u}=\mathbf{0}$.
+  \end{theorem}
+  Thus, nonempty plus closure of scalar mult implies that the zero vector is in a subspace.
+  \medskip
+  
+  \pause
+  \blue{Proof.} Note that $0\mathbf{u}=(0+0)\mathbf{u}=0\mathbf{u}+0\mathbf{u}$.
+  Subtracting $0\mathbf{u}$ from both sides, we have $\mathbf{0}=0\mathbf{u}$.
+  \bigskip
+  
+  \pause
+  \begin{theorem}
+    Let $V$ be a vector space.  For each vector $\mathbf{u}$ in $V$, $(-1)\mathbf{u}=-\mathbf{u}$.
+  \end{theorem}
+  
+  \pause
+  \blue{Proof.} Note that $\mathbf{0}=0\mathbf{u}=(1-1)\mathbf{u}=1\mathbf{u}+(-1)\mathbf{u}=\mathbf{u}+(-1)\mathbf{u}$.
+  \smallskip
+  
+  Since the additive inverse is unique, $(-1)\mathbf{u}=-\mathbf{u}$.
+\end{frame}
+
+
+\begin{frame}{Is it a Subspace?}
+
+\begin{columns}[T]
+
+\column{0.35\tw}
+
+\bb
+\item Nonempty.
+\ii Closed under addition.
+\ii Closed under scalar mult.
+\ee
+
+\column{0.65\tw}
+
+Let $V = \mathbb{R}^4$ with usual operations. $\dsty H =  \left\{ \begin{bmatrix} 2a + 3b \\ -d \\ 0 \\ 6c+2a-b \end{bmatrix} : a, b, c, d \mbox{ in }  \mathbb{R}  \right\}$.
+
+\end{columns}
+
+  \pause
+  \bb
+    \item {\footnotesize $\begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$ is in $H$.}
+    \ii {\footnotesize $\begin{bmatrix} 2a_1 + 3b_1 \\ -d_1 \\ 0 \\ 6c_1+2a_1-b_1 \end{bmatrix}  + \begin{bmatrix}  2a_2 + 3b_2 \\ -d_2 \\ 0 \\ 6c_2+2a_2-b_2 \end{bmatrix}  = \begin{bmatrix} 2(a_1+a_2) + 3(b_1+b_2)  \\ -(d_1+d_2) \\ 0 \\ 6(c_1 +c_2)+2(a_1+a_2)-(b_1+b_2) \end{bmatrix}$.} \ms
+    \ii {\footnotesize $k \begin{bmatrix} 2a + 3b \\ -d \\ 0 \\ 6c+2a-b \end{bmatrix}  = \begin{bmatrix} 2(ka) + 3(kb) \\ -(kd) \\ 0 \\ 6(kc)+2(ka)-(kb) \end{bmatrix}$.} 
+    \qquad \qquad \onslide<3->{So $H$ is a \alert{subspace} of $\R^4$.}
+  \ee
+\end{frame}
+
+\begin{frame}{Is it a Subspace?}
+
+\begin{columns}[T]
+
+\column{0.35\tw}
+
+\bb
+\ii Nonempty.
+\ii Closed under addition.
+\ii Closed under scalar mult.
+\ee
+
+\column{0.65\tw}
+
+Let $V = \mathbb{R}^3$ with usual operations. $\dsty H =  \left\{ \begin{bmatrix} 3a + b \\ a+5 \\ 2a-5b  \end{bmatrix} : a, b \mbox{ in } \mathbb{R}  \right\}$.
+
+\end{columns}
+
+\vspace{0.25in}
+
+\pause
+  \bb
+  \item Nonempty: {\footnotesize $\begin{bmatrix} 0 \\ 5 \\ 0 \end{bmatrix}$ is in $H$.}
+  \ii Consider {\footnotesize $\begin{bmatrix} 3(3) +0 \\ 3+5 \\ 2(3)-0 \end{bmatrix} + \begin{bmatrix} 0+1 \\ 0+5 \\ 0-5(1) \end{bmatrix} 
+  = \begin{bmatrix} 10 \\ 13 \\ 1 \end{bmatrix}
+  = \begin{bmatrix} 3(3) + 1 \\ 3 + \alert{10} \\ 2(3) - 5(1) \end{bmatrix}$}
+  is \alert{NOT in $H$}. \bs
+  \item If $k=0$, then $k \mathbf{h} = \mathbf{0}$ is \alert{NOT in $H$}.
+    We need $a=-5$, which means $b=15$. This gives $2a-5b =-10 -75=-85$. 
+    We \alert{cannot} find values for $a$, $b$, and $c$ in $\R$ such that \alert{$\mathbf{0}$ is in $H$.}
+  \ee
+\end{frame}
+
+
+\begin{frame}{The Span of a Set of Vectors}
+  \begin{theorem}
+    Let $\v_1, \ldots \v_p$ be vectors from a vector space $V$. Then $\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$ is a \alert{subspace} of $V$.
+  \end{theorem}
+  \bi
+  \item We call $\mbox{Span} \left\{ \v_1, \v_2, \ldots, \v_p \right\}$  the \alert{subspace spanned by $\v_1, \ldots , \v_p$ }.
+  \item Given any subspace of $H$ of $V$, a \alert{spanning set for $H$} is a set $\left\{ \v_1, \ldots, \v_p \right\}$ in $H$ such that $H=\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$.
+  \ei
+  
+  \pause
+  \blue{Proof.}
+  \begin{enumerate}[<+->]  % pause each item
+    \item $\mathbf{0}=0\v_1 + 0\v_2 + \ldots + 0\v_p$ is in $\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$.
+    \medskip
+    So $\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$ is nonempty.
+    \item Let $\x = \alert{a_1} \v_1 +  \alert{a_2} \v_2 +  \ldots  + \alert{a_p} \v_p$ and $\y = \colorb{b_1} \v_1 +  \colorb{b_2} \v_2  + \ldots + \colorb{b_p} \v_p$. Then we have
+    \[ \x + \y = (\alert{a_1} + \colorb{b_1}) \v_1 +   (\alert{a_2} + \colorb{b_2}) \v_2 +  \ldots +   (\alert{a_p} + \colorb{b_p}) \v_p. 
+    \ \text{ So $\x+\y$ is in $\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$.} \]
+    \item Let $\x = \alert{a_1} \v_1 +  \alert{a_2} \v_2 +  \ldots  + \alert{a_p} \v_p$. Then for a scalar $\colorp{c}$, we have
+    \[ \colorp{c} \x = (\colorg{ca_1}) \v_1 +  (\colorg{ca_2})  \v_2 +  \ldots + (\colorg{ca_p})  \v_p. 
+    \ \text{ So $c\x$ is in $\mbox{Span} \left\{ \v_1, \ldots, \v_p \right\}$.} \]
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Is it a Subspace?}
+
+\begin{columns}[T]
+
+\column{0.35\tw}
+
+\bb
+\item Nonempty.
+\ii Closed under addition.
+\ii Closed under scalar mult.
+\ee
+
+\column{0.65\tw}
+
+Let $V = \mathbb{R}^4$ with usual operations. $\dsty H =  \left\{ \begin{bmatrix} 2a + 3b \\ -d \\ 0 \\ 6c+2a-b \end{bmatrix} : a, b, c, d \mbox{ in }  \mathbb{R}  \right\}$.
+
+\end{columns}
+
+\vspace{0.2in}
+
+\pause
+{\small Notice that $\begin{bmatrix} 2a + 3b \\ -d \\ 0 \\ 6c+2a-b \end{bmatrix} = a \begin{bmatrix} 2 \\ 0 \\ 0 \\ 2 \end{bmatrix} + b \begin{bmatrix} 3 \\ 0 \\ 0 \\ -1 \end{bmatrix} + c \begin{bmatrix} 0 \\ 0 \\ 0 \\ 6 \end{bmatrix} + d  \begin{bmatrix} 0 \\ -1 \\ 0 \\ 0 \end{bmatrix}$. Thus we have:} \ms
+
+  \[ H = \mbox{Span} \left\{ \begin{bmatrix} 2 \\ 0 \\ 0 \\ 2 \end{bmatrix} , \begin{bmatrix} 3 \\ 0 \\ 0 \\ -1 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 0 \\ 0 \\ 6 \end{bmatrix} ,  \begin{bmatrix} 0 \\ -1 \\ 0 \\ 0 \end{bmatrix} \right\}.
+  \quad
+  \text{Thus, $H$ is a \alert{subspace} of $\mathbb{R}^4$.}
+  \]
+\end{frame}
+
+
+\begin{frame}{Is it a Subspace?}
+
+\begin{columns}[T]
+
+\column{0.35\tw}
+
+\bb
+\item Nonempty.
+\ii Closed under addition.
+\ii Closed under scalar mult.
+\ee
+
+\column{0.65\tw}
+
+\onslide*<1-4>{
+Let $V = \mbox{Mat}_{2 \times 2}$ with the usual operations.
+
+\qquad $\dsty H = \left\{ \begin{bmatrix} a & c \\ c & b \end{bmatrix} : a,b,c \in \mathbb{R} \right\}$
+}
+
+\onslide*<2-4>{
+\medskip
+
+\quad \colorg{YES!}
+$H=\text{Span}\left\{
+    \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix},
+    \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix},
+    \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+  \right\}$
+}
+
+\onslide*<3-4>{
+\vspace*{2em}
+Let $V = \mbox{Mat}_{3 \times 3}$ with the usual operations.
+
+$\dsty H = \left\{ \begin{bmatrix} a & 0 & 0  \\ 0 & b & 0 \\ 0 & 0 & c \end{bmatrix} : a,b,c \in \mathbb{R} \mbox{ with } a+b+c=0 \right\}$
+}
+
+\onslide*<4>{
+\quad \colorg{YES!}
+$H=\text{Span}\left\{
+    \begin{bmatrix} 1 & 0 & 0\\ 0 & 0 & 0\\ 0 & 0 & -1\end{bmatrix},
+    \begin{bmatrix} 0 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & -1\end{bmatrix}
+  \right\}$
+}
+
+\onslide*<5->{
+Let $V = \mathbb{P}$ (all polynomials) with usual operations. 
+
+$H$ is the set of polynomials of degree at most $2$.
+}
+
+\onslide*<6->{
+\qquad \colorg{YES!}  $H=\text{Span}\{x^2,x,1\}$.
+}
+
+\onslide*<7->{
+\bigskip
+
+$H$ is the set of polynomials with integer coefficients.
+}
+
+\onslide*<8->{
+\quad \alert{No!}  Not closed under scalar mult (scalars are reals).
+}
+
+\onslide*<9->{
+\vspace{2em}
+
+Let $V$ be all continuous functions with the usual operations.
+
+$H$ is the set of all \alert{differentiable} functions.
+}
+
+\onslide*<10->{
+\quad \colorg{YES!}  But cannot be described as a \blue{finite} span.
+
+\vspace{2em}
+}
+
+\end{columns}
+
+\end{frame}
+
+\end{document}

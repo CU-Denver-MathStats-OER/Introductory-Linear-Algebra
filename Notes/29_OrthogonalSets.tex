@@ -1,0 +1,295 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Orthogonal Sets}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Orthogonal Sets}
+  \begin{definition}
+    A set of vectors $\left\{ \v_1, \v_2, \ldots , \v_p \right\}$ in $\R^n$ is said to be an \alert{orthogonal set} 
+
+    \quad if $\v_i \cdot \v_j =0$ when $i \ne j$ (ie, the vectors are pairwise orthogonal).
+  \end{definition}
+  \medskip
+
+  \begin{example}
+  Is $\left\{ \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$ an orthogonal set?
+  \end{example}
+  \medskip
+
+  \pause
+  Since
+  \[ \v_1 \cdot \v_2 = 0 , \quad \v_1 \cdot \v_3 = 0, \quad \mbox{and } \v_2 \cdot \v_3 = 0 ,\]
+  the set is indeed an orthogonal set.
+\end{frame}
+
+
+\begin{frame}{Linear Independence of Orthogonal Sets}
+  \begin{theorem}
+  If $S = \left\{ \v_1 , \v_2 , \ldots , \v_p \right\}$ is an \alert{orthogonal set} of \alert{nonzero} vectors in $\R^n$, then
+  \smallskip
+  
+  $S$ is a \alert{linearly independent} set, and is therefore a \blue{basis} for the subspace spanned by $S$.
+  \end{theorem}
+  \medskip
+
+  \pause
+  \blue{Proof.}\smallskip
+  
+  Suppose $S$ is an orthogonal set and that the vectors in $S$ are linearly \alert{dependent}.
+  This implies there exist scalars $c_1,c_2,\ldots,c_p$, with at least one $c_i \ne 0$,
+  such that $\mathbf{0} = c_1 \v_1 + c_2 \v_2 + \ldots + c_p \v_p$.
+  \pause Then we have
+
+  \begin{columns}[T]
+  \column{0.5\tw} 
+  \vspace*{-1em}
+  \begin{align*}
+  0 &= \mathbf{0} \cdot \v_1 = (c_1 \v_1 + c_2 \v_2 + \ldots + c_p \v_p) \cdot \v_1 \\
+  &= c_1( \v_1 \cdot \v_1) + c_2 ( \v_2 \cdot \v_1) + \ldots c_p ( \v_p \cdot \v_1) \\
+  &= c_1( \v_1 \cdot \v_1).
+  \end{align*}
+
+  \column{0.5\tw}
+  \pause
+  Since $\v_1$ is nonzero, we have $c_1=0$.
+  Similarly, we can show that $c_1 = c_2 = \ldots = c_p =0$,
+  which contradicts our original assumption.
+  Thus $S$ is \alert{linearly independent}.
+  \end{columns}
+  
+  \hfill\blue{$\qed$}
+\end{frame}
+
+
+\begin{frame}{Orthogonal Bases}
+  \medskip
+  
+  \begin{definition}
+    An \alert{orthogonal basis} for a subspace $W$ of $\R^n$ is a \blue{basis} for $W$ that is also an \blue{orthogonal set}.
+  \end{definition}
+  \medskip
+
+  \begin{example}
+  \bi
+  \ii The set $S_1  = \left\{ \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$ is an orthogonal basis for $\R^3$. \ms
+  \ii The set $S_2  = \left\{ \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$ is a basis for $\R^3$ that is \alert{not} orthogonal.
+  \ei
+  \end{example}
+\end{frame}
+
+
+\begin{frame}{Finding Coordinates With an Orthogonal Basis}
+  \bigskip
+
+  Suppose that $\B = \left\{ \u_1 , \u_2, \ldots , \u_p \right\}$ is an \alert{orthogonal basis} for a subspace $W$ of $\R^n$.
+  \smallskip
+  
+  Find $\B$-coordinates of $\y$ in $W$.
+
+  \pause
+  \begin{columns}[T]
+  \column{0.45\tw}
+  \begin{align*}
+    \onslide<+-> { \y &= c_1 \u_1 + c_2 \u_2 + \ldots + c_p \u_p \\}
+    \onslide<+-> { \y \cdot \u_1 &= (c_1 \u_1 + c_2 \u_2 + \ldots + c_p \u_p) \cdot \u_1 \\}
+    \onslide<+-> { \y \cdot \u_1 &= c_1 (\u_1 \cdot \u_1) + \ldots + c_p(\u_p \cdot \u_1) \\
+                   \y \cdot \u_1 &= c_1 (\u_1 \cdot \u_1)\\[.3em]
+                   c_1 &= \frac{\y \cdot \u_1}{\u_1 \cdot \u_1} \\[.7em]}
+    \onslide<+-> { c_j &= \frac{\y \cdot \u_j}{\u_j \cdot \u_j} \text{ for each $j$.} }
+  \end{align*}
+
+  \column{0.55\tw}
+  \pause
+  \begin{theorem}
+  Let $S= \left\{ \u_1 , \u_2, \ldots , \u_p \right\}$ be an orthogonal basis for a subspace $W$ of $\R^n$. For each $\y$ in $W$, the weights in the linear combination $\y = c_1 \u_1 + c_2 \u_2 + \ldots + c_p \u_p$ are given by
+  \[ c_j =  \frac{\y \cdot \u_j}{\u_j \cdot \u_j}  \quad \mbox{for } j = 1, 2, \ldots , p .\]
+  \end{theorem}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Finding Coordinates with an Orthogonal Basis}
+  \begin{columns}
+  \column{0.6\tw}
+  \begin{example}
+  Express the vector $\y = \begin{bmatrix} 3 \\ 7 \\ 4 \end{bmatrix}$ as a linear combination of the orthogonal basis $\left\{ \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\}$.
+  \end{example}
+
+  \pause
+  \column{0.4\tw}
+  \[ \alert{c_1 = \frac{\y \cdot \u_1}{\u_1 \cdot \u_1} = \frac{3-7}{2} = -2} \]
+
+  \[ \colorb{c_2 = \frac{\y \cdot \u_2}{\u_2 \cdot \u_2} = \frac{3+7}{2} = 5} \]
+
+  \[ \colorg{c_3 = \frac{\y \cdot \u_3}{\u_3 \cdot \u_3} = \frac{4}{1} = 4} \]
+  \end{columns}
+
+  \ms
+
+  Thus we have 
+  
+  \[ \y = \begin{bmatrix} 3 \\ 7 \\ 4 \end{bmatrix}
+  = \alert{-2}  \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} 
+  + \colorb{5}  \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} 
+  + \colorg{4} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} 
+  .\]
+\end{frame}
+
+
+\begin{frame}{Orthogonal Projections}
+  \bigskip
+
+  \bi
+  \ii In physics, forces are generally expressed as vectors, $\mathbf{F}$.
+  \ii An object is moving with velocity $\v$.
+  \ii We often want to decompose the force $\mathbf{F}$ into two components $\mathbf{F} = \mathbf{F}_{\rm perp} + \mathbf{F}_{\rm parallel}$
+  %\ii In data science, we may want to minimize the sum of the squared distances of observed values from a plane of predicted values.
+  \ei
+  \vspace*{1.5em}
+
+  \begin{columns}[T]
+
+  \column{0.7\tw}
+
+  Given a nonzero vector $\u$ in $\R^n$, we wish to decompose a vector $\y$ in $\R^n$ into the sum of two vectors, one that is \alert{parallel} to $\u$ and the other is \alert{orthogonal} to $\u$:
+  \[ \y = \hat{\y} + \z = c \u + \z =  \mbox{proj}_{\u} \y + \y_{\rm perp} = \mbox{proj}_{\u} \y + (\y - \hat{\y}) .\]
+
+  \column{0.3\tw}
+  \includegraphics[width=0.95\tw]{images/fig-projection-plane.png}
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \vspace*{-.7em}
+
+  \begin{columns}[T]
+  \column{0.7\tw}
+  Given a nonzero vector $\u$ in $\R^n$, we wish to decompose a vector $\y$ in $\R^n$ into the sum of two vectors, one is parallel to $\u$ and the other is orthogonal to $\u$:
+  \[ \y = \hat{\y} + \z = c \u + \z =  \mbox{proj}_{\u} \y + \y_{\rm perp} = \mbox{proj}_{\u} \y + (\y - \hat{\y}) .\]
+
+  \column{0.3\tw}
+  \includegraphics[width=0.95\tw]{images/fig-projection-plane.png}
+  \end{columns}
+
+  We want to find $\hat{\y} = \mbox{proj}_{\u} \y= c\u$. 
+  \pause
+  The other component $\z = \y - \hat{\y}$ is \alert{orthogonal} to $\u$, so
+  \[ 0 = (\y - c\u) \cdot \u = (\y \cdot \u) - c( \u \cdot \u) .\]
+  \pause
+  Thus we see that 
+  \[ c = \frac{\y \cdot \u}{\u \cdot \u}. \]
+
+  \pause
+  \begin{definition}
+    The vector $\hat{\y}$ is called the \alert{orthogonal projection of $\y$ onto $\u$}, and the vector $\z$ is called the \alert{component of $\y$ orthogonal to $\u$}. We have 
+    \[ \hat{\y} =  \mbox{proj}_{\u} \y =  \left( \frac{\y \cdot \u}{\u \cdot \u} \right) \u, \qquad \z = \y - \hat{\y}.\]
+  \end{definition}
+\end{frame}
+
+
+\begin{frame}{Application of Projections}
+
+\begin{example}
+Suppose a sailboat has constant velocity given by $\v = \begin{bmatrix} 3 \\ 4 \end{bmatrix}$. The wind has a constant velocity of $\w = \begin{bmatrix} 10 \\ -10 \end{bmatrix}$. Find the component of the force that in the direction of the sailboat's motion.
+\end{example} 
+
+\pause
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+We have 
+
+\[ \hat{\w} =  \mbox{proj}_{\v} \w =  \left( \frac{\w \cdot \v}{\v \cdot \v} \right) \v = \frac{-10}{25} \v =\begin{bmatrix}  -6/5 \\ -8/5 \end{bmatrix} \]
+
+\[ \z = \w - \hat{\w} = \begin{bmatrix} 56/5 \\  -42/5 \end{bmatrix} \]
+
+\column{0.5\tw}
+
+And we can verify that
+
+\[ \hat{\w} \cdot \z = \begin{bmatrix}  -6/5 \\ -8/5 \end{bmatrix} \cdot \begin{bmatrix} 56/5 \\  -42/5 \end{bmatrix} =  0 .\]
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Orthonormal Sets}
+  \medskip
+
+  \begin{definition}
+  A set $\left\{ \u_1, \u_2, \ldots , \u_p \right\}$ is an \alert{orthonormal set} if it is an orthogonal set of \alert{unit} vectors.
+  \end{definition}
+  \medskip
+
+  \begin{example}
+    The set $S = \left\{ \e_1,\e_2,\ldots,\e_n \right\}$ is an orthonormal set that forms a basis for $\R^n$.
+  \end{example}
+  \medskip
+
+  \bi
+  \ii Orthonormal sets (bases) are particularly nice to work with as many formulas simplify considerably.
+  \ii For example, $\dsty \hat{\y} =  \mbox{proj}_{\u} \y =  \left( \frac{\y \cdot \u}{\u \cdot \u} \right) \u = (\y \cdot \u) \u$.
+  \ei
+\end{frame}
+
+\begin{frame}{Matrices Constructed from Orthonormal Sets}
+  \bigskip
+
+  Let $\left\{ \u_1, \u_2, \ldots, \u_p \right\}$ be an \alert{orthonormal set} in $\R^n$ and let $U = \begin{bmatrix} \u_1 & \u_2 & \ldots & \u_p \end{bmatrix}_{n\times p}$. Then
+
+  {\small
+  \[ U^TU = \begin{bmatrix} \u_1^T \\ \u_2^T \\ \vdots \\ \u_p^T \end{bmatrix}_{p \times n} \begin{bmatrix} \u_1 & \u_2 & \ldots & \u_p \end{bmatrix}_{n \times p} 
+  \pause =
+  \begin{bmatrix} \u_1^T  \u_1 & \u_1^T \u_2 & \ldots &  \u_1^T \u_p \\[.4em]
+  \u_2^T \u_1 & \u_2^T \u_2 & \ldots & \u_2^T \u_p \\[.4em]
+  \vdots      & \vdots      & \ddots & \vdots \\[.4em]
+  \u_p^T \u_1 & \u_p^T \u_2 & \ldots & \u_p^T \u_p \end{bmatrix}
+  \pause
+  = \begin{bmatrix}
+    1 & 0 & \ldots & 0 \\ 
+    0 & 1 & \ldots & 0 \\ 
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & 1 \end{bmatrix}_{p\times p} 
+  \]
+  }
+  \vspace*{1em}
+  
+  \pause
+  \begin{theorem}
+  The columns of an $m \times n$ matrix $U$ form an \alert{orthonormal set} if and only if $U^TU=I_{n\times n}$.
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}{Linear Mapping from Matrix whose Columns form an Orthonormal Set}
+  \medskip
+
+  \begin{theorem}
+  Let $U$ be an $m \times n$ matrix with orthonormal columns, 
+  and let $\x$ and $\y$ be in $\R^n$. Then
+  \bb[(a)]
+  \ii $(U \x) \cdot (U \y) = \x \cdot \y$.  \smallskip
+  \ii $\| U\x \| = \| \x \|$.  \smallskip
+  \ii $(U \x) \cdot (U \y) = 0$ if and only if $\x \cdot \y=0$.  \smallskip
+  \ee
+  In other words, the linear mapping $\x \mapsto U\x$ preserves \alert{length} and \alert{orthogonality}.
+  \end{theorem}
+  \bigskip
+
+  \pause
+  \blue{Proof.}
+  
+  Statements (b) and (c) follow from statement (a).
+  Note that
+    \[ (U \x) \cdot (U \y) = (U \x)^T (U \y) = \x^T (U^T U) \y = \x^T \y = \x \cdot \y. \]
+    
+  \vspace*{-2em}
+  \hfill\blue{$\qed$}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,319 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Change of Basis}
+
+\renewcommand{\C}{\mathcal{C}}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Change of Coordinate Mappings}
+  Let $V$ be a vector space with two bases 
+  $\B = \left\{ \b_1, \b_2, \ldots, \b_n \right\}$ and
+  $\C = \left\{ \c_1, \c_2, \ldots, \c_n \right\}$.
+  
+  Suppose that $\x\in V$, and we have \alert{$[\x]_\B$}.  How can we find \blue{$[\x]_\C$}?
+  \bigskip
+  
+  \pause
+  {\small
+  We have that $\x = d_1 \b_1 + d_2 \b_2 + \ldots + d_n \b_n$.
+  We want to write $\x$ as a linear combin of $\c_1, \c_2, \ldots, \c_n$.
+  \smallskip
+
+  Since $\C$ is a basis,
+  each $\b_j$ is a linear combin of the elements of $\C$:
+  $\b_j= a_{1j} \c_1 + a_{2j} \c_2 + \ldots + a_{nj} \c_n$.
+  \smallskip
+  
+  Substituting and grouping the $\c_i$, we have
+  \[
+    \x = 
+     \left( \sum_{j=1}^n a_{1j} d_j \right) \c_1
+    +\left( \sum_{j=1}^n a_{2j} d_j \right) \c_2
+    +\ldots
+    +\left( \sum_{j=1}^n a_{ij} d_j \right) \c_i
+    +\ldots
+    +\left( \sum_{j=1}^n a_{nj} d_j \right) \c_n.
+  \]
+  \pause
+  \[
+  \text{Thus, }
+  \blue{[\x]_\C} =
+  \begin{bmatrix} a_{11} & a_{12} & \ldots & a_{1j} & \ldots & a_{1n} \\
+  a_{21} & a_{22} & \ldots & a_{2j} & \ldots & a_{2n} \\
+  \vdots & \vdots &  & \vdots & & \vdots \\
+  a_{n1} & a_{n2} & \ldots & a_{nj} & \ldots & a_{nn} \end{bmatrix}
+  \begin{bmatrix} d_1 \\ d_2 \\ \vdots \\ d_n \end{bmatrix}
+  \pause
+  = 
+  \bigg[ [\b_1]_\C \ [\b_2]_\C \ \ldots \ [\b_n]_\C \bigg] [\x]_\B
+  = \purple{\underset{\C \leftarrow \B}{P}} \alert{[\x]_\B}.
+  \]
+  }
+\end{frame}
+
+
+\begin{frame}{Change of Basis Matrix}
+  \medskip
+
+  \begin{theorem}
+    Let $\B = \left\{ \b_1,\b_2,\ldots,\b_n \right\}$ and $\C = \left\{ \c_1,\c_2,\ldots,\c_n \right\}$ be bases for a vector space $V$.
+    Then there is a unique $n \times n$ matrix $\underset{\C \leftarrow \B}{P}$ such that
+    \[ \underset{\C \leftarrow \B}{P} [\x]_\B = [\x]_\C. \]
+    
+    The map $\z \mapsto \underset{\C \leftarrow \B}{P} \z$ is a linear transformation from $\R^n$ ($\B$-coordinates) to $\R^n$ ($\C$-coordinates).
+    \bigskip
+
+    The columns of the \alert{change of basis matrix from $\B$ to $\C$}, denoted \alert{$\underset{\C \leftarrow \B}{P}$}, are the $\C$-coordinate vectors in the basis $\B$.
+    \[ \underset{\C \leftarrow \B}{P} =
+      \begin{bmatrix} [\b_1]_{\C} & [\b_2]_{\C} & \ldots & [\b_n]_{\C} \end{bmatrix}.
+    \]
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}{Example}
+  Let $V = \mathbb{P}^2$ and consider two bases
+  $\B = \left\{ 1, t, t^2 \right\}$ and $\C = \left\{ 1, 1+t, 1+t+t^2 \right\}$.
+
+  Write $\x=3-2t+7t^2$ in terms of the basis $\C$.
+  \medskip
+
+  \pause
+  We compute the change of basis matrix $\underset{\C \leftarrow \B}P$.
+  \[
+    \underset{\C \leftarrow \B}P=
+    \begin{bmatrix} [\b_1]_{\C} & [\b_2]_{\C} & \ldots & [\b_n]_{\C} \end{bmatrix}
+    =
+    \begin{bmatrix} 1 & -1 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1 \end{bmatrix}.
+  \]
+  
+  \pause
+  We can then compute
+  \[
+    [\x]_\C = \underset{\C \leftarrow \B}P [\x]_\B
+    = \begin{bmatrix} 1 & -1 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1 \end{bmatrix}
+    \begin{bmatrix} 3 \\ -2 \\ 7 \end{bmatrix}
+    =
+    \begin{bmatrix} 5 \\ -9 \\ 7 \end{bmatrix}.
+  \]
+  So $3-2t+7t^2 = 5 (1) -9 (1+t) +7 (1+t+t^2)$.
+\end{frame}
+
+
+\begin{frame}{Example}
+
+{\small Let $\mathcal{A} = \left\{ \mathbf{a}_1, \mathbf{a}_2 , \mathbf{a}_3 \right\}$ and  $\B = \left\{ \b_1, \b_2 , \b_3 \right\}$ be bases for a vector space $V$. Suppose we know that}
+
+\[ \mathbf{a}_1 = 4 \b_1 - \b_2, \quad \mathbf{a}_2 = - \b_1 + \b_2 +\b_3, \quad \mbox{and} \quad \mathbf{a}_3 =  - \b_2 + 2\b_3 \]
+
+\begin{columns}[T]
+
+\column{0.55\tw}
+
+\bb
+\ii {\small Find the change of basis matrix from $\mathcal{A}$ to $\B$.}
+\ee
+
+\pause
+\colorb{We know that 
+\[ \lbrack \mathbf{a}_1 \rbrack_{\B} = \begin{bmatrix} 4 \\ -1 \\ 0 \end{bmatrix}_{\B}  ,
+\lbrack \mathbf{a}_2 \rbrack_{\B} = \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}_{\B}  ,
+\lbrack \mathbf{a}_3 \rbrack_{\B} = \begin{bmatrix} 0 \\ -1 \\ 2 \end{bmatrix}_{\B}  \]}
+
+\colorb{Thus we have
+\vspace{-0.2in}
+ \[ \underset{\B \leftarrow \mathcal{A}}{P} = \begin{bmatrix}
+\lbrack \mathbf{a}_1 \rbrack_{\B} & \lbrack \mathbf{a}_2 \rbrack_{\B}  &  \lbrack \mathbf{a}_3 \rbrack_{\B} \end{bmatrix} = 
+\begin{bmatrix} 4 & -1 & 0 \\ -1 & 1 & -1 \\ 0 & 1 & 2 \end{bmatrix} \]}
+
+\column{0.45\tw}
+
+\bb
+\addtocounter{enumi}{1}
+\ii {\small Find $\lbrack \x \rbrack_{\B}$ for $\x = 3 \mathbf{a}_1 + 4 \mathbf{a}_2 + \mathbf{a}_3$.}
+\ee
+
+\pause
+\alert{We have $\x = \begin{bmatrix} 3 \\ 4 \\ 1 \end{bmatrix}_{\mathcal{A}}$. Using our change of basis matrix we have
+\[ \lbrack \x \rbrack_{\B} = \begin{bmatrix} 4 & -1 & 0 \\ -1 & 1 & -1 \\ 0 & 1 & 2 \end{bmatrix} \begin{bmatrix} 3 \\ 4 \\ 1 \end{bmatrix}_{\mathcal{A}} = \begin{bmatrix} 8 \\ 0 \\ 6 \end{bmatrix}_{\B} .\]}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Example in $\R^n$}
+  \smallskip
+  
+  Let $V = \R^2$ and consider two bases $\B = \left\{ \begin{bmatrix} 2 \\ 1 \end{bmatrix}, \begin{bmatrix} -6 \\ 1 \end{bmatrix} \right\}$ and $\C = \left\{ \begin{bmatrix} 5 \\ 3 \end{bmatrix}, \begin{bmatrix} 2 \\ -2 \end{bmatrix} \right\}$.
+  
+  \begin{columns}
+  \column{.4\textwidth}
+  Write $\begin{bmatrix} 1 \\ 6 \end{bmatrix}_\B$ in terms of the basis $\C$.
+  \bigskip
+  
+  \pause
+  We find $[\b_1]_\C$ and $[\b_2]_\C$ by solving
+  \begin{align*}
+    \begin{bmatrix} 5 & 2 \\ 3 & -2 \end{bmatrix} [\b_1]_\C 
+    &= \begin{bmatrix} 2 \\ 1 \end{bmatrix}\\
+  \intertext{and}
+    \begin{bmatrix} 5 & 2 \\ 3 & -2 \end{bmatrix} [\b_2]_\C 
+    &= \begin{bmatrix} -6 \\ 1 \end{bmatrix}.
+  \end{align*}
+
+  \column{.6\textwidth}
+  \vspace*{.5em}
+  
+  \pause
+  More efficient to solve \alert{both} by row reducing
+  \begin{align*}
+  \colorb{\begin{bmatrix} \c_1 &  \c_2 & | &  \b_1 &  \b_2 \end{bmatrix}} &=  
+  \begin{bmatrix} 5 & 2 & | & 2 & -6 \\
+  3 & -2 & | & 1 & 1 \end{bmatrix} \\
+  %&= \begin{bmatrix} 1 & 2/5 & | & 2/5 & -6/5 \\
+  %3 & -2 & | & 1 & 1 \end{bmatrix} \\
+  &= \begin{bmatrix} 1 & \frac{2}{5} & | & \frac{2}{5} & -\frac{6}{5} \\
+  0 & -\frac{16}{5} & | & -\frac{1}{5} & \frac{23}{5} \end{bmatrix} \\
+  &= \begin{bmatrix} 1 & 0 & | & \alert{\frac{3}{16}} & \alert{\frac{-10}{16}} \\
+  0 & 1 & | & \alert{-\frac{1}{16}} &\alert{ \frac{-23}{16}} \end{bmatrix} 
+  \end{align*}
+  
+  \pause
+  $[\x]_\C = \underset{\C\leftarrow\B}{P} [\x]_\B
+  =\begin{bmatrix}\frac{3}{16} & \frac{-10}{16} \\ -\frac{1}{16} & \frac{-23}{16} \end{bmatrix}
+  \begin{bmatrix} 1 \\ 6 \end{bmatrix}_\B
+  =\begin{bmatrix} -27/8 \\ -137/16 \end{bmatrix}_\C$.
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Finding the Change of Basis Matrix for Two Bases of $\R^n$}
+  \bigskip
+
+  Let $V=\R^n$ with two bases 
+  $\B = \left\{ \b_1, \b_2, \ldots, \b_n \right\}$ and
+  $\C = \left\{ \c_1, \c_2, \ldots, \c_n \right\}$.
+  \smallskip
+  
+  \quad (\emph{Note that $\b_i$ and $\c_j$ are written in terms of the \blue{standard basis} for $\R^n$.})
+  \bigskip
+  
+  Then the \alert{change of basis matrix $\underset{\C\leftarrow\B}P$} can be found by row reducing
+  \[
+    \begin{bmatrix}
+      \c_1 & \c_2 & \ldots & \c_n & | & \b_1 & \b_2 & \ldots & \b_n 
+    \end{bmatrix}
+    \quad \rightarrow \quad 
+    \begin{bmatrix}
+      I_n & | & \alert{\underset{\C\leftarrow\B}P}
+    \end{bmatrix}.
+  \]
+  \vspace*{2em}
+  
+  Note this is reminiscent of computing $A^{-1}$ by row reducing $[A \mid I] \rightarrow [ I \mid A^{-1}]$.
+  
+\end{frame}
+
+
+\begin{frame}{Inverse of Change of Basis Matrix}
+  \medskip
+  
+  Let $V$ be a vector space with two bases 
+  $\B = \left\{ \b_1, \b_2, \ldots, \b_n \right\}$ and
+  $\C = \left\{ \c_1, \c_2, \ldots, \c_n \right\}$.
+  \smallskip
+  
+  Let $\underset{\C\leftarrow\B}P$ be the change of basis matrix.
+  Is $\underset{\C\leftarrow\B}P$ \alert{invertible}?
+  \vspace*{2em}
+  
+  \pause
+  Recall that the $\C$-coordinate mapping $V\to\R^n$ where $\x\mapsto [\x]_\C$ is an \blue{isomorphism.}
+  \smallskip
+  
+  Since $\{\b_1, \b_2, \ldots, \b_n\}$ is a linearly independent set,
+  so is $\{[\b_1]_\C, [\b_2]_\C, \ldots, [\b_n]_\C\}$.
+  \smallskip
+  
+  Thus the cols of $\underset{\C\leftarrow\B}P$ are linearly indep,
+  and by the Invertible Matrix Theorem $\underset{\C\leftarrow\B}P$ is invertible.%
+  \vspace*{2.5em}
+  
+  \pause
+  What is \alert{$\underset{\C\leftarrow\B}P^{-1}$}?
+  \pause
+  Since $\underset{\C\leftarrow\B}P [\x]_\B= [\x]_\C$, \ \ 
+  $[\x]_\B = \alert{\underset{\C\leftarrow\B}P^{-1}} [\x]_\C$.
+  Thus, $\alert{\underset{\C\leftarrow\B}P^{-1}} = \underset{\B\leftarrow\C}P$.
+\end{frame}
+
+
+\begin{frame}{Example}
+  \medskip
+  
+  Let $V = \mathbb{P}^2$ and consider two bases
+  $\B = \left\{ 1, t, t^2 \right\}$ and $\C = \left\{ 1, 1+t, 1+t+t^2 \right\}$.
+  \smallskip
+
+  Find the change of basis matrix $\alert{\underset{\C \leftarrow \B}P}$.
+  \bigskip
+
+  \pause
+  We compute the change of basis matrix $\blue{\underset{\B\leftarrow \C}P}$:
+  \[
+    \blue{\underset{\B\leftarrow \C}P} =
+    \begin{bmatrix} [1]_\B & [1+t]_\B & [1+t+t^2]_\B \end{bmatrix}
+    =\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}.
+  \]
+  Now we can compute
+  \[
+    \alert{\underset{\C \leftarrow \B}P} =
+    \blue{\underset{\B\leftarrow \C}P} ^{-1} =
+    \begin{bmatrix} 1 & -1 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1 \end{bmatrix}.
+  \]
+\end{frame}
+
+
+\begin{frame}{Matrix Vector Space}
+
+Let $V$ denote the vector space of \alert{symmetric $2 \times 2$ matrices}.  We have a basis
+$\B = \left\{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} ,  \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix},  \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right\}$. Consider the set $\C = \left\{ \begin{bmatrix} 1 & -2 \\ -2 & 2 \end{bmatrix} ,  \begin{bmatrix} 0 & 2 \\ 2 & 4 \end{bmatrix},  \begin{bmatrix} 3 & -1 \\ -1 & 1 \end{bmatrix} \right\}$
+\bigskip
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+\bb
+\ii Show that $\C$ is a basis for $V$.
+\ee
+
+\pause
+\colorb{We know that 
+\[ \lbrack \c_1 \rbrack_{\B} = \begin{bmatrix} 1 \\ -2 \\ 2 \end{bmatrix}_{\B} ,
+\lbrack \c_2 \rbrack_{\B} = \begin{bmatrix} 0 \\ 2 \\ 4 \end{bmatrix}_{\B}  ,
+\lbrack \c_3 \rbrack_{\B} = \begin{bmatrix} 3 \\ -1 \\ 1 \end{bmatrix}_{\B}  \]}%
+\colorb{The change of basis matrix below is invertible, so $\C$ is also a basis.
+\vspace{-0.2in}
+ \[ \underset{\B \leftarrow \C}{P} = 
+\begin{bmatrix} 1 & 0 & 3 \\ -2 & 2 & -1 \\ 2 & 4 & 1 \end{bmatrix} \]}
+
+\column{0.5\tw}
+
+\pause
+\bb
+\addtocounter{enumi}{1}
+\ii Write the matrix corresponding to $\begin{bmatrix} 2 \\ 1 \\ -5 \end{bmatrix}_{\C}$ in $\B$ coordinates.
+\ee
+\pause
+\alert{\[ \lbrack \x \rbrack_{\B}  = \begin{bmatrix} 1 & 0 & 3 \\ -2 & 2 & -1 \\ 2 & 4 & 1 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \\ -5 \end{bmatrix}_{\C} = \begin{bmatrix} -13 \\ 3  \\ 3 \end{bmatrix}_{\B} \]
+which is the matrix $\begin{bmatrix} -13 & 3 \\ 3 & 3 \end{bmatrix}$.
+}
+
+\end{columns}
+\end{frame}
+
+\end{document}

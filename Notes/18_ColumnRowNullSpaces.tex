@@ -1,0 +1,261 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Column, Row, and Null Spaces of a Matrix}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Column Space of a Matrix}
+
+We know the \alert{span} of a set of vectors is a \alert{subspace}.  We can record these vectors in a matrix.
+
+\pause
+\bbox
+The \alert{column space} of an $m \times n$ matrix $A = \begin{bmatrix} \mathbf{a}_1 &  \mathbf{a}_2 & \ldots &  \mathbf{a}_n  \end{bmatrix}$, denoted \alert{$\Col A$}, is the span of the columns of $A$.
+
+\[ \Col A = \mbox{Span} \left\{ \mathbf{a}_1 , \mathbf{a}_2 , \ldots ,  \mathbf{a}_n \right\} = \left\{ \mathbf{b} \mbox{ in } \mathbb{R}^m : \mathbf{b} = A \mathbf{x} \mbox{ for some $\mathbf{x}$ in $\mathbb{R}^n$} \right\} \]
+\ebox
+
+\vspace{1em}
+
+\pause
+Let $\dsty A = \begin{bmatrix} 3 & 6 & 6 & 3 & 9 \\ 6 & 12 & 13 & 0 & 3 \end{bmatrix}$. Find $\Col A$
+\pause
+$=\mathbb{R}^2$.
+
+\end{frame}
+
+\begin{frame}{The Column Space is a Subspace}
+  \bigskip
+  
+  \begin{theorem}
+  The column space of an $m \times n$ matrix $A$ is a \alert{subspace} of $\R^m$.
+  \end{theorem}
+  \bigskip
+  
+  \pause
+  \blue{Proof.}
+  The \alert{span} of a collection of vectors is a subspace.
+\end{frame}
+
+
+\begin{frame}{Row Space of a Matrix}
+  \bbox
+  The \alert{row space} of an $m \times n$ matrix $A = \begin{bmatrix} \mathbf{r}_1 \\  \mathbf{r}_2 \\ \vdots \\  \mathbf{r}_m  \end{bmatrix}$, denoted \alert{$\Row A$}, is the span of the rows of $A$.
+
+  \[ \Row A = \mbox{Span} \left\{ \mathbf{r}_1 , \mathbf{r}_2 , \ldots ,  \mathbf{r}_m \right\} = \Col A^T  \]
+  \ebox
+  \bigskip
+
+  \pause
+  Let $\dsty A = \begin{bmatrix} 3 & 6 & 6 & 3 & 9 \\ 6 & 12 & 13 & 0 & 3 \end{bmatrix}$. Find $\Row A$
+  \pause
+  $= \text{Span} \{(3,6,6,3,9),(6,12,13,0,3)\} \subseteq \alert{\mathbb{R}^5}$.
+\end{frame}
+
+\begin{frame}{Null Space of a Matrix}
+\medskip
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+Where else have we written a set of vectors as 
+all the linear combinations of certain vectors?
+\bigskip
+
+\pause
+\bbox
+The \alert{null space} of an $m \times n$ matrix $A$, denoted \alert{$\Nul A$}, is the set of all solutions to the homogeneous equation $A \mathbf{x} = \mathbf{0}$.
+\[ \Nul A = \left\{ \mathbf{x} : \mathbf{x} \mbox{ is in } \mathbb{R}^n \mbox{ and } A \mathbf{x} = \mathbf{0} \right\} \]
+\ebox
+
+\column{0.5\tw}
+
+\pause
+Let $\dsty A = \begin{bmatrix} 3 & 6 & 6 & 3 & 9 \\ 6 & 12 & 13 & 0 & 3 \end{bmatrix}$. Find $\Nul A$.
+
+\bigskip
+
+\pause
+
+$\text{RREF}(A)=
+  \begin{bmatrix}
+    1 & 2 & 0 & 13 & 33 \\
+    0 & 0 & 1 & -6 & -15
+  \end{bmatrix}$
+\medskip
+
+{\tiny
+$\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{bmatrix}
+  = \begin{bmatrix} -2x_2 -13 x_4 -33 x_5 \\ x_2 \\ 6x_4 +15 x_5 \\ x_4 \\ x_5 \end{bmatrix}
+  = x_2 \begin{bmatrix} -2 \\ 1 \\ 0 \\ 0 \\0 \end{bmatrix}
+   +x_4 \begin{bmatrix} -13 \\ 0 \\6 \\ 1 \\ 0 \end{bmatrix}
+   +x_5 \begin{bmatrix} -33 \\ 0 \\15 \\ 0 \\ 1 \end{bmatrix}$
+}
+\bigskip
+
+So $\Nul A = \text{Span}\left\{
+  \begin{bmatrix} -2 \\ 1 \\ 0 \\ 0 \\0 \end{bmatrix},
+  \begin{bmatrix} -13 \\ 0 \\6 \\ 1 \\ 0 \end{bmatrix},
+  \begin{bmatrix} -33 \\ 0 \\15 \\ 0 \\ 1 \end{bmatrix}
+    \right\}$.
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{The Null Space is a Subspace}
+  \medskip
+
+  \begin{theorem}
+  The null space of an $m \times n$ matrix $A$ is a \alert{subspace} of $\R^n$.
+  \end{theorem}
+
+  \pause
+  \blue{Proof.}
+  \begin{enumerate}[<+->]  % pause after each item
+  \item $\x= \mathbf{0}_n$ is a solution to $A \x = \mathbf{0}_m$. Thus $\mathbf{0}_n$ is in $\Nul A$, and so $\Nul A$ is nonempty.
+  \smallskip
+  
+  \item Let $\u$ and $\v$ be vectors in $\Nul A$. Then we have
+  \vspace*{-.5em}
+  \[ A (\u + \v) = A\u + A\v = \mathbf{0} + \mathbf{0} = \mathbf{0} ,\]
+  \vspace*{-1.5em}
+  
+  so we see that $\u + \v$ is in $\Nul A$.
+  \smallskip
+  
+  \item Let $\u$ be a vector in $\Nul A$ and let $c$ denote an arbitrary scalar. Then we have
+  \vspace*{-.5em}
+  \[ A (c\u)= c \left( A\u \right) =c \mathbf{0} = \mathbf{0} ,\]
+  \vspace*{-1.5em}
+  
+  so we see that $c\u$ is in $\Nul A$.
+  \end{enumerate}
+
+\end{frame}
+
+
+% \begin{frame}{Practice}
+% 
+% Find a matrix $A$ such that $\dsty \Col A = \left\{ \begin{bmatrix} x-2y \\ 3y \\ x+y \end{bmatrix} : x,y \mbox{ in } \mathbb{R} \right\}$.
+% 
+% \vspace{3in}
+% 
+% \end{frame}
+
+
+\begin{frame}{Summary for Column, Row, and Null Spaces of $A$}
+\bigskip
+
+Let $A$ denote an $\colorb{m} \times \colorr{n}$ matrix.
+\medskip
+
+\bb[(a)]\itemsep=.5em
+\ii $\Col A$ is a subspace of $\R^{\colorb{m}}$. \medskip
+\ii $\Row A$ is a subspace of $\R^{\colorr{n}}$. \medskip
+%\ii $\Col A$ is spanned by original pivot columns.
+\ii $\Nul A$ is a subspace of $\R^{\colorr{n}}$. \medskip
+%\ii $\Nul A$ has dimensions equal to the number of free variables in solving $A\mathbf{x} = \mathbf{0}$.
+%\ii $\dim (\Col A) + \dim ( \Nul A) = n$
+\ee
+
+\end{frame}
+
+\begin{frame}{Linear Transformations}
+
+\bbox
+A \alert{linear transformation} $T\colon V \to W$ from a vector space $V$ to a vector space $W$ is a function that assigns each vector $\mathbf{x}$ in $V$ to a unique vector $T(\mathbf{x})$ in $W$ such that 
+for all $\mathbf{u}$, $\mathbf{v}$ in $V$ and scalars $c$:
+\bb
+\ii $T(\mathbf{u} + \mathbf{v} ) = T(\mathbf{u}) + T(\mathbf{v})$,
+\ii $T(c \mathbf{u} ) = c T( \mathbf{u} )$.
+\ee
+\ebox
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+$\dsty T\colon \mathbb{P} \to \mathbb{R}: p(x) \mapsto \int_0^1 p(x) \, dx $
+
+\column{0.5\tw}
+
+$\dsty T\colon \mbox{Mat}_{3 \times 3} \to \mathbb{R}: A \mapsto a_{11}+a_{22}+a_{33}$
+
+\end{columns}
+
+\vspace{2in}
+
+\end{frame}
+
+
+\begin{frame}{Null Space and Range of a Linear Transformation}
+  \bbox
+  The \alert{kernel} (also called the \alert{null space}) of $T$ is the set of all vectors in $V$ that are mapped to the zero vector in $W$.
+
+  \[ \mbox{ker}(T) = \Nul T = \left\{ \mathbf{v} \mbox{ in } V : T(\mathbf{v}) = \mathbf{0}_W \right\} \]
+  \ebox 
+
+  How can $\text{ker}(T)$ be used to test if $T$ is \alert{one-to-one}?
+  \ms
+
+  \pause
+  \bbox
+  The \alert{range} (also called the \alert{image}) of $T$ is the set of all vectors $\mathbf{w}$ in $W$ for which there exists a preimage $\mathbf{v}$ in $V$ such that $T(\mathbf{v}) = \mathbf{w}$.
+
+  \[ \mbox{range}(T) =  \mbox{Im}(T) = \left\{ T(\v) \mbox{ in } W: \mathbf{v} \mbox{ in } V \right\} \]
+  \ebox 
+  How can $\text{range}(T)$ be used to test if $T$ is \alert{onto}?
+  \ms
+\end{frame}
+
+
+\begin{frame}{Practice}
+  Identify the kernel and range of the linear transformation.
+  \medskip
+
+  \onslide*<2-4>{
+  $T: \mathbb{R}^3 \rightarrow \mathbb{R}^3: 
+  \mathbf{x} \mapsto A \mathbf{x}$, 
+  where $A=\begin{bmatrix} 1 & 3 & 5\\ 2 & 4 & 8 \\ -2 & 4 & 0 \end{bmatrix}$.
+  \bigskip
+  }
+  
+  \onslide*<3-4>{
+  $\text{RREF}(A)=
+  \begin{bmatrix}
+    1 & 0 & 2 \\
+    0 & 1 & 1 \\
+    0 & 0 & 0
+  \end{bmatrix}$
+  \bigskip
+  }
+
+  \onslide*<4>{
+  \[
+  \mbox{ker}(T)=\Nul A=\text{Span}\left\{
+    \begin{bmatrix} -2 \\ -1 \\ 1\end{bmatrix}
+    \right\}
+  \qquad
+  \mbox{range}(T)=\Col A=\text{Span}\left\{
+    \alert{?}
+%     \begin{bmatrix} 1 \\ 2 \\ -2\end{bmatrix},
+%     \begin{bmatrix} 3 \\ 4 \\ 4\end{bmatrix}
+    \right\}
+  \]
+  }
+
+  \onslide*<5>{
+  $T: \mathbb{R}^2 \rightarrow \mbox{Mat}_{2 \times 2}: (a,b) \mapsto \begin{bmatrix} a & a+b \\ b & b-a \end{bmatrix}$
+  }
+  
+  \onslide*<6>{
+  $\dsty T: \mbox{Diff} \rightarrow \mbox{Cont}: f \mapsto \frac{df}{dx}$
+  }
+\end{frame}
+
+\end{document}

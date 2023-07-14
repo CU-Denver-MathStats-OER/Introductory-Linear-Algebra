@@ -1,0 +1,447 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{The Determinant of a Matrix}
+
+\usepackage{tikz,calc}
+\newcommand{\tikzmark}[1]{\tikz[remember picture] \node[coordinate] (#1) {#1};}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{The Invertible Matrix Theorem redux}
+  Let $A$ be a square $n \times n$ matrix. Then all of the following statements are \alert{equivalent}.
+  \medskip
+  
+  \begin{enumerate}[(a)]
+    \item \alert{$A$ is an invertible matrix.}
+    \item $A$ is row equivalent to the $n \times n$ identity matrix $I_n$.
+    \item $A$ has $n$ pivots.
+    \item The equation $A\x=\mathbf{0}$ has only the trivial solution.
+    %\item The columns of $A$ form a linearly independent set.
+    \item \blue{The linear transformation $\x\mapsto A\x$ is one-to-one.}
+    \addtocounter{enumi}{2}
+    \item The equation $A\x=\b$ has at least one solution for each $\b$ in $\R^n$.
+    \item The columns of $A$ span $\mathbb{R}^n$.
+    \item \blue{The linear transformation $\x \mapsto A\x$ maps $\R^n$ onto $\R^n$.}
+    \addtocounter{enumi}{1}
+    \item There is an $n \times n$ matrix $C$ such that $CA = I_n$.
+    \item There is an $n \times n$ matrix $D$ such that $AD = I_n$.
+    \item $A^T$ is an invertible matrix.
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Inverse of a $2 \times 2$ Matrix}
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+\bbox
+If $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, then
+\[ A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} \]
+when \colorb{$ad-bc \ne 0$}.
+
+If \alert{$ad -bc=0$, then $A$ is not invertible}.
+\ebox
+
+%If $A = \begin{bmatrix} -2 & 4 \\ -3 & 1 \end{bmatrix}$, then we have
+
+%\[ \alert{A^{-1} = \frac{1}{10} \begin{bmatrix} 1 & -4 \\ 3 & -2 \end{bmatrix}} . \]
+
+\column{0.5\tw}
+
+Consider $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$
+\bi
+\ii If both $a$ and $c$ are equal to 0, $A$ is not invertible. Assume $a \ne 0$.
+\ii Then we have 
+\[ \begin{bmatrix} a & b \\ c & d \end{bmatrix} \sim  \begin{bmatrix} a & b \\ ac & ad \end{bmatrix}
+\sim   \begin{bmatrix} a & b \\ 0 & ad - bc \end{bmatrix} \]
+\ii \alert{As long as $ad - bc \ne 0$, $A$ has a pivot in every column and is invertible.}
+\ei
+
+\end{columns}
+
+\bbox
+The \alert{determinant $\det A$} of a $2 \times 2$ matrix $A$ is \alert{$\det A = ad-bc = a_{11}a_{22} - a_{12}a_{21}$}.
+\ebox
+
+\end{frame}
+
+\begin{frame}{Examples of Determinants of $2 \times 2$ Matrices}
+
+Compute the determinant of each matrix and determine whether the matrix has an inverse or not? If the matrix is invertible, give its inverse.
+\medskip
+
+  \begin{tasks}(2)
+    \task $\dsty \begin{bmatrix} 2 & -4 \\ 3 & 8 \end{bmatrix}$
+    \task $\dsty \begin{bmatrix} -5 & 2 \\ -10 & 4 \end{bmatrix}$
+\end{tasks}
+
+\vspace{3in}
+
+\end{frame}
+
+
+\begin{frame}{Determinant of larger matrices}
+  
+  We want a function called the \alert{determinant} defined on square $n\times n$ matrices that produces a scalar
+  with the following properties:
+  \medskip
+  
+  \begin{enumerate}
+    \item $\det A \alert{\ne} 0$ if and only if $A$ is \alert{invertible}.
+    \smallskip
+    \pause%
+    \item $\det(AB)=(\det A)(\det B)$.\smallskip
+    \item $\det(I_n)=1$.\smallskip
+    \item $\det$ is multilinear.\smallskip
+  \end{enumerate}
+  \bigskip
+  
+  This ends up making a complicated (\alert{but useful!}) function.
+\end{frame}
+
+
+\begin{frame}{Determinant of a $1 \times 1$ Matrix}
+\bigskip
+
+  Let $\dsty A = \begin{bmatrix} a_{11} \end{bmatrix}$.  What is $\det A$?
+  \bigskip
+
+  \pause
+  $A$ is invertible if and only if $a_{11}\ne 0$ \alert{$\quad\Rightarrow\quad$} $\det A=a_{11}$.
+\end{frame}
+
+
+\begin{frame}{Determinant of a $3 \times 3$ Matrix}
+
+Let $\dsty A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}$. 
+
+\bbox
+\bi
+\ii The \alert{submatrix} obtained by deleting entries in the first row and first column we denote \alert{$\dsty A_{11} = \begin{bmatrix} a_{22} & a_{23} \\ a_{32} & a_{33} \end{bmatrix}$.}
+\ii The submatrix obtained by deleting entries in the first row and second column we denote $\dsty A_{12} = \begin{bmatrix} a_{21} & a_{23} \\ a_{31} & a_{33} \end{bmatrix}$.
+\ii In general, the submatrix obtained by deleting entries in the $i^{\mbox{th}}$ row and $j^{\mbox{th}}$ column we denote $\dsty A_{ij}$. 
+\ei
+\ebox
+
+\end{frame}
+
+\begin{frame}{Determinant of a $3 \times 3$ Matrix}
+
+Let $\dsty A = \begin{bmatrix} 3  & -1 & 2 \\ 1 & 2 & 0 \\ 2 & 0 & 1 \end{bmatrix}$. 
+
+We can compute the determinant of matrix $A$ as follows:
+
+\begin{align*}
+\det A &= a_{11} (\det A_{11} ) - a_{12}( \det A_{12}) + a_{13}( \det A_{13})\\
+&= (3) \left( \det \begin{bmatrix} 2 & 0 \\ 0 & 1\end{bmatrix} \right) - (-1) \left( \det \begin{bmatrix} 1 & 0 \\ 2 & 1\end{bmatrix} \right) + (2) \left( \det \begin{bmatrix} 1 & 2  \\ 2& 0\end{bmatrix} \right)  \\
+&= (3)(2) - (-1)(1) + (2)(-4)\\
+&= -1
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Determinant of a $3 \times 3$ Matrix}
+
+\begin{columns}[T]
+
+\column{0.3\tw}
+
+Let $\dsty A = \begin{bmatrix} 3  & -1 & 2 \\ 1 & 2 & 0 \\ 2 & 0 & 1 \end{bmatrix}$. 
+
+\column{0.7\tw}
+
+{\small
+\begin{align*}
+\det A &= a_{11} (\det A_{11} ) - a_{12}( \det A_{12}) + a_{13}( \det A_{13})\\
+&= (3)(2) - (-1)(1) + (2)(-4) = -1
+\end{align*}
+}
+
+\end{columns}
+
+{\small
+\colorb{Or we have:
+\begin{align*} \det A &= \alert{-}a_{21} (\det A_{21} ) \alert{+} a_{22}( \det A_{22}) \alert{-} a_{23}( \det A_{23})
+= -(1) \left( \det \begin{bmatrix} -1 & 2 \\ 0 & 1\end{bmatrix} \right) + (2) \left( \det \begin{bmatrix} 3 & 2 \\ 2 & 1\end{bmatrix} \right) - 0\\
+&= -(1)(-1) + (2)(-1) -0 = -1
+\end{align*}}
+
+\colorg{Or we have 
+\begin{align*}
+ \det A &= a_{31} (\det A_{31} ) \alert{-} a_{32}( \det A_{32}) \alert{+} a_{33}( \det A_{33})
+= (2) \left( \det \begin{bmatrix} -1 & 2 \\ 2 & 0\end{bmatrix} \right) - 0  + (1) \left( \det \begin{bmatrix} 3 & -1 \\ 1 & 2\end{bmatrix} \right) \\
+&= (2)(-4) - 0 + (1)(7) = -1
+\end{align*}}
+}
+
+\end{frame}
+
+\begin{frame}{Determinant of a $3 \times 3$ Matrix}
+
+
+\begin{columns}[T]
+
+\column{0.3\tw}
+
+Let $\dsty A = \begin{bmatrix} 3  & -1 & 2 \\ 1 & 2 & 0 \\ 2 & 0 & 1 \end{bmatrix}$. 
+
+\column{0.7\tw}
+
+We have
+\bi
+\ii $\det A = a_{11} \left( \det A_{11} \right) - a_{12} \left( \det A_{12} \right) + a_{13} \left( \det A_{13} \right)$, or \ss
+\ii $\det A = -a_{21} \left( \det A_{21} \right) + a_{22} \left( \det A_{22} \right) - a_{23} \left( \det A_{23} \right)$, or \ss
+\ii $\det A = a_{31} \left( \det A_{31} \right) - a_{32} \left( \det A_{32} \right) + a_{33} \left( \det A_{33} \right)$.
+\ei 
+
+\end{columns}
+
+\ss
+
+\bbox
+Choosing to expand across a row with $0$'s requires less calculations!
+\ebox
+
+\ss
+
+\bbox
+The sign associated with the coefficient $a_{ij}$ in front of each determinant is positive if $i+j$ is even and negative if $i+j$ is odd.
+\ebox
+
+\end{frame}
+
+\begin{frame}{Examples of Determinants of $3 \times 3$ Matrices}
+
+Compute the determinant of each matrix.
+
+ \begin{tasks}(2)
+\task $\dsty \begin{bmatrix} 4 & 1 & 2 \\ 4 & 0 & 3 \\ 3 & -2 & 5 \end{bmatrix}$
+\task $\dsty \begin{bmatrix}  3 & 7 & -5 \\ 0 & -2 & 16 \\ 0 & 0 & 5 \end{bmatrix}$
+\end{tasks}
+
+\vspace{3in}
+\end{frame}
+
+\begin{frame}{Mnemonic Device for $2\times 2$ and $3\times 3$ Matrices}% 3x3 is called the ``Rule of Sarrus''
+\vspace*{1.5em}
+
+{\Large
+$\det \begin{bmatrix} \tikzmark{topleft} a & b \\ \tikzmark{bottomleft} c & d \end{bmatrix} = $
+\pause $\colorr{+ad}$ 
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[red,->,thick] (topleft)+(-.2,.5) -- node[label={[label distance=15]315:$\mathbf{+}$}] {} ++(1.2,-1);
+\end{tikzpicture}%
+\pause$\colorb{-bc}$
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[blue,->,thick] (bottomleft)+(-.2,-.3) -- node[label={[label distance=15]45:$\mathbf{-}$}] {} ++(1.3,1.3);
+\end{tikzpicture}
+}
+
+\vspace*{4.5em}
+
+\pause
+{\Large
+$\det \begin{bmatrix} 
+  \tikzmark{topleft1} a_{11} & \tikzmark{topleft2} a_{12} & \tikzmark{topleft3} a_{13} \\ 
+  a_{21} & a_{22} & a_{23} \\ 
+  \tikzmark{botleft1} a_{31} & \tikzmark{botleft2} a_{32} & \tikzmark{botleft3} a_{33}
+\end{bmatrix}
+\pause
+\begin{array}{ll}
+  a_{11} & a_{12} \\
+  a_{21} & a_{22} \\
+  a_{31} & a_{32}
+\end{array}$
+\pause
+\onslide<6->{
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[red,->,thick] (topleft1)+(-.2,.5) -- ++(3.0,-1.6) node[label={[label distance=-15]315:$\mathbf{+}$}] {};
+  \draw[red,->,thick] (topleft2)+(-.2,.5) -- ++(3.0,-1.6) node[label={[label distance=-15]315:$\mathbf{+}$}] {};
+  \draw[red,->,thick] (topleft3)+(-.2,.5) -- ++(3.0,-1.6) node[label={[label distance=-15]315:$\mathbf{+}$}] {};
+\end{tikzpicture}%
+}
+\onslide<7->{
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[blue,->,thick] (botleft1)+(-.2,-.3) -- ++(3.0,1.8) node[label={[label distance=-15]45:$\mathbf{-}$}] {};
+  \draw[blue,->,thick] (botleft2)+(-.2,-.3) -- ++(3.0,1.8) node[label={[label distance=-15]45:$\mathbf{-}$}] {};
+  \draw[blue,->,thick] (botleft3)+(-.2,-.3) -- ++(3.0,1.8) node[label={[label distance=-15]45:$\mathbf{-}$}] {};
+\end{tikzpicture}%
+}
+$=\begin{array}{ll}
+  \onslide<2->{\colorr{ + a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21} a_{32} }} \\
+  \pause
+  \colorb{ - a_{13} a_{22} a_{31} - a_{11} a_{23} a_{32} - a_{12} a_{21} a_{33} }
+\end{array}
+$}
+\end{frame}
+
+
+\begin{frame}{Determinants of $4 \times 4$ Matrices}
+
+\begin{columns}
+
+\column{0.3\tw}
+
+Let $\dsty A = \begin{bmatrix} 1  & 2 & 3 & -2\\ 4 & 10 & 2 & -3 \\ 2 & 5 & -1 & -6\\ 0 & 7 & -5 & 1 \end{bmatrix}$. 
+
+\column{0.7\tw}
+Then we have  $\det A = a_{11} (\det A_{11} ) - a_{12}( \det A_{12}) + a_{13}( \det A_{13}) - a_{14}( \det A_{14})$
+
+\end{columns}
+
+{\footnotesize
+\[ (1) \alert{\left(\det \begin{bmatrix} 10 & 2 & -3\\5 & -1 & -6\\7 & -5 & 1 \end{bmatrix} \right) }
+- (2)  \left(\det \begin{bmatrix} 4 & 2 & -3\\ 2 & -1 & -6\\ 0 & -5 & 1 \end{bmatrix} \right)
++(3)  \left( \det \begin{bmatrix} 4 & 10 & -3\\ 2 & 5 & -6\\ 0 & 7 & 1\end{bmatrix} \right)
+-(-2)  \left( \det \begin{bmatrix} 4 & 10 & 2\\ 2 & 5 & -1\\0 & 7 & -5\end{bmatrix} \right)\]}
+
+
+\alert{
+\[ \det \begin{bmatrix} 10 & 2 & -3\\5 & -1 & -6\\7 & -5 & 1 \end{bmatrix} = (10) \left( \det \begin{bmatrix} -1 & -6 \\ -5 & 1\end{bmatrix} \right) - (2)  \left( \det \begin{bmatrix} 5 & -6\\ 7 & 1\end{bmatrix} \right) + (-3)  \left( \det \begin{bmatrix} 5 & -1 \\ 7 & -5 \end{bmatrix} \right) \]
+}
+
+and so on!!!!
+
+\end{frame}
+
+\begin{frame}{Example of Determinant of a $4 \times 4$ Matrix}
+\bigskip
+
+Compute the determinant of $\dsty A = \begin{bmatrix} 1 & 3 & -1 & 5\\0 & 2 & 3 &-4\\0 & 0 & -1 & 6\\ 0 & 0 & 0 & 4 \end{bmatrix}$. 
+
+%\vspace{1.25in}
+\vspace{2.5em}
+
+\pause
+\begin{theorem}
+If $A$ is a \alert{triangular matrix}, then $\det A$ is the product of the entries on the main diagonal of $A$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}{Determinants of $n \times n$ Matrices}
+
+{\small
+\begin{columns}
+
+\column{0.3\tw}
+
+Let $\dsty A = \begin{bmatrix} 1  & 2 & 3 & -2\\ 4 & 10 & 2 & -3 \\ 2 & 5 & -1 & -6\\ 0 & 7 & -5 & 1 \end{bmatrix}$. 
+
+\column{0.7\tw}
+Then we have  $\det A = a_{11} (\det A_{11} ) - a_{12}( \det A_{12}) + a_{13}( \det A_{13}) - a_{14}( \det A_{14})$
+
+\end{columns}}
+
+\bbox
+In general, if $A$ is an $n \times n$ matrix, then we define:
+
+\vspace{-0.25in}
+\begin{align*}
+\det A &= a_{11} (\det A_{11} ) - a_{12} (\det A_{12} )+ \ldots + (-1)^{1+n}a_{1n} (\det A_{1n} )\\
+&= \sum_{j=1}^n (-1)^{1+j} \ a_{1j} \ \det \ A_{1j} \\
+&= \sum_{j=1}^n (-1)^{\alert{2}+j} \ a_{\alert{2}j} \ \det \ A_{\alert{2}j} = \sum_{j=1}^n (-1)^{\alert{i}+j} \ a_{\alert{i}j} \ \det \ A_{\alert{i}j}
+\end{align*}
+\ebox
+
+
+\end{frame}
+
+\begin{frame}{Computing Determinants with Python}
+
+Compute the determinant of $\dsty A = \begin{bmatrix} 3  & -1 & 2 \\ 1 & 2 & 0 \\ 2 & 0 & 1 \end{bmatrix}$.
+
+\bigskip
+
+We can use \alert{\texttt{A.det()}} in SymPy.
+
+\bigskip
+
+\pause
+Compute the determinant of  
+\[ A = \begin{bmatrix} 1  & 2 & 3 & -2\\ 4 & 10 & 2 & -3 \\ 2 & 5 & -1 & -6\\ 0 & 7 & -5 & 1 \end{bmatrix}. \]
+
+% \begin{lstlisting}
+% from sympy import *
+% A=Matrix([
+%   [3.,-1.,2.],
+%   [1.,2.,0.],
+%   [2.,0.,1.]
+% ])
+% A.det()
+% \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Cofactor Expansion}
+\bbox
+In general, if $A$ is an $n \times n$ matrix, then we define:
+
+\vspace{-0.25in}
+%\begin{align*}
+\[ \det A = \sum_{j=1}^n (-1)^{1+j} \ a_{1j} \ \det \ A_{1j} = a_{11} (\det A_{11} ) - a_{12} (\det A_{12} )+ \ldots + (-1)^{1+n}a_{1n} (\det A_{1n} ) \]
+%&= \sum_{j=1}^n (-1)^{\alert{i}+j} \ a_{\alert{i}j} \ \det \ A_{\alert{i}j}
+%\end{align*}
+\ebox
+
+\bi
+\ii We call the expression $(-1)^{i+j} \det \ A_{ij}$ the $(i,j)$ \alert{cofactor.}
+\ii We can rewrite the formulas in the definition above in terms of cofactors:
+\[ \det \ A = \sum_{j=1}^n a_{1j} C_{1j}  = a_{11} C_{11} +  a_{12} C_{12} + \ldots + a_{1n} C_{1n}.\] 
+\ii The formula above is the \alert{cofactor expansion across the 1st row}.
+\ii In general, we can use the cofactor expansion \alert{across any row}:
+\[ \det \ A = \sum_{j=1}^n a_{\alert{i}j} C_{\alert{i}j}  = a_{\alert{i}1} C_{\alert{i}1} +  a_{\alert{i}2} C_{\alert{i}2} + \ldots + a_{\alert{i}n} C_{\alert{i}n}.\] 
+\ei
+
+\end{frame}
+
+\begin{frame}{Cofactor Expansion Across Rows or Down Columns}
+
+\begin{theorem}
+The determinant of an $n \times n$ matrix $A$ can be computed by a cofactor expansion \alert{across any row} or \colorb{down any column}.
+\bi
+\ii The cofactor expansion across the $i^{\mbox{th}}$ row is given by:
+\alert{\[ \det \ A = a_{i1} C_{i1} +  a_{i2} C_{i2} + \ldots + a_{in} C_{in}. \]}
+\ii The cofactor expansion down the $j^{\mbox{th}}$ column is given by:
+\colorb{\[ \det \ A = a_{1j} C_{1j} +  a_{2j} C_{2j} + \ldots + a_{nj} C_{nj}. \]}
+\ei
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{Comparing Methods}
+
+{\small Let $\dsty A = \begin{bmatrix} 3  & -1 & 2 \\ 1 & 2 & 0 \\ 2 & 0 & 1 \end{bmatrix}$. }
+
+
+We can compute the determinant of matrix $A$ using the \alert{cofactor expansion across the first row}:
+
+\vspace{-0.2in}
+
+{\small
+\begin{align*}
+\det A &= a_{\alert{1}1} (\det A_{\alert{1}1} ) - a_{\alert{1}2}( \det A_{\alert{1}2}) + a_{\alert{1}3}( \det A_{\alert{1}3})\\
+&= (3) \left( \det \begin{bmatrix} 2 & 0 \\ 0 & 1\end{bmatrix} \right) - (-1) \left( \det \begin{bmatrix} 1 & 0 \\ 2 & 1\end{bmatrix} \right) + (2) \left( \det \begin{bmatrix} 1 & 2  \\ 2& 0\end{bmatrix} \right)  \\
+&= (3)(2) - (-1)(1) + (2)(-4) = -1
+\end{align*}}
+
+\vspace{-0.1in}
+
+We can compute the determinant of matrix $A$ using the \colorb{cofactor expansion down column $2$}:
+
+\vspace{-0.2in}
+
+{\small
+\begin{align*}
+  \det A &= -a_{1\colorb{2}} (\det A_{1\colorb{2}} ) + a_{2\colorb{2}}( \det A_{2\colorb{2}}) - a_{3\colorb{2}}( \det A_{3\colorb{2}})\\
+  &= -(-1) \left( \det \begin{bmatrix} 1 & 0 \\ 2 & 1\end{bmatrix} \right) 
+     + (2) \left( \det \begin{bmatrix} 3 & 2 \\ 2 & 1\end{bmatrix} \right) 
+     - (0) \left( \det \begin{bmatrix} 3 & 2 \\ 1 & 0\end{bmatrix} \right)  \\
+  &= (1)(1) + (2)(-1)-0 = -1
+\end{align*}}
+
+\end{frame}
+
+\end{document}

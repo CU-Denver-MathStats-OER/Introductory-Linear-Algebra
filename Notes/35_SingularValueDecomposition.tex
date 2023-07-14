@@ -1,0 +1,456 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Singular Value Decomposition}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Summary of Diagonalization}
+  \bigskip
+
+  \begin{itemize}
+    \item Not every matrix can be \alert{diagonalized}:
+    \smallskip
+    
+    \qquad only \blue{square} matrices with $n$ linearly independent eigenvectors
+    \bigskip
+    
+    \item Not every square matrix can be \alert{orthogonally diagonalized}:
+    \smallskip
+    
+    \qquad only \blue{square} matrices $A$ with $n$ orthogonal eigenvectors 
+      $\ \Leftrightarrow\ $ $A$ is \blue{symmetric}
+      \bigskip
+  \end{itemize}
+  \vspace*{1em}
+  
+  \pause
+  \begin{center}
+  Can we do something \green{like diagonalization} for \alert{all} matrices (including \blue{non-square} matrices)?
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{Generalizing the Diagonalization Process}
+  \medskip
+
+  $A = \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}$ is \alert{not} diagonalizable (not even square).
+  Instead let's look at $A^T A$.
+  \[ A^T A = \begin{bmatrix} 4 & 8 \\ 11 & 7 \\ 14 & -2 \end{bmatrix} \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix} = \begin{bmatrix} 80 & 100 & 40 \\ 100 & 170 & 140 \\ 40 & 140 & 200 \end{bmatrix}\]
+  ~
+
+  \pause
+  \begin{theorem}
+  Let $A$ denote an $m \times n$ matrix. Then $A^T A$ can be \alert{orthogonally diagonalized}.
+  \end{theorem}
+
+  \pause
+  \blue{Proof.}\smallskip
+  
+  The matrix $A^T A$ is \alert{symmetric} since $(\blue{A^T A})^T = A^T (A^T)^T = \blue{A^T A}$.
+  \smallskip
+  
+  All symmetric matrices are orthogonally diagonalizable!
+  \hfill\blue{\qed}
+\end{frame}
+
+
+\begin{frame}{The Eigenvalues of $A^T A$}
+  \smallskip
+  
+  \begin{theorem}
+    Let $A$ be an $m \times n$ matrix.
+    Then the \alert{eigenvalues of $A^TA$} are \blue{nonnegative real numbers}.
+  \end{theorem}
+  \medskip
+
+  \pause
+  \blue{Proof.}\smallskip
+  
+  $A^T A$ is a \green{symmetric} $n\times n$ square matrix, and is \alert{orthogonally diagonalizable.}
+  \medskip
+  
+  Let $\{ \v_1,\v_2,\ldots,\v_n \}$ be an \blue{orthonormal basis} for $\R^n$ consisting of eigenvectors of $A^T A$ corresponding to eigenvalues $\lambda_1,\lambda_2,\ldots,\lambda_n$.
+  \pause
+  Then we have
+  \[ \| A \v_i \|^2 = (A\v_i)^T (A\v_i) = \v_i^T A^TA \v_i =
+  \pause 
+  \v_i^T (\colorb{A^TA \v_i}) = \v_i^T \colorb{\lambda_i \v_i} =
+  \lambda_i \| \v_i \| ^2 = \lambda_i. \]
+  Since the length of a vector is a nonnegative real number, $\lambda_i$ is a also nonnegative real num.
+  \medskip
+  
+  Hence, all the \alert{eigenvalues of $A^T A$} are \blue{nonnegative real numbers}.
+  \hfill\blue{\qed}
+\end{frame}
+
+
+\begin{frame}{Singular Values of an $m \times n$ Matrix}
+  \smallskip
+
+  Let $A$ be an $m \times n$ matrix, and let 
+  \vspace*{-1em}
+  
+  \[  \lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n \geq 0\]
+  \vspace*{-1em}
+  
+  denote the nonnegative \alert{eigenvalues of $A^T A$}, arranged in descending order 
+  ($\lambda_1$ is the largest eigenvalue and $\lambda_n$ is the smallest).
+  \medskip
+
+  \begin{definition}
+    The \alert{singular values} of $A$ are the square roots of the eigenvalues of $A^TA$.
+    We typically denote the singular values as $\sigma_i = \sqrt{\lambda_i}$.
+    The singular values of $A$ can be listed in descending order as
+    \vspace*{-1em}
+    
+    \[ \sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_n \geq 0.\]
+  \end{definition}
+  \medskip
+  
+  On the previous slide we showed that $\| A \v_i \|^2 = \lambda_i$.
+  \medskip
+  
+  Thus the singular value $\sigma_i$ is the \alert{length} of $A\v_i$:
+  \blue{$\sigma_i = \| A \v_i \|$}.
+\end{frame}
+
+
+\begin{frame}{Example}
+  \medskip
+
+  Find the \alert{singular values} of
+  $A = \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}$.
+  \bigskip
+
+  \pause
+  \bb
+  \ii Compute the product $A^T A$.
+
+  \alert{\[ A^T A = \begin{bmatrix} 4 & 8 \\ 11 & 7 \\ 14 & -2 \end{bmatrix} \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix} = \begin{bmatrix} 80 & 100 & 40 \\ 100 & 170 & 140 \\ 40 & 140 & 200 \end{bmatrix}\]}
+
+  \ii Find the eigenvalues of $A^T A$. \alert{$\lambda_1 = 360$, $\lambda_2 = 90$, and $\lambda_3 =0$}.
+  \medskip
+
+  \ii The singular values of $A$ are the square roots of the eigenvalues of $A^TA$. \ss
+
+  \alert{We have $\sigma_1 = \sqrt{360}$, $\sigma_2 = \sqrt{90}$, and $\sigma_3 = \sqrt{0}=0$.}
+  \ee
+\end{frame}
+
+
+\begin{frame}{Singular Value Decomposition}
+
+  \begin{theorem}
+  Let $A$ be an $m \times n$ matrix with \colorb{rank} $r$.
+  Then there exists an $m \times n$ matrix 
+  \[ \Sigma = \begin{bmatrix} D & 0 \\ 0 & 0 \end{bmatrix} \quad \mbox{where $D$ is an $r \times r$ diagonal submatrix}\]
+  for which the diagonal entries of $D$ are the first $r$ \colorb{singular values} of $A$, $\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_r >0$,
+  and there exists an $m \times m$ orthogonal matrix $U$ 
+  and an $n \times n$ orthogonal matrix $V$ such that
+  \vspace*{-.5em}
+  
+  {\large 
+  \[ A_{m\times n} = U_{m\times m} \Sigma_{m \times n} V_{n \times n}^T. \]%
+  }
+  \vspace*{-1em}
+  \end{theorem}
+
+  \bi
+  \ii The factorization $A = U \Sigma V^T$ is called a \alert{singular value decomposition} (or \alert{SVD} for short). \smallskip
+  \ii As with the diagonalization process, the matrices $U$ and $V$ are \alert{not} uniquely determined. \smallskip
+  \ii The matrix $\Sigma$ is unique, if the diagonal entries are listed in descending order.
+  \ei
+\end{frame}
+
+
+\begin{frame}{Steps for Finding Singular Value Decomposition}
+  \begin{example}
+  Find a singular value decomposition of 
+  $A = \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}$.
+  \end{example}
+
+  \bb
+  \ii \alert{Find an orthogonal diagonalization of $A^TA$.}
+  \ee
+\end{frame}
+
+
+\begin{frame}
+
+  \bb
+  \ii \alert{Find an orthogonal diagonalization of $A^TA$.}
+  \ee
+
+  \bi
+  \ii We have $A^TA = \begin{bmatrix} 4 & 8 \\ 11 & 7 \\ 14 & -2 \end{bmatrix} \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix} = \begin{bmatrix} 80 & 100 & 40 \\ 100 & 170 & 140 \\ 40 & 140 & 200 \end{bmatrix}$.
+  \ii Find the \blue{eigenvalues} of $A^TA$. We have $\lambda_1 = 360$, $\lambda_2 = 90$, and $\lambda_3 =0$.
+  \pause
+  \ii For each eigenvalue, find an \blue{orthogonal basis} for the eigenspace (use Gram--Schmidt if needed).
+  Corresponding to $\lambda_1 = 360$, $\lambda_2 = 90$, and $\lambda_3 =0$, respectively, we have
+
+  \vspace{-0.1in}
+
+  \[ \w_1 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}, \w_2 = \begin{bmatrix} -2 \\ -1 \\ 2 \end{bmatrix}, \w_3 =  \begin{bmatrix} 2 \\ -2 \\ 1 \end{bmatrix} \quad \v_1 = \begin{bmatrix} 1/3 \\ 2/3 \\ 2/3 \end{bmatrix}, \v_2 = \begin{bmatrix} -2/3 \\ -1/3 \\ 2/3 \end{bmatrix}, \v_3 =  \begin{bmatrix} 2/3 \\ -2/3 \\ 1/3 \end{bmatrix} \]
+
+  \pause
+  \ii \blue{Normalize} to find the orthonormal columns of $P$.
+  \ei
+
+  \vspace{-0.1in}
+
+  \[ A^TA = PDP^T \quad \mbox{where} \quad 
+  P = \begin{bmatrix} 1/3 & -2/3 & 2/3 \\ 2/3 & -1/3 & -2/3 \\ 2/3 & 2/3 & 1/3 \end{bmatrix} \mbox{ and } D = \begin{bmatrix} 360 & 0 & 0 \\ 0 & 90 & 0 \\ 0 & 0 & 0 \end{bmatrix} \]
+\end{frame}
+
+
+\begin{frame}
+
+  \[ A^TA = PDP^T \quad \mbox{where} \quad 
+  P = \begin{bmatrix} 1/3 & -2/3 & 2/3 \\ 2/3 & -1/3 & -2/3 \\ 2/3 & 2/3 & 1/3 \end{bmatrix} \mbox{ and } D = \begin{bmatrix} 360 & 0 & 0 \\ 0 & 90 & 0 \\ 0 & 0 & 0 \end{bmatrix} \]
+
+  We need to find the \colorb{decomposition $A = U \Sigma V^T$}.
+  \medskip
+  
+  \pause
+  \bb
+  \addtocounter{enumi}{1}
+  \ii \alert{Find the matrices $V$ and $\Sigma$.}
+  \ee
+  \medskip
+
+  \bi
+  \ii We have $V = P =  \begin{bmatrix} 1/3 & -2/3 & 2/3 \\ 2/3 & -1/3 & -2/3 \\ 2/3 & 2/3 & 1/3 \end{bmatrix} $.
+  \smallskip
+  
+  The column vectors of $V$ are called \alert{right singular vectors} of $A$.
+  \bigskip
+
+  \ii We have $D = \begin{bmatrix} \sqrt{360} & 0 \\ 0 & \sqrt{90} \end{bmatrix}$ so $\Sigma = \begin{bmatrix} \alert{\sqrt{360}} & \alert{0} & 0 \\
+  \alert{0} & \alert{\sqrt{90}} & 0 \end{bmatrix}$.
+  \ei
+\end{frame}
+
+
+\begin{frame}
+
+  So far we have the \blue{decomposition} $A = U \Sigma V^T= U  \begin{bmatrix} \alert{\sqrt{360}} & \alert{0} & 0 \\ \alert{0} & \alert{\sqrt{90}} & 0 \end{bmatrix}  \begin{bmatrix} 1/3 & -2/3 & 2/3 \\ 2/3 & -1/3 & -2/3 \\ 2/3 & 2/3 & 1/3 \end{bmatrix}^T$.
+  \medskip
+
+  \pause
+  \bb
+  \addtocounter{enumi}{2}
+  \ii \alert{Construct the matrix $U$.}
+  The $i^{\mbox{th}}$ column of $U$ is $\mathbf{u}_i = \frac{1}{\sigma_i}  A\v_i$ for each $\sigma_i \ne 0$.
+
+  \bi
+  \ii $\u_1 =  \frac{1}{\sigma_1} A\v_1 = \frac{1}{\sqrt{360} } \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}  \begin{bmatrix} 1/3 \\ 2/3 \\ 2/3 \end{bmatrix} =  \begin{bmatrix}3/\sqrt{10} \\ 1/\sqrt{10} \end{bmatrix}$
+  \ii $\u_2 =    \frac{1}{\sigma_2} A\v_2 = \frac{1}{\sqrt{90}} \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix} \begin{bmatrix} -2/3 \\ -1/3 \\ 2/3 \end{bmatrix} = \begin{bmatrix} 1/\sqrt{10} \\ -3/\sqrt{10} \end{bmatrix}$
+  \ei
+  \medskip
+
+  \pause
+  \ii \alert{Express the complete decomposition in the form $A = U \Sigma V^T$.}
+  \[ \begin{bmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{bmatrix}  = \begin{bmatrix} 3/\sqrt{10} & 1/\sqrt{10} \\ 1/\sqrt{10} & -3\sqrt{10} \end{bmatrix}  \begin{bmatrix} \sqrt{360} & 0 & 0 \\ 0 & \sqrt{90} & 0 \end{bmatrix}  \begin{bmatrix} 1/3 & 2/3 & 2/3 \\ -2/3 & -1/3 & 2/3\\ 2/3 & -2/3 & 1/3 \end{bmatrix}\]
+  \ee
+  
+\end{frame}
+
+
+\begin{frame}{Example 2}
+  \smallskip
+  
+  Compute the SVD of $A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}$.
+  \hfill 
+  \pause
+  $A^TA = \begin{bmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$
+  \bigskip
+
+  \bb
+  \ii  Find an \alert{orthogonal diagonalization} of $A^TA= PDP^T$.
+  \ee
+  \vspace*{-1em}
+
+  \[ p(\lambda) = (2-\lambda )(2-\lambda) - 1 = \lambda^2 - 4 \lambda + 3 = (\lambda -3)(\lambda -1)=0 \quad \alert{\lambda_1 = 3} \mbox{ and } \colorb{\lambda_2 = 1}\]
+
+  \begin{columns}[T]
+  \column{0.5\tw}
+  \[ \begin{bmatrix} \alert{-1} & 1 \\ 1 &  \alert{-1} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \]
+
+  \[ \alert{\v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}} \]
+
+  \column{0.5\tw}
+  \[ \begin{bmatrix} \colorb{1} & 1 \\ 1 &  \colorb{1} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \]
+
+  \[ \colorb{\v_2 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}} \]
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Finding Matrices $\Sigma$ and $V$}
+
+  \[ A^TA = \begin{bmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}  \quad \mbox{ has } \quad \alert{\lambda_1 = 3 \ \ \v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}} \mbox{ and } \colorb{\lambda_2 = 1 \ \ \v_2 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}} \]
+
+  \bb
+  \addtocounter{enumi}{1}
+  \ii \alert{Find the matrices $V$ and $\Sigma$.}
+  \ee
+
+  \bi
+  \ii The eigenvectors $\v_1$ and $\v_2$ are already orthogonal. $V = \begin{bmatrix} \alert{1/\sqrt{2}} & \colorb{-1/\sqrt{2}} \\ \alert{1/\sqrt{2}} &  \colorb{1/\sqrt{2}} \end{bmatrix}$
+  \ii We have $\Sigma = \begin{bmatrix} D & 0 \\ 0 & 0 \\ \end{bmatrix} = \begin{bmatrix} \sqrt{\alert{3}} & 0 \\ 0 & \colorb{1} \\ 0 & 0 \end{bmatrix}$.
+  \ei
+\end{frame}
+
+
+\begin{frame}{Finding the Matrix $U$}
+  \bb
+  \addtocounter{enumi}{2}
+  \ii \alert{Find the matrix $U$.} So far we have $V = \begin{bmatrix} \alert{1/\sqrt{2}} & \colorb{-1/\sqrt{2}} \\ \alert{1/\sqrt{2}} &  \colorb{1/\sqrt{2}} \end{bmatrix}$ and $\Sigma= \begin{bmatrix} \sqrt{\alert{3}} & 0 \\ 0 & \colorb{1} \\ 0 & 0 \end{bmatrix}$.
+  \ee
+
+  \bbox
+  For each nonzero $\sigma_i$, we have $\u_i = \frac{1}{\sigma_i} A\v_i$.
+  % Need to add additional explanation why this is!
+  \ebox
+  \vspace*{-1.5em}
+
+  \pause
+  \[ \u_1 = \frac{1}{\sqrt{\alert{3}}} \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}  \begin{bmatrix} \alert{1/\sqrt{2}} \\ \alert{1/\sqrt{2}} \end{bmatrix} = \alert{\begin{bmatrix} \sqrt{2/3} \\ 1/\sqrt{6} \\  1/\sqrt{6}  \end{bmatrix}} 
+  \quad \mbox{and} \quad  
+  \u_2 = \frac{1}{\colorb{1}}  \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}  \begin{bmatrix} \colorb{-1/\sqrt{2}} \\ \colorb{1/\sqrt{2}} \end{bmatrix} = \colorb{\begin{bmatrix} 0 \\ -1/\sqrt{2} \\  1/\sqrt{2}  \end{bmatrix}} \]
+
+  \[  \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = 
+  \begin{bmatrix} \alert{\sqrt{2/3}}  &  \colorb{0} \\ \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}} \\  \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}}\end{bmatrix}
+  \begin{bmatrix} \sqrt{\alert{3}} & 0 \\ 0 & \colorb{1} \\ 0 & 0 \end{bmatrix}
+  \begin{bmatrix} \alert{1/\sqrt{2}} & \alert{1/\sqrt{2}} \\  \colorb{-1/\sqrt{2}} & \colorb{1/\sqrt{2}} \end{bmatrix}\]
+  
+  \pause
+  \hfill But $U$ needs to be \green{$3\times 3$}!  We need another column.
+\end{frame}
+
+
+\begin{frame}{Finding the Remaining Columns of $U$}
+  \smallskip
+
+  We have found \alert{$\u_1 = \begin{bmatrix} \sqrt{2/3} \\ 1/\sqrt{6} \\  1/\sqrt{6}  \end{bmatrix}$} and
+  \colorb{$\u_2 = \begin{bmatrix} 0 \\ -1/\sqrt{2} \\  1/\sqrt{2}  \end{bmatrix}$}.
+  \smallskip
+
+  We need \green{one more} column vector (which is \alert{orthogonal} to the first two vectors!).
+  \vspace*{-1.5em}
+
+  \pause
+  \[ \begin{array}{rcrclcll}
+  \z^T \alert{\u_1} &=&  \alert{\sqrt{2/3}}z_1 &+& \alert{1/\sqrt{6}}z_2 &+& \alert{1/\sqrt{6}}z_3&=0 \\
+  \z^T \colorb{\u_2} &=&  \colorb{0}z_1 & \colorb{-} & \colorb{1/\sqrt{2}}z_2 &+&  \colorb{1/\sqrt{2} } z_3&=0
+  \end{array}
+  \quad
+  \begin{bmatrix}  \alert{\sqrt{2/3}} & \alert{1/\sqrt{6}} &\alert{1/\sqrt{6}} \\ \colorb{0} & \colorb{-1/\sqrt{2}} &  \colorb{1/\sqrt{2} } \end{bmatrix} \begin{bmatrix} z_1 \\ z_2 \\ z_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \]
+
+  \[ \z = \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix} 
+  \quad \colorg{\u_3 = \begin{bmatrix} -1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3} \end{bmatrix}} 
+  \quad U = \begin{bmatrix} \alert{\sqrt{2/3}}  &  \colorb{0} & \colorg{ -1/\sqrt{3}}\\ \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}} &  \colorg{1/\sqrt{3}}\\  \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}} &  \colorg{1/\sqrt{3}}\end{bmatrix} \]
+\end{frame}
+
+
+\begin{frame}{Success!}
+  \medskip
+
+  We want to find $A = U\Sigma V^T$.
+  \medskip
+
+  \bi
+  \ii $A$ is a $3 \times 2$ matrix.
+  \ii $\Sigma$ is a $3 \times 2$ matrix (\blue{size matches $A$}).
+  \ii $U$ is a $3 \times 3$ orthogonal matrix.
+  \ii $V$ is a $2 \times 2$ orthogonal matrix.
+  \ei
+
+  \[  \begin{bmatrix} 1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} \alert{\sqrt{2/3}}  &  \colorb{0} & \colorg{ -1/\sqrt{3}}\\ \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}} &  \colorg{1/\sqrt{3}}\\  \alert{1/\sqrt{6}} & \colorb{1/\sqrt{2}} &  \colorg{1/\sqrt{3}}\end{bmatrix} 
+  \begin{bmatrix} \sqrt{\alert{3}} & 0 \\ 0 & \colorb{1} \\ 0 & 0 \end{bmatrix}
+  \begin{bmatrix} \alert{1/\sqrt{2}} & \alert{1/\sqrt{2}} \\  \colorb{-1/\sqrt{2}} & \colorb{1/\sqrt{2}} \end{bmatrix}\]
+\end{frame}
+
+
+\begin{frame}{Summary of Steps}
+  \smallskip
+
+  Given an $m \times n$ matrix $A$, to find a singular value decomposition $A = U \Sigma V^T$:
+
+  \bb
+  \ii  Find an \alert{orthogonal diagonalization} of $A^TA= PDP^T$.
+  \bi
+  \ii Find eigenvalues and eigenvectors of $A^TA$.
+  \ii Use Gram--Schmidt (if needed) to make orthogonal basis for $\R^n$. Then normalize.
+  \ii Give the \alert{orthogonal matrix} $P$. 
+  \ei \medskip
+  \ii Find the matrices $V$ and $\Sigma$.
+  \bi
+  \ii $V = P$ from the previous step.
+  \ii $\Sigma = \begin{bmatrix} D & 0 \\ 0 & 0 \end{bmatrix}$, $D$ is $r \times r$ diagonal matrix with nonzero singular values on the diagonal.
+  \ei \medskip
+  \ii Find the matrix $U$.
+  \bi
+  \ii For each nonzero $\sigma_i$, we have $\u_i = \frac{1}{\sigma_i} A\v_i$.
+  \smallskip
+  \ii If there are $r$ nonzero $\sigma_i$, then the \green{remaining columns} of $U$ are an orthogonal basis for the orthogonal complement of $\Span\{\u_1,\ldots,\u_r\}$.
+  \ei
+  \ee
+\end{frame}
+
+
+\begin{frame}{An Application to Image Compression}
+  \bigskip
+  
+  We can expand the singular value decomposition as follows:
+  
+  \[
+    A=U \Sigma V^T = \sigma_1 \u_1 \v_1^T + \sigma_2 \u_2 \v_2^T + \ldots + \sigma_r \u_r \v_r^T.
+  \]
+  \smallskip
+  
+  \pause
+  Note that $\u_i \v_i^T$ are $m \times n$ \alert{rank-$1$} matrices.
+  \bigskip
+  
+  \pause
+  If we want to \colorb{approximate} $A$ with rank-$1$ matrices, then we can drop the terms with small singular values.  See Python notebook.
+  
+\end{frame}
+
+\begin{frame}{Linear Transformations}
+  \bigskip
+  
+  Let $T\colon\R^n\to\R^m$ be a linear transformation, and let $A_{m\times n}$ be the associated matrix.
+  \medskip
+  
+  Let $S$ denote the \alert{unit sphere} in $\R^n$ (ie, all points at distance $1$ from the origin).
+  \bigskip
+  
+  What does the \colorb{image of $S$} under $T$ look like?  See Python notebook.
+  \medskip
+  
+  \pause
+  The image of $S$ under $T$ is an \alert{ellipsoid} in $\R^m$.  We can find the axes and size of the ellipsoid using the SVD of $A$.
+  
+\end{frame}
+
+\end{document}
+
+
+
+% Extension of the Invertible Matrix Theorem:
+
+\begin{frame}
+  \begin{theorem}
+  Suppose $\{ \v_1, \v_2, \ldots , \v_n \}$ is an orthonormal basis of $\R^n$ consisting of eigenvectors of $A^TA$, arranged such that $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n \geq 0$. Let $A$ have $r$ nonzero singular values. Then $\{ A\v_1, A\v_2, \ldots ,A \v_n \}$  is an orthogonal basis for $\Col A$ and $\mbox{rank } A = r$.
+  \end{theorem}
+
+  \begin{proof}
+  We have $\v_i$ and $\v_j$ are orthogonal for $i \ne j$, thus
+  \[ (A\v_i)^T(A\v_j) = \v_i^T\colorb{A^TA\v_j} = \v_i^T \colorb{\lambda_j \v_j} = 0.\]
+  Thus $\{ A\v_1, A\v_2, \ldots ,A \v_n \}$  is an orthogonal set.
+
+  The singular values of $A$ are $\| A\v_1 \| \geq \| A\v_2 \| \geq \ldots \geq \|A\v_n\|$. We have $r$ nonzero singular values, so $| A\v_i | \ne 0$ for $1 \leq i \leq r$.

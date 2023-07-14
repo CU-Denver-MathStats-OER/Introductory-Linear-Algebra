@@ -1,0 +1,264 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{The Dimension of a Vector Space}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Considering Bases for $\mathbb{P}_2$}
+
+Given a vector space $V$,  then $\mathcal{B} = \left\{ \b_1 ,  \b_2, \ldots ,  \b_n \right\} $ is a \alert{basis for $V$} if
+\bb
+\ii $\mathcal{B}$ is a linearly independent set, and
+\ii $\mbox{Span} \left\{ \b_1 ,  \b_2, \ldots ,  \b_n \right\} = V$.
+\ee
+
+\begin{example}
+Let $V = \mathbb{P}_2$, the vector space of degree two (or less) polynomials with usual polynomial addition and scalar multiplication.
+
+\bi
+\ii $\mathcal{B} = \left\{ 1 , t , t^2 \right\}$ is the standard basis. \smallskip
+\ii $\mathcal{B}_1 = \left\{ 1-2t , 5+t , -8+3t^2 \right\}$ is also a basis. \smallskip
+\ii Is $\mathcal{B}_2 = \left\{ 1-2t+t^2 , 5+t-t^2 \right\}$ a basis? \smallskip
+\ii Is $\mathcal{B}_3 = \left\{ 1-2t+t^2 , 5+t-t^2, 2+7t, 6t+2t^2 \right\}$ a basis? 
+\ei
+
+\end{example}
+\end{frame}
+
+\begin{frame}{How Many Vectors Are Needed to Form a Basis for $V$?}
+  \begin{theorem}
+  If a vector space $V$ has a basis  $\mathcal{B} = \left\{ \v_1,\v_2,\ldots,\v_n \right\}$, then any set containing \blue{more than $n$} vectors of $V$ must be \alert{linearly dependent}.
+  \end{theorem}
+
+  \onslide<2->{
+  \blue{Proof.}
+  Let $\mathcal{U} = \left\{ \u_1,\u_2,\ldots,\u_p \right\}$ be a set with $p$ vectors from $V$, where $p > n$.
+  
+  Suppose that $c_1 \u_1 +\ldots + c_p \u_p = \mathbf{0}$.
+  }%
+  \onslide*<2-3>{%
+  Since $\mathcal{B}$ is a basis for $V$,
+  each $\u_j$ can be written as a linear combination of the elements of $\mathcal{B}$:
+  $\u_j= a_{1j} \v_1 + a_{2j} \v_2 + \ldots + a_{nj} \v_n$.
+  
+  Substituting and grouping the $\v_i$, we have
+  \[
+     \left( \sum_{j=1}^p a_{1j} c_j \right) \v_1
+    +\left( \sum_{j=1}^p a_{2j} c_j \right) \v_2
+    +\ldots
+    +\left( \sum_{j=1}^p a_{ij} c_j \right) \v_i
+    +\ldots
+    +\left( \sum_{j=1}^p a_{nj} c_j \right) \v_n
+    = \mathbf{0}.
+  \]
+  }%
+  \onslide*<3>{%
+  Since the $\B$ is a basis and thus linearly indep,
+  the only linear combination of the $\v_i$s equal to $\mathbf{0}$ is where all the scalar weights are $0$.
+  }
+
+  \onslide*<4->{
+  Thus we wish to solve the homogeneous linear system
+  \[
+  \begin{bmatrix} a_{11} & a_{12} & \ldots & a_{1j} & \ldots & a_{1p} \\
+  a_{21} & a_{22} & \ldots & a_{2j} & \ldots & a_{2p} \\
+  \vdots & \vdots &  & \vdots & & \vdots \\
+  a_{n1} & a_{n2} & \ldots & a_{nj} & \ldots & a_{np} \end{bmatrix}
+  \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_p \end{bmatrix}
+  = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix}.
+  \]
+  }%
+  \onslide*<5->{
+  Since $p>n$, there are more columns than rows and so there is a nontrivial solution for the $c_j$s.
+  
+  Thus $\mathcal{U}$ is a \alert{linearly dependent} set. 
+  \hfill\blue{\qed}
+  }
+\end{frame}
+
+
+\begin{frame}{How Many Vectors Are Needed to Form a Basis for $V$?}
+  \medskip
+  
+  \begin{theorem}
+  If a vector space $V$ has a basis of $n$ vectors, then \alert{every} basis of $V$ must consist of \alert{exactly} $n$ vectors.
+  \end{theorem}
+  \bigskip
+
+  \pause
+  \blue{Proof.}
+  Let $\mathcal{B}_1$ be a basis for $V$ consisting of $n$ vectors and let $\mathcal{B}_2$ denote another basis for $V$ that consists of $m$ vectors. By the previous theorem, we know $\mathcal{B}_2$ cannot have more than $n$ vectors, so $m \leq n$.
+  \medskip
+
+  \pause
+  Similarly, since $\mathcal{B}_2$  is a basis with $m$ vectors, then we know (also by the previous theorem) that $\mathcal{B}_1$ cannot contain more than $m$ vectors, so we have $n \leq m$. Since $m \leq n$ and $n \leq m$, we have $m=n$.
+  
+  \hfill\blue{\qed}
+\end{frame}
+
+
+\begin{frame}{The Dimension of a Vector Space}
+  \bbox
+  If $V$ is a vector space spanned by a finite set, then $V$ is said to be \alert{finite dimensional}, and the \alert{dimension} of $V$, written as \alert{$\dim V$}, is the number of vectors in a basis for $V$.
+  \ebox
+
+  \pause
+  \bbox
+  \bi 
+  \ii The zero vector space  $V = \left\{ \mathbf{0} \right\}$ has dimension 0.
+  \ii If $V$ is not spanned by a finite set, then $V$ is said to be \alert{infinite dimensional}.
+  \ei
+  \ebox
+
+  \pause
+  \begin{example}
+  \bi
+  \ii $\mathbb{P}_2$ has dimension 3.  %It is isomorphic to $\mathbb{R}^3$.
+  \ii $\mbox{Mat}_{2 \times 2}$ has dimension 4.  %It is isomorphic to $\mathbb{R}^4$.
+  \ii The vector space of polynomials (of any degree) is infinite dimensional.
+  \ei
+  \end{example}
+\end{frame}
+
+
+\begin{frame}{Example}
+\medskip
+
+  Find a basis and state the dimension of the subspace:
+  \[ H = \left\{ \begin{bmatrix} 3a - b \\ 6a \\ 2a+b \end{bmatrix}
+    \ : \ a, b \mbox{ in } \mathbb{R} \right\}
+  \onslide<2->{
+  =\left\{
+    a \begin{bmatrix} 3 \\ 6 \\ 2 \end{bmatrix}
+  + b \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}
+    \ : \ a, b \mbox{ in } \mathbb{R} \right\}
+  = \text{Span}
+    \left\{
+    \begin{bmatrix} 3 \\ 6 \\ 2 \end{bmatrix},
+    \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}
+    \right\}.
+  }
+  \]
+  
+  % a picture might be nice.
+\end{frame}
+
+\begin{frame}{Subspaces of a Vector Space}
+
+{\small All subspaces of $\mathbb{R}^3$ can be classified by their dimension:
+\bi
+\ii \colorb{$0$-dimensional subspaces:} There is only one, the zero subspace $H_0 = \left\{ \mathbf{0} \right\}$.
+\ii \colorb{$1$-dimensional subspaces:} Lines through the origin. Any subspace spanned by a single, nonzero-vector $H_1 = \mbox{Span} \left\{ \mathbf{v}_1 \right\}$. 
+\ii \colorb{$2$-dimensional subspaces:} Planes that contain the origin. Any subspace spanned by two linearly independent vectors $H_2 = \mbox{Span} \left\{ \mathbf{v}_1, \mathbf{v}_2  \right\}$. 
+\ii \colorb{$3$-dimensional subspaces:} The entire vector space $\mathbb{R}^3$ is the only subspace with three dimensions. Any subspace spanned by three linearly independent vectors $H_2 = \mbox{Span} \left\{ \mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3  \right\}$. 
+\ei}
+
+% maybe a picture would be nice
+
+\end{frame}
+
+
+\begin{frame}{The Basis Theorem}
+
+  \begin{example}
+  Determine whether the following set $S = \left\{ 1-t , 1+t, 2t^2 \right\}$ is a basis for $\mathbb{P}_2$.
+  \end{example}
+  \vspace*{2em}
+
+  \pause
+  \begin{theorem}[The Basis Theorem]
+  Let $V$ be a $p$-dimensional vector space. Any linearly independent set of $p$ vectors in $V$ is automatically a basis for $V$. Any set of exactly $p$ vectors that span $V$ is automatically a basis for $V$.
+  \end{theorem}
+
+\end{frame}
+
+
+\begin{frame}{Dimension of Matrix Subspaces}
+
+Find the dimensions of $\Nul A$ and $\Col A$ for 
+$\dsty A = \begin{bmatrix} 1 & 4 & 0 & 2 & -1\\ 
+3 & 12 & 1 & 5 & 5 \\ 
+2 & 8 & 1 & 3 & 2 \\ 
+5 & 20 & 2 & 8 & 8 
+\end{bmatrix}
+\pause
+\sim 
+\begin{bmatrix} 1 & 4 & 0 & 2 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}$.
+
+Find RREF of $A$.
+
+%\[ A = \begin{bmatrix} 1 & 4 & 0 & 2 & -1\\ 3 & 12 & 1 & 5 & 5 \\ 2 & 8 & 1 & 3 & 2 \\ 5 & 20 & 2 & 8 & 8 \end{bmatrix} \sim 
+%\begin{bmatrix} 1 & 4 & 0 & 2 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}.\]
+
+
+\bi
+\ii We see $\Nul A$ has dimension 2 since we have a basis $\mathcal{B}_{\rm null} = \left\{  \begin{bmatrix} -4 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} , \begin{bmatrix} -2 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix} \right\}$.
+\ii We see $\Col A$ has dimension 3 since we have a basis $\mathcal{B}_{\rm col} = \left\{ \begin{bmatrix} 1 \\ 3 \\ 2 \\ 5 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \\ 2 \end{bmatrix}  ,  \begin{bmatrix} -1 \\ 5 \\ 2 \\ 8 \end{bmatrix} \right\}$.
+\ei
+
+\end{frame}
+
+
+\begin{frame}{Rank and Nullity of a Matrix}
+
+\bbox
+\bi 
+\ii The \alert{rank} of an $m \times n$ matrix $A$ is the \alert{dimension of the column space.}
+\ii The \colorb{nullity} of an $m \times n$ matrix $A$ is the \colorb{dimension of the null space.}
+\ei
+\ebox
+\smallskip
+
+\pause 
+Note that $\colorr{\mbox{rank }A}=\text{\# of pivots}$, 
+\pause
+and $\dim\ \Row A=\text{\# of pivots}=\colorr{\mbox{rank }A}$! 
+\medskip
+
+\pause
+Note that $\colorb{\mbox{nullity }A}=\text{\# of free variables}$.
+
+
+
+\pause
+\begin{theorem}[The Rank Theorem]
+The dimensions of the column space and the null space of an $m \times n$ matrix $A$ satisfy the equation
+\[ \colorr{\mbox{rank $A$}} + \colorb{\mbox{nullity $A$}} = n = \mbox{number of columns of $A$}. \]
+\end{theorem}
+\smallskip
+
+\pause
+\bb
+\ii If $A$ is a $9 \times 12$ matrix with rank $3$, what is the nullity of $A$?
+\ii If $A$ is a $10 \times 6$ matrix with nullity $4$, what is the rank of $A$?
+\ee
+
+\end{frame}
+
+
+\begin{frame}{Rank and The Invertible Matrix Theorem}
+  \begin{theorem}[The Invertible Matrix Theorem (continued)]
+  Let $A$ be an $n \times n$ matrix. Then the following are equivalent statements:
+
+  \bb[(a)]
+  \ii $A$ is an invertible matrix.
+  \addtocounter{enumi}{2}
+  \item The equation $A\x=\mathbf{0}$ has only the trivial solution.
+  \item The columns of $A$ form a linearly independent set.
+  \addtocounter{enumi}{2}
+  \item The columns of $A$ span $\R^n$.
+  \addtocounter{enumi}{5}
+  \ii The columns of $A$ form a \alert{basis} for $\R^n$.
+  \ii $\Col A = \R^n$.
+  \ii $\mbox{rank } A = n$. (\emph{$A$ has ``full rank''})
+  \ii $\mbox{nullity } A = 0$.
+  \ii $\Nul A = \left\{ \mathbf{0} \right\}$.
+  \ee
+  \end{theorem}
+\end{frame}
+
+\end{document}
+
+

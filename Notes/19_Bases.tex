@@ -1,0 +1,526 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Linear Independence and Bases}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Finding an Efficient Set of Vectors that Span $V$}
+
+Consider the vector space $V = \mathbb{R}^3$ with the usual operations, and consider the following set of vectors:
+
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}, \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  \right\} . \]
+
+
+\bb
+\ii Do the set of vectors above span all of $\mathbb{R}^3$? \ms
+
+\pause
+\colorb{YES. Given any vector $\mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}$ in $\mathbb{R}^3$, we have
+$\dsty \mathbf{b} = b_1 \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}  + b_2   \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}  + b_3  \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$, 
+so $\mathbf{b}$ is in the span of the set of vectors above.}
+
+\pause
+\ii Do we need all five vectors in the set to span all of $\mathbb{R}^3$?
+\ee
+
+%\alert{NO. We only need the three standard column vectors to span $\mathbb{R}^3$. Notice  
+%\[ \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  =  -2   \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}  + 5  \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \quad \mbox{and} \quad
+%\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}  =    \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}  -  \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}.\]
+
+%\bi
+%\ii Removing these two vectors from the set above does not change the span.
+%\ii Removing one of the standard column vectors would affect the span of the set.
+%\ii We need a minimum of three vectors to span all of $\mathbb{R}^3$.
+%\ei}
+
+\end{frame} 
+
+\begin{frame}{Finding an Efficient Set of Vectors that Span $V$}
+
+
+\begin{columns}[T]
+
+\column{0.425\tw}
+
+Consider the vector space $V = \mathbb{R}^3$ with the usual operations, and consider the following set of vectors:
+
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}, \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  \right\} . \]
+
+
+\bb
+\ii Do the set of vectors above span all of $\mathbb{R}^3$?  \colorb{YES} \ms 
+
+\ii Do we need all five vectors in the set to span all of $\mathbb{R}^3$? \ms
+\ee
+
+\column{0.575\tw}
+
+\colorb{NO. We only need the three standard column vectors to span $\mathbb{R}^3$. Notice  
+\[ \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  =  -2   \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}  + 5  \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \quad \mbox{and} \quad
+\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}  =    \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}  -  \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}.\]}
+
+\pause
+\bi
+\ii Removing these two vectors from the set above does not change the span.
+\ii Then also removing one of the standard column vectors would affect the span of the set.
+\ii We need a minimum of three vectors to span all of $\mathbb{R}^3$.
+\ei
+
+\end{columns}
+
+\end{frame} 
+
+\begin{frame}{Revisiting Linear Independence}
+  \bbox
+  Let $V$ denote a vector space, and consider the set of vectors $S = \left\{ \mathbf{v}_1 ,  \mathbf{v}_2 , \ldots ,  \mathbf{v}_p \right\}$.%
+  \bi
+  \ii The set $S$ of vectors is \alert{linearly independent} if the vector equation $c_1  \mathbf{v}_1 + c_2  \mathbf{v}_2 + \ldots + c_p  \mathbf{v}_p = \mathbf{0}$ has \alert{only the trivial solution}. \ms
+  \ii The set $S$ of vectors is \alert{linearly dependent} if the vector equation above has a \alert{non-trivial solution}.
+  \ei
+  \ebox
+
+  \pause
+  \begin{theorem}
+  A set $\left\{ \mathbf{v}_1 ,  \mathbf{v}_2 , \ldots ,  \mathbf{v}_p \right\}$ of vectors is \alert{linearly dependent} if and only if
+  \smallskip
+
+  \qquad some $\mathbf{v}_j$ is a linear combination of the other vectors.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Basis of a Vector Space}
+
+\bbox
+Let $H$ denote a subspace of a vector space $V$. A set of vectors $\mathcal{B}$ in $V$ is \alert{basis for $H$} if:
+\bb[(i)]
+\ii $\mathcal{B}$ is a \alert{linearly independent set}, and
+\ii the subspace spanned by $\mathcal{B}$ equals $H$. Namely \alert{$\mbox{Span } \mathcal{B} = H$}.
+\ee
+\ebox
+
+\pause
+\begin{columns}[T]
+
+\column{0.42\tw}
+
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}, \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  \right\}  \] \ss
+
+\begin{center}\alert{NOT A BASIS} \end{center}
+
+\column{0.29\tw}
+
+\onslide*<2>{
+
+\vspace{1em}
+
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}  \right\}  \] \ss
+
+\begin{center}\alert{NOT A BASIS} \end{center}
+}
+\onslide*<3->{
+Note that there is \alert{not} a unique basis.
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix},
+\begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix} 
+\right\} \]
+\begin{center} \colorb{ALSO A BASIS} \end{center}
+}
+
+\column{0.29\tw}
+
+\[ \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\} \] \ss
+
+\begin{center} \colorb{WE HAVE A WINNER!} \end{center}
+
+\end{columns}
+
+
+\end{frame}
+
+
+\begin{frame}{Spanning Set Theorem}
+
+\begin{theorem}
+Let $S = \left\{ \mathbf{v}_1 ,  \mathbf{v}_2 , \ldots ,  \mathbf{v}_p \right\}$ be a set in a vector space $V$, and let $H= \mbox{Span}\left\{ \mathbf{v}_1 ,  \mathbf{v}_2 , \ldots ,  \mathbf{v}_p \right\}$ (which is a subspace of $V$).
+\bi
+\ii If one of the vectors in $S$ is a linear combination of the remaining vectors in $S$, then after removing that vector from the set, the remaining vectors will still span $H$.
+\ii If $H \ne \left\{ \mathbf{0} \right\}$, some nonempty subset of $S$ is a basis for $H$.
+\ei
+\end{theorem}
+
+  \begin{example}
+    \[ H = \mbox{Span} \left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} , \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}, \begin{bmatrix} 0 \\ -2 \\ 5 \end{bmatrix}  \right\}  \] 
+  \end{example}
+\end{frame}
+
+
+\begin{frame}{Standard Basis for $\mathbb{R}^n$}
+  \bigskip
+
+  We saw that  $\left\{ \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} ,  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right\} = \left\{ \mathbf{e}_1 ,  \mathbf{e}_2 ,  \mathbf{e}_3 \right\}$ is a basis for $\mathbb{R}^3$, and probably this is the most natural basis.  We extend this basis to higher dimensions.
+  \bigskip
+
+  \bbox
+  The set of standard column vectors $\left\{  \mathbf{e}_1 ,  \mathbf{e}_2 , \ldots ,  \mathbf{e}_n \right\}$ that forms a basis for $\mathbb{R}^n$ is called the \alert{standard basis for $\mathbb{R}^n$.}
+  \ebox
+\end{frame}
+
+
+\begin{frame}{Examples in $\mathbb{R}^3$}
+
+Determine whether the given set of vectors is a basis for $\mathbb{R}^3$. %Using the Inverse Matrix Theorem, we have many ways to investigate. The set will be a basis if: 
+
+%\bi
+%\ii The matrix of column vectors $\begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 \end{bmatrix}$ is invertible.
+%\ii The matrix of column vectors $\begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 \end{bmatrix}$ has a pivot in every column.
+%\ii The determinant of the matrix of column vectors $\begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \mathbf{v}_3 \end{bmatrix}$ is nonzero.
+%\ei}
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+$\left\{ \begin{bmatrix} 3 \\ 0 \\ -6 \end{bmatrix} , \begin{bmatrix} -4 \\ 1 \\ 7 \end{bmatrix} , \begin{bmatrix} -2 \\ 1 \\ 5 \end{bmatrix} \right\}$   \bs
+
+\pause
+$\dsty \begin{bmatrix} 3 & -4 & -2 \\ 0 & 1 & 1 \\ -6 & 7 & 7 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$ \ms
+
+$\dsty \det \begin{bmatrix} 3 & -4 & -2 \\ 0 & 1 & 1 \\ -6 & 7 & 7 \end{bmatrix} = 6$
+
+
+\column{0.5\tw}
+\pause
+$\left\{ \begin{bmatrix} 0 \\ 2 \\ -1 \end{bmatrix} , \begin{bmatrix} 2 \\ 2 \\ 0 \end{bmatrix} , \begin{bmatrix} 6 \\ 16 \\ -5 \end{bmatrix} \right\}$ \bs
+
+\pause
+{\small
+$\begin{bmatrix} 0 & 2 & 6 \\ 2 & 2 & 16 \\ -1 & 0 & -5 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & \colorb{5} \\ 0 & 1 & \alert{3} \\ 0 & 0 & 0 \end{bmatrix}$ \ms
+
+$\begin{bmatrix}x_1 \\ x_2 \\ x_3 \end{bmatrix} = 
+\begin{bmatrix} -5 x_3 \\ -3 x_3 \\ x_3 \end{bmatrix} = 
+x_3 \begin{bmatrix} -5 \\ -3 \\ 1 \end{bmatrix}$.
+}
+\medskip
+
+Setting $x_3=-1$ and rearranging, we see that \ms
+
+$\dsty \begin{bmatrix} 6 \\ 16 \\ -5 \end{bmatrix} = \colorb{5}  \begin{bmatrix} 0 \\ 2 \\ -1 \end{bmatrix} + \alert{3} \begin{bmatrix} 2 \\ 2 \\ 0 \end{bmatrix}$
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Bases for More Abstract Vector Spaces}
+
+\bb
+\ii Find a basis for $\mbox{Mat}_{2 \times 2}$ the vector space of all $2 \times 2$ matrices with the usual operations. \ms
+
+\colorb{\small
+\[ \begin{bmatrix} a & b \\ c & d \end{bmatrix} = a \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + b \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} + c \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} + d \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \]}
+
+
+\colorb{Thus we have $\dsty \mathcal{B} = \left\{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} , \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} ,  \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} ,  \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right\}$.}
+
+\vspace*{2em}
+
+\pause
+\ii Find a basis for $\mathbb{P}_4$, the vector space of all polynomials of degree at most 4 with the usual operations. \ms
+
+\colorb{An arbitrary vector in $\mathbb{P}_4$ is given by $p(t) = a_4t^4 + a_3t^3 + a_2t^2+a_1t + a_0$. Thus we have $\mathcal{B} = \left\{ 1, t, t^2, t^3, t^4 \right\}$.}
+
+\ee
+\end{frame}
+
+
+\begin{frame}{Polynomial Vector Space Example 1}
+  \medskip
+
+Is \alert{$\left\{ 2t^2+1, t^2-1, t+2 \right\}$} a basis for \alert{$\mathbb{P}_2$}? ($\mathbb{P}_2=$polynomials of degree at most $2$) \vspace{0.25in}
+
+\pause
+We solve $c_1 ( 2t^2+1) + c_2 (t^2-1) + c_3(t+2)= 0$. This gives
+
+\[ (2c_1 + c_2)t^2 + c_3t + (c_1-c_2) = 0 \]
+
+From the linear and constant terms respectively, we see that $c_3=0$ and $c_1 = c_2$. Then looking at the coefficient in front of the quadratic term, we have $2c_1 + c_2 = 2c_1 + c_1 = 3c_1 =0$. Thus the only solution is the trivial solution, $c_1=c_2=c_3=0$. The set is linearly independent. \ms
+
+Note the standard basis for $\mathbb{P}_2$ is $\left\{ t^2, t, 1 \right\}$, which contains three vectors. We have a linearly independent set of the same number of vectors, thus this set is a basis for $\mathbb{P}_2$.
+
+
+\end{frame}
+
+\begin{frame}{Polynomial Vector Space Example 2}
+\medskip
+
+Is \alert{$\left\{ 2t^2+t, t+1, 2t^2-1 \right\}$} a basis for \alert{$\mathbb{P}_2$}?  \vspace{0.5in}
+
+\pause
+Notice that we have $2t^2-1 = (2t^2+t) - (t+1)$, or $\mathbf{v}_3 = \mathbf{v}_1 - \mathbf{v}_2$. Since the set is linearly dependent, it cannot be a basis for $\mathbb{P}_2$.
+
+\end{frame}
+
+\begin{frame}{Matrix Vector Space Example}
+  \bigskip
+
+  Is \alert{$\left\{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} , \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} ,  \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} ,  \begin{bmatrix} 2 & -4 \\ 4 & 0 \end{bmatrix} \right\}$} a basis for $\mbox{Mat}_{2 \times 2}$?
+  \vspace{0.3in}
+
+  \pause
+  Notice that we have 
+
+  \[  \begin{bmatrix} 2 & -4 \\ 4 & 0 \end{bmatrix} = 2  \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} - 4 \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} . \]
+  \medskip
+
+  Since one matrix can be written as a linear combination of other matrices in the set, this is a \alert{linearly dependent set}, and it cannot be a basis for $\mbox{Mat}_{2 \times 2}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Bases for the Null Space of a Matrix}
+
+\bbox
+The \alert{null space} of an $m \times n$ matrix $A$, denoted \alert{$\Nul A$}, is the set of all solutions to the homogeneous equation $A \mathbf{x} = \mathbf{0}$.
+\ebox
+
+Let $\dsty A = \begin{bmatrix} 1 & 4 & 0 & 2 & -1\\ 3 & 12 & 1 & 5 & 5 \\ 2 & 8 & 1 & 3 & 2 \\ 5 & 20 & 2 & 8 & 8 \end{bmatrix}$.
+\onslide<2->{
+$\text{RREF}(A) = \begin{bmatrix} 1 & 4 & 0 & 2 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 0 \end{bmatrix}$.
+}
+\medskip
+
+Find a basis for \alert{$\Nul A$}.
+
+\onslide<2->{
+\[ \mathbf{x} = \begin{bmatrix} -4x_2 - 2x_4 \\ x_2 \\ x_4 \\ x_4 \\ 0 \end{bmatrix} = x_2 \begin{bmatrix} -4 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + x_4 \begin{bmatrix} -2 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix} \quad 
+\mathcal{B} = \left\{  \begin{bmatrix} -4 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} , \begin{bmatrix} -2 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix} \right\} .\] 
+}
+
+\end{frame}
+
+\begin{frame}{Basis for Column Space of a Matrix}
+
+\vspace*{-.3em}
+\bbox
+The \alert{column space} of an $m \times n$ matrix $A = \begin{bmatrix} \mathbf{a}_1 &  \mathbf{a}_2 & \ldots &  \mathbf{a}_n  \end{bmatrix}$, denoted \alert{$\Col A$}, is the set of all linear combinations of the columns of $A$.
+\ebox
+
+\begin{columns}
+  
+\column{0.4\tw}
+Find a basis for \alert{$\Col A$}.
+\bigskip
+
+\hspace*{1.5em} Let $\dsty A = 
+\begin{bmatrix}
+\onslide*<1-4>{
+1 & 4 & 0 & 2 & -1\\
+3 & 12 & 1 & 5 & 5 \\
+2 & 8 & 1 & 3 & 2 \\ 
+5 & 20 & 2 & 8 & 8}%
+\onslide*<5->{
+\colorr{1} & 4 & \colorr{0} & 2 & \colorr{-1}\\
+\colorr{3} & 12 & \colorr{1} & 5 & \colorr{5} \\
+\colorr{2} & 8 & \colorr{1} & 3 & \colorr{2} \\ 
+\colorr{5} & 20 & \colorr{2} & 8 & \colorr{8}}%
+\end{bmatrix}$.
+\medskip
+
+$\begin{array}{ll} R= \\ \text{RREF}(A) = \end{array} 
+\begin{bmatrix} 
+\onslide*<1-3>{
+1 & 4 & 0 & 2 & 0 \\ 
+0 & 0 & 1 & -1 & 0 \\ 
+0 & 0 & 0 & 0 & 1 \\ 
+0 & 0 & 0 & 0 & 0 }%
+\onslide*<4->{
+\colorr{1} & 4 & \colorr{0} & 2 & \colorr{0} \\ 
+\colorr{0} & 0 & \colorr{1} & -1 & \colorr{0} \\ 
+\colorr{0} & 0 & \colorr{0} & 0 & \colorr{1} \\ 
+\colorr{0} & 0 & \colorr{0} & 0 & \colorr{0} }
+\end{bmatrix}$.
+
+\column{0.6\tw}
+
+\pause
+Note that $A\mathbf{y}=\mathbf{0} \ \colorb{\Longleftrightarrow} \ R\mathbf{y}=\mathbf{0}$.
+\smallskip
+
+\pause
+So every linear dep of the columns of $R$ is 
+
+a linear dep of the columns of $A$.
+\smallskip
+
+\pause
+\alert{Pivot cols of $R$} are $\mathbf{e}_i$s; non-pivot cols are linear combs.
+\smallskip
+
+\pause
+So \alert{pivot cols of $A$} are lin indep, form a basis for $\Col A$.
+\medskip
+
+\qquad $\dsty \mathcal{B} = \left\{ \begin{bmatrix} 1 \\ 3 \\ 2 \\ 5 \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 1 \\ 2 \end{bmatrix}  ,  \begin{bmatrix} -1 \\ 5 \\ 2 \\ 8 \end{bmatrix} \right\}$.
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Basis for Column Space of a Matrix}
+  \medskip
+  
+  \begin{columns}[T]
+    \column{.3\textwidth}
+      $A=
+      \begin{bmatrix}
+      \red{1} & 4 & \red{0} & 2 & \red{-1}\\
+      \red{3} & 12 & \red{1} & 5 & \red{5} \\
+      \red{2} & 8 & \red{1} & 3 & \red{2} \\ 
+      \red{5} & 20 & \red{2} & 8 & \red{8}
+      \end{bmatrix}$
+      \medskip
+    
+    \column{.7\textwidth}
+      Given $\b$ in $\Col A$, how can $\b$ be written as a linear combination of vectors in $\mathcal{B}$?
+      \medskip
+      
+      \pause
+      Solve $A\x=\b$, use the solution where the free variables are $0$.
+      \vspace*{1.5em}
+      
+  \end{columns}
+  
+    \pause
+    $\b=(1,12,3,17)$.
+    %\medskip
+    
+    {\small
+    $\begin{array}{l}\text{RREF of} \\ {[A|\b]}= \end{array}
+    \begin{bmatrix}
+      1 & 4 & 0 & 2 & 0 & 3\\
+      0 & 0 & 1 & -1 & 0 & -7\\
+      0 & 0 & 0 & 0 & 1 & 2\\
+      0 & 0 & 0 & 0 & 0 & 0
+    \end{bmatrix}$
+    \qquad
+    $\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{bmatrix} =
+      \begin{bmatrix} 3 -4x_2 - 2x_4 \\ x_2 \\ -7+ x_4 \\ x_4 \\ 2 \end{bmatrix} = 
+          \begin{bmatrix} 3 \\ 0  \\ -7 \\ 0 \\ 2 \end{bmatrix}
+    + x_2 \begin{bmatrix} -4 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+    + x_4 \begin{bmatrix} -2 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix}$.
+    \bigskip
+    
+    Set $x_2=x_4=0$.
+    Then $\b=\begin{bmatrix} 1 \\ 12 \\ 3 \\ 17 \end{bmatrix} =
+      3\begin{bmatrix} 
+      \red{1} \\
+      \red{3} \\
+      \red{2} \\ 
+      \red{5} 
+      \end{bmatrix}
+      -7
+      \begin{bmatrix}
+      \red{0}\\
+      \red{1}\\
+      \red{1}\\
+      \red{2}
+      \end{bmatrix}
+      +2\begin{bmatrix}
+      \red{-1}\\
+      \red{5} \\
+      \red{2} \\
+      \red{8}
+      \end{bmatrix}$.
+    }  % small
+    
+\end{frame}
+
+
+\begin{frame}{Basis for Row Space of a Matrix}
+
+\vspace*{-.4em}
+\bbox
+\vspace*{-.2em}
+The \alert{row space} of an $m \times n$ matrix $A = {\scriptsize \begin{bmatrix} \mathbf{r}_1 \\  \vdots \\  \mathbf{r}_m  \end{bmatrix}}$, denoted \alert{$\Row A$}, is the set of all linear combinations of the rows of $A$.
+\quad $\Row A = \mbox{Span} \left\{ \mathbf{r}_1 , \mathbf{r}_2 , \ldots ,  \mathbf{r}_m \right\} = \Col A^T$
+\ebox
+
+\begin{columns}
+  
+\column{0.4\tw}
+Find a basis for \alert{$\Row A$}.
+\medskip
+
+\hspace*{1.5em} Let $\dsty A = 
+\begin{bmatrix}
+1 & 4 & 0 & 2 & -1\\
+3 & 12 & 1 & 5 & 5 \\
+2 & 8 & 1 & 3 & 2 \\ 
+5 & 20 & 2 & 8 & 8
+\end{bmatrix}$.
+\medskip
+
+$\begin{array}{ll} R= \\ \text{RREF}(A) = \end{array} 
+\begin{bmatrix} 
+1 & 4 & 0 & 2 & 0 \\ 
+0 & 0 & 1 & -1 & 0 \\ 
+0 & 0 & 0 & 0 & 1 \\ 
+0 & 0 & 0 & 0 & 0
+\end{bmatrix}$.
+
+\column{0.6\tw}
+\pause
+The rows of $R$ are linear combinations of rows of $A$.
+
+\quad Thus, span rows $R$ \colorb{$\subseteq$} span rows $A$.
+
+\pause
+But since elementary row ops are \alert{reversible},
+
+the rows of $A$ are linear combinations of rows of $R$.
+
+Thus, span rows $A$ \colorb{$\subseteq$} span rows $R$.
+\colorb{$\Rightarrow$} $\Row A = \Row R$.%
+\medskip
+
+\pause
+So a basis for $\Row R$ is a basis for $\Row A$.
+\medskip
+
+A basis for $\Row A$ is 
+
+\qquad $\left\{ ( 1, 4, 0, 2, 0), (0, 0, 1, -1, 0 ) ,(0, 0, 0, 0, 1 ) \right\}$.
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Basis for Row Space of a Matrix}
+  \bigskip
+
+  \begin{theorem}
+  If two matrices $A$ and $B$ are row equivalent, then their \alert{row spaces} are the same.
+  \medskip
+
+  If $B$ is in (reduced) row echelon form, the nonzero rows of $B$ form a basis for the row space of $A$ as well as for $B$.
+  \end{theorem}
+\end{frame}
+
+
+\begin{frame}{Summary}
+  \bigskip
+
+  Given a matrix $A$:
+  \medskip
+
+  \bi
+  \ii Solve the equation $A\mathbf{x} = \mathbf{0}$ to find a basis for \green{$\Nul A$}. \medskip
+  \pause
+  \ii Find the reduced row echelon form of $A$. \medskip
+  \ii \quad The pivot columns of the \alert{original matrix $A$} form a basis for \alert{$\Col A$}. \medskip
+  \ii \quad The non-zero rows of the \blue{RREF matrix} form a basis for \blue{$\Row A$}.
+  \ei
+
+\end{frame}
+
+\end{document}

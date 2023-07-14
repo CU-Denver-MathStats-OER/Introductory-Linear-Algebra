@@ -1,0 +1,156 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{The Invertible Matrix Theorem}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Equivalent Statements}
+
+Let $A$ be a square $n \times n$ matrix. 
+
+\bb[(a)]
+\ii $A$ is an invertible matrix.
+\ii $A$ is row equivalent to the $n \times n$ identity matrix $I_n$.
+\ii $A$ has $n$ pivots when forming the reduced row echelon form of $A$.
+\ii The equation $A \mathbf{x} = \mathbf{0}$ has only the trivial solution.
+%\addtocounter{enumi}{5}
+%\ii There is an $n \times n$ matrix $C$ such that $CA = I_n$.
+\ee
+  \bigskip
+
+  \pause
+  \begingroup\addtolength{\leftmargini}{2em}
+  \begin{itemize}
+  \item[(d)$\Rightarrow$(b)] If $A \mathbf{x} = \mathbf{0}$ has only the trivial solution, that means the augmented matrix $\lbrack A \mathbf{0} \rbrack$ has no free variables. Thus $A$ has $n$ pivots. \ss
+  \item[(c)$\Leftrightarrow$(b)] $A$ has $n$ pivots if and only if $A$ is row equivalent to the $n \times n$ identity matrix. \ss
+  \pause
+  \item[(a)$\Rightarrow$(d)] If $A$ is invertible, then $A\x=\b$ has a unique solution for any $b$ in $\mathbb{R}^n$.
+  \item[(b)$\Rightarrow$(a)]
+      If $A$ is row equivalent to $I_n$, then there are elementary matrices $E_i$ such that $E_p E_{p-1} \cdots E_1 A = I_n$.  Thus, $A^{-1} = E_p E_{p-1} \cdots E_1$, so $A$ is invertible.
+  \end{itemize}
+  \endgroup
+
+  \pause
+  \alert{Statements (a), (b), (c), (d) are all equivalent!}
+\end{frame}
+
+\begin{frame}{Equivalence of Statements}
+
+  \bb[(a)]
+  \ii $A$ is an invertible matrix.
+  \ii $A$ is row equivalent to the $n \times n$ identity matrix, $I_n$.
+  \ii $A$ had $n$ pivots.
+  \ii The equation $A \mathbf{x} = \mathbf{0}$ has only the trivial solution.
+  \addtocounter{enumi}{5}
+  \ii There is an $n \times n$ matrix $C$ such that $CA = I_n$.
+  \ee
+  \bigskip
+
+  \pause
+  \begingroup\addtolength{\leftmargini}{2em}
+  \begin{itemize}
+    \item[(a)$\Rightarrow$(j)] If $A$ is invertible, then $C=A^{-1}$ is a matrix such that $CA = I_n$. \ss
+    \item[(j)$\Rightarrow$(d)] If there is an $n \times n$ matrix $C$ such that $CA = I_n$, then $A \mathbf{x} = \mathbf{0}$ has only the trivial solution.
+  \end{itemize}
+  \endgroup
+  \bigskip
+  
+  \pause
+  \alert{Statements (a), (b), (c), (d), and (j) are all equivalent!}
+
+\end{frame}
+
+\begin{frame}{Adding to the Chain of Equivalence}
+
+ \bb[(a)]
+  \ii $A$ is an invertible matrix.
+  \addtocounter{enumi}{5}
+  \ii The equation $A \mathbf{x} = \mathbf{b}$ has at least one solution for each $\mathbf{b}$ in $\mathbb{R}^n$.
+  \addtocounter{enumi}{3}
+  \ii There is an $n \times n$ matrix $D$ such that $AD = I_n$.
+  \ee
+  \bigskip
+
+  \pause
+  \begingroup\addtolength{\leftmargini}{2em}
+  \begin{itemize}
+    \item[(a)$\Rightarrow$(k)] If $A$ is invertible, then there is an $n \times n$ matrix $D=A^{-1}$ such that $AD = I_n$.
+    \item[(k)$\Rightarrow$(g)] If there is an $n \times n$ matrix $D$ such that $AD = I_n$, then the equation $AD \mathbf{b} = I_n \mathbf{b}=\mathbf{b}$. Thus, for any $\mathbf{b}$ in $\mathbb{R}^n$, the equation $A \mathbf{x} = \mathbf{b}$ has the solution $\mathbf{x} = D \mathbf{b}$.
+    \item[(g)$\Rightarrow$(a)] If the equation $A \mathbf{x} = \mathbf{b}$ has at least one solution for each $\mathbf{b}$ in $\mathbb{R}^n$, each row in $A$ must have a pivot.
+    Since $A$ is $n\times n$, $A$ has $n$ pivots, and $A$ therefore is invertible.
+  \end{itemize}
+  \endgroup
+  \bigskip
+
+  \pause
+  \alert{Statements (a), (b), (c), (d),  (g), (j)  and (k) are all equivalent statements!}
+\end{frame}
+
+% \begin{frame}{Summary of Equivalence So Far}
+%   \bb[(a)]
+%   \addtocounter{enumi}{6}
+%   \ii The equation $A \mathbf{x} = \mathbf{b}$ has at least one solution for each $\mathbf{b}$ in $\mathbb{R}^n$.
+%   \ii The columns of $A$ span $\mathbb{R}^n$
+%   \ii The linear transformation $\mathbf{x} \mapsto A\mathbf{x}$ maps $\mathbb{R}^n$ onto $\mathbb{R}^n$.
+%   \ee
+% 
+% \bs
+%   
+%   \bb[(a)]
+%   \addtocounter{enumi}{3}
+%   \ii The equation $A \mathbf{x} = \mathbf{0}$ has only the trivial solution.
+%   \ii The columns of $A$ form a linearly independent set.
+%   \ii The linear transformation $\mathbf{x} \mapsto A\mathbf{x}$ is one-to-one.
+%   \ee
+% 
+%   \bbox
+%   \alert{Statements (a), (b), (c), (d),  (e), (f), (g), (h), (i), (j)  and (k) are all equivalent and statements!}
+% \ebox
+%   
+% \end{frame}
+
+\begin{frame}{The Invertible Matrix Theorem (so far)}
+
+Let $A$ be a square $n \times n$ matrix. Then all of the following statements are equivalent.
+  
+ \bb[(a)]
+  \ii \colorb{$A$ is an invertible matrix.}
+  \ii $A$ is row equivalent to the $n \times n$ identity matrix $I_n$.
+  \ii $A$ has $n$ pivots.
+  \ii The equation $A \mathbf{x} = \mathbf{0}$ has only the trivial solution.
+  %\ii The columns of $A$ form a linearly independent set.
+  %\ii The linear transformation $\mathbf{x} \mapsto A\mathbf{x}$ is one-to-one.
+  \addtocounter{enumi}{2}
+  \ii The equation $A \mathbf{x} = \mathbf{b}$ has at least one solution for each $\mathbf{b}$ in $\mathbb{R}^n$.
+  \ii The columns of $A$ span $\mathbb{R}^n$.
+  %\ii The linear transformation $\mathbf{x} \mapsto A\mathbf{x}$ maps $\mathbb{R}^n$ onto $\mathbb{R}^n$.
+  \addtocounter{enumi}{1}
+  \ii There is an $n \times n$ matrix $C$ such that $CA = I_n$.
+  \ii There is an $n \times n$ matrix $D$ such that $AD = I_n$.
+  \ii \colorb{$A^T$ is an invertible matrix.}
+\ee
+
+\end{frame}
+
+\begin{frame}{Example}
+
+  Consider the matrix
+  \[ A = \begin{bmatrix} 2 & 3 & 4\\ 2& 3 & 4\\2 & 3 & 4\end{bmatrix} .\]
+
+  Does $A$ have an inverse? Explain why or why not.
+  \medskip
+  
+  \pause
+  \bi
+  %\ii The columns of $A$ are not linearly independent.
+  \ii $A$ is not row equivalent to $I_3$.
+  \ii The columns of $A$ do not span $\mathbb{R}^3$.
+  \ii $A^T$ is not invertible.
+  \ii And so on $\ldots$
+  \ei
+
+\end{frame}
+
+\end{document}

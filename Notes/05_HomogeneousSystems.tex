@@ -1,0 +1,248 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Homogeneous Systems of Linear Equations}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Homogeneous Solutions}
+  \bbox
+  A system of equations is \alert{homogeneous} if it can be written in the form $A \mathbf{x} = \mathbf{0}$.
+  \ebox
+  \vspace*{-1.5em}
+
+  \begin{columns}
+    \column{0.5\tw}
+    \[
+    \begin{array}{l}
+     x_1 +x_2 +x_3=7 \\
+     x_1 -x_2 +2x_3= 7\\
+     5x_1+x_2+x_3=11
+    \end{array}  \]
+
+    \[   \bbm
+    1 & 1 & 1 \\
+    1 & -1 & 2 \\
+    5 & 1 & 1 \ebm \bbm x_1 \\ x_2 \\ x_3 \ebm = \bbm 7 \\ 7 \\ 11\ebm  \]
+
+    \hspace*{2em} \alert{NOT a homogeneous system.}
+
+    \column{0.5\tw}
+    \[
+    \begin{array}{l}
+     x_1 +x_2 +x_3=0 \\
+     x_1 -x_2 +2x_3= 0\\
+     5x_1+x_2+x_3=0
+    \end{array}  \]
+
+    \[   \bbm
+    1 & 1 & 1 \\
+    1 & -1 & 2 \\
+    5 & 1 & 1 \ebm \bbm x_1 \\ x_2 \\ x_3 \ebm = \bbm 0 \\ 0 \\ 0\ebm  \]
+
+    \hspace*{2em} \colorb{YES, this is a homogeneous system.}
+  \end{columns}
+  \medskip
+
+  \pause
+  \bbox
+    Every homogeneous system has a \alert{trivial solution} $\x=\mathbf{0}$, and so is \alert{consistent}.
+    \smallskip
+    
+    Does the homogeneous system have a \colorb{nontrivial solution}?
+    ie, infinite number of solutions?
+  \ebox
+
+\end{frame}
+
+\begin{frame}{Existence of Nontrivial Solutions}
+
+  Recall that if the system $A \mathbf{x} = \mathbf{b}$ is \alert{consistent}, then it has:
+  \begin{itemize}
+  \item A \alert{unique solution} if, when forming the RREF of $A$, there is a pivot position in every column (ie, all variables are \colorb{basic}).
+  \item An \colorb{infinite number} of solutions if there is a column of $A$ without a pivot position (ie, there is at least one \colorb{free variable}).
+  \end{itemize}
+  \bigskip
+
+  \begin{theorem}
+  The homogeneous equation $A\mathbf{x} = \mathbf{0}$ has a nontrivial solution if and only if the solution set has at least one free variable.
+  \end{theorem}
+
+\end{frame}
+
+\begin{frame}{Example}
+\medskip
+   
+    \begin{columns}
+      \column{0.6\tw}
+     Find the solution set to the \alert{homogeneous} system
+    \[   \begin{array}{ccccccc}
+     x_1 & + & 3x_2 & + &7 x_3&=&0\\
+     &  & x_2 & + & 3x_3 &=& 0\\
+    -2x_1 & - & 4x_2 & - & 8x_3 &=& 0
+    \end{array}  \]
+
+    \column{0.4\tw}
+    \end{columns}
+  
+  \bigskip
+    
+\[ \bbm 1 & 3 & 7 & 0\\
+0 & 1 & 3 & 0\\
+-2 & -4 & -8 & 0 \ebm \sim
+\bbm 1 & 3 & 7 & 0\\
+0 & 1 & 3 & 0\\
+0 & 2 & 6 & 0 \ebm \sim
+\bbm 1 & 3 & 7 & 0\\
+0 & 1 & 3 & 0\\
+0 & 0 & 0 & 0 \ebm \sim
+\bbm \alert{1} & 0 & \colorb{-2} & 0\\
+0 & \alert{1} & \colorb{3} & 0\\
+0 & 0 & \colorb{0} & 0 \ebm \]
+\smallskip
+
+Notice \colorb{$x_3$ is a free variable}, and the solution set can therefore be given by
+
+\[ \mathbf{x} = \bbm x_1 \\ x_2 \\ x_3 \ebm = \bbm 2x_3 \\ -3x_3 \\ x_3 \ebm =  x_3 \bbm 2 \\ -3 \\ 1 \ebm = x_3 \mbf{v} \ , \mbox{ where } \mbf{v} = \bbm 2 \\ -3 \\ 1 \ebm . \]
+\end{frame}
+
+
+\begin{frame}{Example}
+\medskip
+
+  Find the solution set to the homogeneous system
+  \[   \begin{array}{ccccccc}
+     3x_1 & - & 2x_2 & + & x_3&=&0\\
+     -6x_1& + & 4x_2 & - & 2x_3 &=& 0
+  \end{array}  \]
+
+  \[ \bbm 3 & -2 & 1 & 0\\
+  -6 & 4 & -2 & 0 \ebm \sim
+  \bbm 3 & -2 & 1 & 0\\
+  0 & 0 & 0 & 0 \ebm \sim
+  \bbm \alert{1} & \colorb{\frac{-2}{3}} & \colorb{\frac{1}{3}} & 0\\
+  0 & \colorb{0} & \colorb{0} & 0  \ebm \]
+  \medskip
+
+  Both \colorb{$x_2$ and $x_3$ are free variables}, and the solution set can therefore be given by
+  \[ \mathbf{x} = \bbm x_1 \\ x_2 \\ x_3 \ebm = \bbm \frac{2}{3}x_2-\frac{1}{3} x_3 \\ x_2 \\ x_3 \ebm =  x_2 \bbm \frac{2}{3} \\ 1 \\ 0 \ebm +  x_3 \bbm -\frac{1}{3} \\ 0 \\ 1 \ebm = x_2 \mbf{u}  + x_3 \mbf{v}. \]
+\end{frame}
+
+
+% \begin{frame}{Parametric Vector Form}
+% 
+%       Find the solution set to the homogeneous system
+% \[   \begin{array}{ccccccc}
+%      3x_1 & - & 2x_2 & + & x_3&=&0\\
+%      -6x_1& + & 4x_2 & - & 2x_3 &=& 0
+% \end{array}  \]
+% 
+% \bi
+% \ii \alert{Implicit Solution:} The plane $\dsty 3x_1 - 2x_2 + x_3=0$.
+% \ii \alert{Explicit Solution:} The plane $\dsty x_1 = \frac{2}{3}x_2-\frac{1}{3} x_3$.
+% \ii \alert{Vector Form:} $\dsty x_2 \bbm \frac{2}{3} \\ 1 \\ 0 \ebm +  x_3 \bbm -\frac{1}{3} \\ 0 \\ 1 \ebm = x_2 \mbf{u}  + x_3 \mbf{v}$
+% \ii \alert{Parametric Vector Form:} $\dsty \colorb{s} \bbm 2 \\ 3 \\ 0 \ebm +  \colorb{t} \bbm -1 \\ 0 \\ 3 \ebm = \colorb{s} \mbf{u}  + \colorb{t} \mbf{v}$ with $\colorb{s,t}$ in $\mathbb{R}$
+% \medskip
+% 
+% The weights $\colorb{s,t}$ are any scalars. Vector Form is a special case of Parametric Vector Form.
+% \ei
+% 
+% \end{frame}
+
+\begin{frame}{Nonhomogeneous Linear Systems}
+\medskip
+
+  Find the solution set to the \alert{nonhomogeneous} system
+  \[
+  \begin{array}{ccccccc}
+    x_1 & + & 3x_2 & + &7 x_3&=&4\\
+    &  & x_2 & + & 3x_3 &=& 5\\
+  -2x_1 & - & 4x_2 & - & 8x_3 &=& 2
+  \end{array}  \]
+  
+  \pause
+  \[ \bbm 1 & 3 & 7 & 4\\
+  0 & 1 & 3 & 5\\
+  -2 & -4 & -8 & 2 \ebm \sim
+  \bbm 1 & 3 & 7 & 4\\
+  0 & 1 & 3 & 5\\
+  0 & 2 & 6 & 10 \ebm \sim
+  \bbm 1 & 3 & 7 & 4\\
+  0 & 1 & 3 & 5\\
+  0 & 0 & 0 & 0 \ebm \sim
+  \bbm \alert{1} & 0 & \colorb{-2} & -11\\
+  0 & \alert{1} & \colorb{3} & 5\\
+  0 & 0 & \colorb{0} & 0 \ebm \]
+  \medskip
+
+  Notice \colorb{$x_3$ is a free variable}, and the solution set can therefore be given by
+
+  \[ \mathbf{x} = \bbm x_1 \\ x_2 \\ x_3 \ebm = \bbm -11+2x_3 \\ 5-3x_3 \\ x_3 \ebm =  \bbm -11 \\ 5 \\ 0 \ebm +  x_3 \bbm 2 \\ -3 \\ 1 \ebm = \mathbf{p} + t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]
+\end{frame}
+
+
+\begin{frame}{Comparing Homogeneous and Nonhomogeneous Solutions}
+
+  \vspace*{-1.5em}
+  \begin{columns}
+\column{0.45\tw}
+
+\[   \begin{array}{ccccccc}
+     x_1 & + & 3x_2 & + &7 x_3&=&0\\
+     &  & x_2 & + & 3x_3 &=& 0\\
+    -2x_1 & - & 4x_2 & - & 8x_3 &=& 0
+\end{array}  \]
+
+\[ \mathbf{x} =  x_3 \bbm 2 \\ -3 \\ 1 \ebm = t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]
+
+    \column{0.55\tw}
+
+\[   \begin{array}{ccccccc}
+     x_1 & + & 3x_2 & + &7 x_3&=&4\\
+     &  & x_2 & + & 3x_3 &=& 5\\
+    -2x_1 & - & 4x_2 & - & 8x_3 &=& 2
+\end{array}  \]
+
+\[ \mathbf{x} =  \alert{\bbm -11 \\ 5 \\ 0 \ebm} +  x_3 \bbm 2 \\ -3 \\ 1 \ebm =\alert{\mathbf{p}} + t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]
+
+  \end{columns}
+
+  \begin{center}
+    \includegraphics[width=3in]{images/fig-translate.png}
+  \end{center}
+  
+  
+  \end{frame}
+
+\begin{frame}
+
+  \begin{theorem}
+    Suppose \colorb{$A \mathbf{x} = \mbf{b}$} is consistent and has a solution \colorb{$\mathbf{x} = \mathbf{p}$}.
+    If $\colorr{\mbf{v}}$ is \textbf{any} solution to the \colorr{homogeneous} equation \colorr{$A \mathbf{x} = \mathbf{0}$}, then
+    \[ \mbf{x} = \colorb{\mbf{p}} + \colorr{\mbf{v}} \]
+    is a solution to the \colorb{nonhomogeneous} equation \colorb{$A \mathbf{x} = \mathbf{b}$}.
+  \end{theorem}
+
+  \begin{proof}
+    \pause
+    We have $A \mathbf{x} = A \left( \colorb{ \mbf{p}} + \alert{\mbf{v}} \right) = \colorb{A  \mbf{p}} + \alert{A  \mbf{v}} = \colorb{\mbf{b}} + \alert{\mathbf{0}} = \colorb{\mathbf{b}}$.
+  \end{proof}
+  
+  \pause
+  
+  \begin{theorem}
+    \textbf{Every} solution $\mathbf{x}$ of $\colorb{A \mathbf{x} = \mbf{b}}$ can be written as $\mbf{x} = \colorb{\mbf{p}} + \colorr{\mbf{v}}$ for \textbf{some} solution $\colorr{\mbf{v}}$ of \colorr{$A \mathbf{x} = \mathbf{0}$}.
+  \end{theorem}
+
+  \begin{proof}
+    \pause
+    Let $\mathbf{y}$ be a solution to $\colorb{A \mathbf{x} = \mathbf{b}}$.
+    Let $\colorr{\mbf{v}}=\mathbf{y}-\colorb{\mathbf{p}}$.
+    Then $A\colorr{\mbf{v}}=A(\mathbf{y}-\colorb{\mathbf{p}}) = A\mathbf{y}-A\colorb{\mathbf{p}}= \colorb{\mathbf{b}}-\colorb{\mathbf{b}}=\colorr{\mathbf{0}}$.
+    Hence, $\colorr{\mbf{v}}$ is a solution to $\colorr{A \mathbf{x} = \mathbf{0}}$.
+  \end{proof}
+  
+  \end{frame}
+
+  \end{document}

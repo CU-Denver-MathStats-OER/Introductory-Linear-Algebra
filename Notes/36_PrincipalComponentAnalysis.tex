@@ -1,0 +1,95 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Principal Component Analysis}
+
+\def \X {\mathbf{X}}
+\def \Y {\mathbf{Y}}
+\def \B {\mathbf{B}}
+\def \A {\mathbf{A}}
+\def \M {\mathbf{M}}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Data Matrices}
+  \medskip
+  
+  Suppose that we've conducted a  study and measured various characteristics.
+  We put our data into a matrix $D$, 
+  where the columns are each feature and 
+  the rows are each member of the study (observations). 
+  \bigskip
+  
+  Eg, people, and measuring height, weight, and age.
+  
+  \begin{center}
+    \begin{tabular}{ccccc}
+%     \multicolumn{1}{c}{} & \multicolumn{1}{c}{height} & \multicolumn{1}{c}{weight} & \multicolumn{1}{c}{age}  \multicolumn{1}{c}{$\cdots$} \smallskip\\
+    & height & weight & age & $\cdots$ \smallskip\\
+    Irwin & 72 inches & 187 pounds & 32 years & $\cdots$ \\
+    Quinn & 61 inches & 132 pounds & 55 years & $\cdots$ \\
+    \vdots & & & & 
+    \end{tabular}
+  \end{center}
+  \bigskip
+  
+  If we have $p$ features and $N$ observations, $D$ is an $N \times p$ matrix.
+  
+\end{frame}
+
+\begin{frame}{Mean and Covariance}
+  \smallskip
+  
+  The \alert{mean $\mu$} or average of a feature $\x$ can be computed by $\frac{1}{N} \sum x_i$.
+  \medskip
+  
+  The (sample) \alert{variance} of a distribution is the average\footnote{almost} square deviation from the mean.
+  \[ \mbox{var} = \frac{1}{N-1} \sum (x_i-\mu)^2. \]
+  
+  \pause
+  The \alert{covariance} of two distributions $\x$ and $\y$ is given by
+  \[ \mbox{cov}(\x,\y) = \frac{1}{N-1} \sum (x_i -\mu_x)(y_i-\mu_y). \]
+  
+  The covariance is $0$ when the two distributions are \colorb{uncorrelated}.
+  \bigskip
+    
+  \pause
+  
+  From our data matrix $D$, let $A=[ a_{ij}]$, where $a_{ij}=d_{ij}-\mu_j$ is the deviation from the mean.
+  \medskip
+  
+  Then the \alert{matrix of covariances} is $S=\frac{1}{N-1} A^T A$.
+\end{frame}
+
+
+\begin{frame}{Principal Component Analysis}
+  \smallskip
+  
+  We would like the features to be uncorrelated so that we can see the individual effects.
+  \medskip
+  
+  \pause
+  Find an orthogonal matrix $P$ such that $AP^T=B$,
+  ie, for each observation, produce a new list of features and measurements that are linear combinations of the original features.
+  \medskip
+  
+  We want the columns $\b_i$ to be \colorb{uncorrelated},
+  \pause
+  ie, covariance matrix $\frac{1}{N-1} B^T B$ to be \alert{diagonal}.
+  \medskip
+  
+  The cov matrix of $B$ is $\frac{1}{N-1} P A^T A P^T$.  Since $\frac{1}{N-1} A^T A$ is \alert{symmetric}, we can orthogonally diagonalize it.
+  \medskip
+  
+  The columns of $P$ (which are unit eigenvectors of $A^T A$) are called the \alert{principal components} of the data.  These are also \blue{right singular vectors} of $A$.
+  \bigskip
+  
+  \pause
+  The sum $\sum \lambda_i$ of the eigenvalues of $\frac{1}{N-1} A^T A$ is a measure of the total variance of the data.
+  \medskip
+  
+  The scaled values $\frac{\lambda_i}{\sum \lambda_i}$ indicate how important each principal component is.  Less important principal components can be dropped for \colorb{dimension reduction}.
+\end{frame}
+
+\end{document}

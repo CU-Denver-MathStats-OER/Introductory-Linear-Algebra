@@ -1,0 +1,331 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Matrix Arithmetic}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Representations of Matrices}
+
+\bi 
+\ii If $A$ is an $m \times n$ matrix, it has $m$ rows and $n$ columns.
+\ii The $j^{\mbox{th}}$ column vector is denoted $\mathbf{a}_j$.
+\ii We have $n$ column vectors, and each $\mathbf{a}_j$ is in $\mathbb{R}^m$.
+\ii The entry in the $i^{\mbox{th}}$ row and $j^{\mbox{th}}$ column is denoted $a_{ij}$.
+\ii \alert{Rows First!}  First we give the row index, then the column index.
+\ii \alert{Recall that in Python, indexing starts at 0.}
+\ei
+
+\[ A = \begin{bmatrix} \mathbf{a}_1 &  \mathbf{a}_2 & \ldots & \alert{\mathbf{a}_j} & \ldots & \mathbf{a}_n \end{bmatrix} = 
+\begin{bmatrix}
+a_{11} & a_{12} & \ldots & \alert{a_{1j}} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & \alert{a_{2j}} & \ldots & a_{2n} \\
+\vdots & \vdots & & \alert{\vdots} & & \vdots \\
+a_{i1} & a_{i2} & \ldots & \alert{a_{ij}} & \ldots & a_{in} \\
+\vdots & \vdots & & \alert{\vdots} && \vdots \\
+a_{m1} & a_{m2} & \ldots & \alert{a_{mj}} & \ldots & a_{mn} 
+\end{bmatrix}_{m\times n} \]
+
+\end{frame}
+
+\begin{frame}{Types of Matrices}
+
+\bi
+\ii An $m \times n$ whose entries are all $0$ is called a \alert{zero matrix}, $\dsty M = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$.
+\ii A matrix that has the same number of rows and columns is called a \alert{square matrix}.
+\ii We call the entries along the diagonal of a square matrix the \alert{diagonal entries}.
+\ii A square matrix whose \alert{off-diagonal} entries are all $0$ is called a \alert{diagonal matrix}.
+\ii An $n \times n$  matrix with each $a_{ij} = 1$ if $i=j$ and $a_{ij}=0$ if $i \ne j$ is called the \alert{identity matrix} and is denoted $I_n$.
+\ii An $n \times n$ matrix for which \colorb{$a_{ij} = a_{ji}$} for all $1\leq i, j \leq n$ is called a \alert{symmetric matrix}.
+\ei
+
+\[ 
+\begin{bmatrix} \alert{1} & 2 & 3 & 4 \\ 5 & \alert{6} & 7 & 8 \\ 9 & 10 & \alert{11} & 12 \\ 13 & 14 & 15 & \alert{16} \end{bmatrix} \ , \ 
+\begin{bmatrix} \alert{1} & 0 & 0 & 0 \\ 0 & \alert{-8} & 0 & 0 \\ 0 & 0 & \alert{6} & 0 \\ 0 & 0 & 0 & \alert{-7} \end{bmatrix} \ , \ 
+I_4 = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} \ , \ 
+\begin{bmatrix}\alert{1} & 2 & \colorb{3} & 4 \\ 2 & \alert{6} & 0 & 8 \\ \colorb{3} & 0 & \alert{11} & 12 \\ 4 & 8 & 12 & \alert{16}\end{bmatrix} 
+\]
+
+\end{frame}
+
+\begin{frame}{Arithmetic with Matrices}
+
+  {\small
+  \bi
+  \ii Let $A$ and $B$ be $m \times n$ matrices of the same size. The \alert{sum $C=A + B$} is the $m \times n$ matrix whose entries are the sums of the corresponding entries of $A$ and $B$. In other words, $c_{ij} = a_{ij}+b_{ij}$.
+  \ii Let $A$ denote an $m \times n$ matrix and $r$ a scalar. To compute \alert{scalar multiple $rA$} we multiply every entry in $A$ by the scalar $r$. Thus, if $C = rA$, then $c_{ij} = r a_{ij}$.
+  \ii Two matrices $A$ and $B$ are equal if they have the same size and $a_{ij}=b_{ij}$ for all entries.
+  \ei
+  }
+
+  \pause
+  \begin{example}
+  Let $\dsty A = \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix}$ and $\dsty B = \begin{bmatrix} 1 & 2 & 6\\ -1 & 0 & 5 \end{bmatrix}$.  Compute $2A - B$.
+  \end{example}
+\end{frame}
+
+\begin{frame}{Properties of Matrix Addition and Scalar Multiplication}
+
+\bbox
+Let $A$, $B$, and $C$ be $m \times n$ matrices of the same size, and let $r$ and $s$ denote scalars.
+
+\begin{columns}[T]
+\column{0.5\tw}
+\bb[a.]
+\ii $A+B = B+A$
+\ii $(A+B)+C = A+(B+C)$
+\ii $A + 0 = A$
+\ee
+
+\column{0.5\tw}
+\bb[a.]
+\addtocounter{enumi}{3}
+\ii $r(A+B) = rA + rB$
+\ii $(r+s) A = rA + sA$
+\ii $r(sA) = (rs)A$
+\ee
+\end{columns}
+\ebox
+
+\end{frame}
+
+\begin{frame}{Matrix Multiplication}
+
+\bbox
+Let $A$ be an $m \times n$ matrix and $B$ be an $n \times p$ matrix. Then 
+\[ AB = A \begin{bmatrix} \mathbf{b}_1 & \mathbf{b}_2 & \ldots & \mathbf{b}_p \end{bmatrix} =  \begin{bmatrix} A \mathbf{b}_1 & A \mathbf{b}_2 & \ldots &A \mathbf{b}_p \end{bmatrix} .\]
+\ebox
+
+
+Let $\dsty A = \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix}$ and $\dsty B = \begin{bmatrix} \colorb{2} & \colorr{1} & \colorg{0} & 5\\ \colorb{6} & \colorr{0} & \colorg{-1} & 2\\ \colorb{1} & \colorr{2} & \colorg{1} & 1 \end{bmatrix}$. We define the product $AB$ as follows:
+
+
+%\[ \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix} \begin{bmatrix} 2 & 1 & 0 & 5\\ 6 & 0 & -1 & 2\\ 1 & 2 & 1 & 1 \end{bmatrix} \] 
+
+\begin{columns}[T]
+\column{0.33\tw}
+\[  \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix} \colorb{\begin{bmatrix}2\\6\\1 \end{bmatrix}} =  \colorb{\begin{bmatrix} 1\\ -7 \end{bmatrix}} \]
+
+\column{0.33\tw}
+\[  \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix} \colorr{\begin{bmatrix}1\\0\\2 \end{bmatrix}} =  \colorr{\begin{bmatrix} 5\\ 4 \end{bmatrix}} \]
+
+\column{0.33\tw}
+\[  \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix} \colorg{\begin{bmatrix}0\\-1\\1 \end{bmatrix}} = \colorg{\begin{bmatrix} 3\\ 3 \end{bmatrix}} \]
+\end{columns}
+
+\begin{columns}
+
+\column{0.33\tw}
+\[  \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix} \begin{bmatrix}5\\-2\\1 \end{bmatrix} = \begin{bmatrix} -2\\ 15 \end{bmatrix} \]
+
+\column{0.67\tw}
+
+\[ AB = \begin{bmatrix} \colorb{1} & \colorr{5} & \colorg{3} & -2 \\ \colorb{-7} & \colorr{4} & \colorg{3} & 15\end{bmatrix} \]
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Checking Matrix Sizes}
+
+\bbox
+  Let $A$ be an $m \times n$ matrix and $B$ be an $n \times p$ matrix.  The matrix product $AB$:
+  \bi
+  \ii Is only defined when \alert{$A$ has the same number of columns as $B$ has rows}. 
+  \ii Is undefined when $A$ has a different number of columns as $B$ has rows. 
+  \ii Results in an $m \times p$ matrix when it is defined.
+  \ei
+\ebox
+
+inner sizes match, outer sizes give result:  $A_{\colorb{m}\times \colorr{n}} B_{\colorr{n}\times \colorg{p}} = (AB)_{\colorb{m}\times \colorg{p}}$.
+\vspace*{-1em}
+
+\begin{align*}
+AB &= \begin{bmatrix} -1 & 0 & 3\\ 2 & -2 & 1 \end{bmatrix}_{2\times 3} 
+\begin{bmatrix} \colorb{2} & \colorr{1} & \colorg{0} & 5\\ \colorb{6} & \colorr{0} & \colorg{-1} & 2\\ \colorb{1} & \colorr{2} & \colorg{1} & 1 \end{bmatrix}_{3 \times 4} \\
+& = \begin{bmatrix} \colorb{1} & \colorr{5} & \colorg{3} & -2 \\ \colorb{-7} & \colorr{4} & \colorg{3} & 15\end{bmatrix}_{2 \times 4} 
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Is the Operation Defined?}
+
+{\small
+\[ A = \begin{bmatrix} 3 & 0 \\ -1 & 2 \\ 1 & 1 \end{bmatrix} \ , \ 
+B = \begin{bmatrix} 4 & -1 \\ 0 & 2 \end{bmatrix} \ , \ 
+C = \begin{bmatrix} 1 & 4 & 2\\ 3 & 1 & 5 \end{bmatrix} \ , \ 
+D = \begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \  , \ 
+E = \begin{bmatrix} 4 & 6 \\ 0 & 3\\ 1&0 \end{bmatrix}  \ , \ 
+F = \begin{bmatrix} 1 & 4 \\ 2 & 3 \end{bmatrix} \]
+}
+
+
+\bb
+\ii For which matrices is \alert{addition} with $A$ defined? [In what order?] \ms
+\ii For which matrices is \alert{addition} with $B$ defined? \ms
+\ii For which matrices is \alert{addition} with $C$ defined? \ms
+\ii For which matrices is \colorb{multiplication} with $A$ defined?  [In what order?]\ms
+\ii For which matrices is \colorb{multiplication} with $B$ defined? \ms
+\ii For which matrices is \colorb{multiplication} with $C$ defined? \ms
+\ee
+
+\end{frame}
+
+\begin{frame}
+
+{\small
+\[ A = \begin{bmatrix} 3 & 0 \\ -1 & 2 \\ 1 & 1 \end{bmatrix} \ , \ 
+B = \begin{bmatrix} 4 & -1 \\ 0 & 2 \end{bmatrix} \ , \ 
+C = \begin{bmatrix} 1 & 4 & 2\\ 3 & 1 & 5 \end{bmatrix} \ , \ 
+D = \begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \  , \ 
+E = \begin{bmatrix} 4 & 6 \\ 0 & 3\\ 1&0 \end{bmatrix}  \ , \ 
+F = \begin{bmatrix} 1 & 4 \\ 2 & 3 \end{bmatrix} \]
+}
+
+  Evaluate each of the products below:
+  \only<1>{
+    \begin{tasks}(2)
+      \task $AD$
+      \task $DA$
+    \end{tasks}
+  }
+  \only<2>{
+    \begin{tasks}(3)
+      \task $BF$
+      \task $FB$
+      \task $B^2$
+    \end{tasks}
+  }
+  \only<3>{
+    \begin{tasks}(2)
+      \task $A(BC)$
+      \task $(AB)C$
+    \end{tasks}
+  }
+
+\end{frame}
+
+\begin{frame}{Finding the $ij^{\mbox{th}}$ Entry}
+
+\[ AB = \begin{bmatrix} 3 & 0 \\ -1 & 2 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 4 & -1 \\ 0 & 2 \end{bmatrix} = 
+\begin{bmatrix} \begin{bmatrix} \alert{3} & \alert{0} \\ \colorg{-1} & \colorg{2} \\ \colorp{1} & \colorp{1} \end{bmatrix}  \begin{bmatrix} \colorb{4}\\ \colorb{0} \end{bmatrix}  & \begin{bmatrix} 3 & 0 \\ -1 & 2 \\ 1 & 1 \end{bmatrix}  \begin{bmatrix} -1\\2 \end{bmatrix}  \end{bmatrix}
+=
+\begin{bmatrix} \alert{12} & -3 \\ \colorg{-4} & 5\\ \colorp{4} & 1\end{bmatrix} \]
+
+\ss
+
+{\small
+\[ AB = \begin{bmatrix} a_{11} & a_{12} & \ldots & a_{1j} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2j} & \ldots & a_{2n} \\
+\vdots & \vdots & & \vdots & & \vdots \\
+\alert{a_{i1}} & \alert{a_{i2}} & \ldots & \alert{a_{ij}} & \ldots & \alert{a_{in}} \\
+\vdots & \vdots & & \vdots & & \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mj} & \ldots & a_{mn} 
+\end{bmatrix} 
+\begin{bmatrix} b_{11} & b_{12} & \ldots & \colorb{b_{1j}} & \ldots & b_{1p} \\
+b_{21} & b_{22} & \ldots & \colorb{b_{2j}} & \ldots & b_{2p} \\
+\vdots & \vdots & & \colorb{\vdots} & & \vdots \\
+b_{i1} & b_{i2} & \ldots & \colorb{b_{ij}} & \ldots & b_{ip} \\
+\vdots & \vdots & & \colorb{\vdots} && \vdots \\
+b_{n1} & b_{n2} & \ldots & \colorb{b_{nj}} & \ldots & b_{np} 
+\end{bmatrix}  \] }
+
+
+\bbox
+\[ \bigg( AB \bigg)_{ij}  = \alert{a_{i1}} \colorb{b_{1j}} + \alert{a_{i2}} \colorb{b_{2j}} + \ldots + \alert{a_{in}} \colorb{b_{nj}} 
+= \sum_{k=1}^n \alert{a_{ik}} \colorb{b_{kj}}.\]
+\ebox
+
+\end{frame}
+
+\begin{frame}{Properties of Matrix Multiplication}
+
+\bbox
+Let $A$, $B$, and $C$ be matrices for which the indicated sums and products are defined. Let $r$ denote a scalar.
+\bb[a.]
+\ii $A(BC) = (AB)C$ \ \ \ \ \ \ \ \ \ \ \ \ (associative law)
+\ii $A(B+C) = AB+AC$ \ \ \ \ \ (left distributive law)
+\ii $(B+C)A = BA + CA$ \ \ \ \ \ (right distributive law)
+\ii $r(AB) = (rA)B = A(rB)$\ \ \ \ (scalar multiplication)
+\ii $I_m A = A = AI_m$ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (identity for a square $m \times m$ matrix $A$)
+\ee
+\ebox
+
+\pause
+\begin{proof}[Partial proof for identity.]
+  Note that $I_m=[\mathbf{e}_1 \ \mathbf{e}_2 \ \dots \ \mathbf{e}_m]$.
+  Then 
+  \[
+    A I_m = A[\mathbf{e}_1 \ \mathbf{e}_2 \ \dots \ \mathbf{e}_m]
+          = [A\mathbf{e}_1 \ A\mathbf{e}_2 \ \dots \ A\mathbf{e}_m]
+          = [ \mathbf{a}_1 \ \mathbf{a}_2 \ \dots \ \mathbf{a}_m] = A.\qedhere
+  \]
+\end{proof}
+
+\end{frame}
+
+
+\begin{frame}{The Transpose of a Matrix}
+
+\bbox
+Let $A$ denote an $m \times n$ matrix. The \alert{transpose} of $A$ is the $n \times m$ matrix, denoted by \alert{$A^T$}, whose columns are formed from the corresponding rows of $A$.
+\ebox
+
+
+\begin{columns}[T]
+
+\column{0.5\tw}
+
+\begin{example}
+  Give the transpose of 
+\[ A = \begin{bmatrix} 1 & 2 & 3 & 4 \\ -5 & -6 & -7 & -8 \\ 9 & 10 & 11 & 12 \end{bmatrix}\]
+\end{example}
+
+\column{0.5\tw}
+
+\ \ 
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Properties of Transpose}
+
+\bbox
+Let $A$ and $B$ be matrices for which the indicated sums and products are defined. Let $r$ denote a scalar.
+
+%FIXME!!!!
+\begin{columns}[T]
+\column{0.5\tw}
+\bb[a.]
+\ii $\left( A^T \right)^T = A$  \ms
+\ii $(A+B)^T = A^T + B^T$ \ms
+\ii $(rA)^T = rA^T$ \ms
+\ee
+
+\column{0.5\tw}
+\bb[a.]
+\addtocounter{enumi}{3}
+\ii $(AB)^T = B^TA^T$ \ms
+\ii $A^T=A$ if $A$ is $m\times m$ symmetric
+\ee
+\end{columns}
+\ebox
+
+\pause
+\begin{proof}[Other proof for identity.]
+  We previously showed that $A_{m\times m}I_m = A$.  We wish to show that $I_m A = A$.
+  \[
+    I_m A 
+    = \left((I_m A)^T \right)^T
+    = \left(A^T I_m ^T \right)^T  
+    = \left(A^T I_m \right)^T 
+    = \left(A^T \right)^T = A.\qedhere
+  \]
+\end{proof}
+
+\end{frame}
+
+
+\end{document}

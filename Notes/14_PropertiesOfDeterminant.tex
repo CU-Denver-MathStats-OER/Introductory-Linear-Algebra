@@ -1,0 +1,451 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Properties of Determinants}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Cofactor Expansion Definition of Determinant}
+  \bbox
+  {\small
+  For an $n \times n$ matrix $A$, the cofactor expansion about row $\alert{i}$ is
+  $\blue{\det A} = \displaystyle\sum_{j=1}^n (-1)^{\alert{i}+j} \, a_{\alert{i}j} \, \det A_{\alert{i}j}.$
+  }
+  \ebox
+  \bigskip
+  
+  \pause
+  This \blue{recursive} definition is \alert{too time-consuming} for large matrices.
+  \vspace*{2em}
+  
+  We will discover a more efficient method of calculating the determinant
+  by studying how the \green{elementary row operations} change the determinant.
+\end{frame}
+
+\begin{frame}{Scaling a Row}
+  \medskip
+
+  \begin{columns}
+  \column{.4\textwidth}
+  {\small
+  $\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\  0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\  \blue{0} & \blue{0} & \blue{5} & \blue{0} \\ 0 & 0 & 0 & 1 \end{bmatrix}$
+  \medskip
+  
+  \quad $\det I_4 = 1$ \hspace*{3em} $\det E = $
+  }
+  
+  \column{.5\textwidth}
+  \onslide<2->{
+  {\small
+  $\begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ -1 & 3 & 7 & 9 \\ 4 & -2 & -3 & 2 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ \blue{-5} & \blue{15} & \blue{35} & \blue{45} \\ 4 & -2 & -3 & 2 \end{bmatrix}$
+  \medskip
+  
+  \qquad $\det A = -40$ \hspace*{5em} $\det B = $
+  }
+  }
+  \end{columns}
+  \bigskip
+  
+  \onslide<3->{
+  \bbox
+  Let $A$ and $B$ be $n \times n$ matrices, and let $k$ be a scalar. 
+  
+  If $B$ is obtained by \blue{scaling one row of $A$ by $k$}, then \blue{$\det B = k (\det A)$}.
+  \ebox
+  }
+  
+  \onslide<4->{
+  {\large \blue{Proof.}}
+    Let $A$ be an $n \times n$ matrix, and let $B$ be the matrix obtained by multiplying the row  $i$ of $A$ by the scalar $k$. We calculate the determinant of $B$ by cofactor expansion across row $i$.
+    \[ \det B = \sum_{j=1}^n (-1)^{i+j} \blue{b_{ij}} \det \blue{B_{ij}}
+      = \sum_{j=1}^n (-1)^{i+j} (\blue{k \cdot a_{ij}}) \det A_{ij}  
+      = k \sum_{j=1}^n (-1)^{i+j} a_{ij} \det A_{ij} = \det A. \qedhere\]
+  }
+\end{frame}
+
+
+\begin{frame}{Adding a Multiple of a Row to another Row}
+  \medskip
+
+  \begin{columns}
+  \column{.4\textwidth}
+  {\small
+  $\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\  0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 0 & 0 & 0 \\ \red{0} & \red{1} & \red{3} & \red{0} \\  0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}$
+  \medskip
+  
+  \quad $\det I_4 = 1$ \hspace*{3em} $\det E = $
+  }
+  
+  \column{.5\textwidth}
+  \onslide<2->{
+  {\small
+  $\begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ -1 & 3 & 7 & 9 \\ 4 & -2 & -3 & 2 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 2 & 3 & 4 \\ \red{2} & \red{15} & \red{28} & \red{35} \\ -1 & 3 & 7 & 9 \\ 4 & -2 & -3 & 2 \end{bmatrix}$
+  \medskip
+  
+  \qquad $\det A = -40$ \hspace*{5em} $\det B = $
+  }
+  }
+  \end{columns}
+  \bigskip
+  
+  \onslide<3->{
+  \bbox
+  Let $A$ and $B$ be $n \times n$ matrices. 
+  
+  If $B$ is obtained from $A$ by \red{adding a multiple of a row to another}, then \red{$\det B = \det A$}.
+  \ebox
+  }
+  
+  \onslide<4->{
+  {\large \blue{Proof.}}
+    We'll give a proof later.
+  }
+\end{frame}
+
+
+\begin{frame}{Swapping Two Rows}
+  \medskip
+
+  \begin{columns}
+  \column{.4\textwidth}
+  {\small
+  $\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\  0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 0 & 0 & 0 \\ \green{0} & \green{0} & \green{0} & \green{1} \\  0 & 0 & 1 & 0 \\ \green{0} & \green{1} & \green{0} & \green{0} \end{bmatrix}$
+  \medskip
+  
+  \quad $\det I_4 = 1$ \hspace*{3em} $\det E = $
+  }
+  
+  \column{.5\textwidth}
+  \onslide<2->{
+  {\small
+  $\begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ -1 & 3 & 7 & 9 \\ 4 & -2 & -3 & 2 \end{bmatrix}
+  \rightarrow
+  \begin{bmatrix} 1 & 2 & 3 & 4 \\ \green{4} & \green{-2} & \green{-3} & \green{2} \\ -1 & 3 & 7 & 9 \\ \green{5} & \green{6} & \green{7} & \green{8} \end{bmatrix}
+  $
+  \medskip
+  
+  \qquad $\det A = -40$ \hspace*{5em} $\det B = $
+  }
+  }
+  \end{columns}
+  \bigskip
+  
+  \onslide<3->{
+  \bbox
+  Let $A$ and $B$ be $n \times n$ matrices.
+  
+  If $B$ is obtained by \colorg{swapping two rows of $A$}, then \green{$\det B = -\det A$}.
+  \ebox
+  }
+  
+  \onslide<4->{
+  {\large \blue{Proof.}}
+    We'll give a proof later.
+  }
+\end{frame}
+
+\begin{frame}{Elementary Row Operations and Determinants}
+  \bbox
+  Let $A$ and $B$ denote $n \times n$ matrices, and let $k$ denote a scalar. 
+  \bi
+    \item If $B$ is obtained from $A$ by \blue{scaling one row of $A$ by $k$}, then \colorb{$\det B = k (\det A)$}.
+    \item If $B$ is obtained from $A$ by \red{adding a mult of a row to another}, then \alert{$\det B = \det A$}.
+    \item If $B$ is obtained from $A$ by \green{swapping two rows of $A$}, then \colorg{$\det B = - \det A$}.
+  \ei
+  \ebox
+  
+  \pause
+  {\large \blue{Proof.}}
+
+    Let $A$ be an $n \times n$ matrix ($n\ge 2$), and let $B$ denote the matrix obtained from $A$ by
+    \vspace*{-.7em}
+    \begin{center}
+      \red{adding $k$ times row $r$ to row $s$}, OR \green{swapping rows $r$ and $s$}.
+    \end{center}
+    
+    \pause
+    If $n=2$, then we can directly calculate the determinant.
+    \medskip
+    
+    \begin{columns}
+      \column{.4\textwidth}
+      \onslide<3->{
+      $\begin{bmatrix} a & b \\ c & d \end{bmatrix} \quad \rightarrow \quad
+       \begin{bmatrix} a & b \\ \red{c+ka} & \red{d+kb} \end{bmatrix}$
+      \medskip
+      
+      \hspace*{-2em}{\small $\det A = ad-bc$} \quad ${\det B=a(d+kb)-b(c+ka)\atop =ad-bc+kab-kab=ad-bc}$
+      }
+      
+      \column{.4\textwidth}
+      \onslide<4->{
+      $\begin{bmatrix} a & b \\ c & d \end{bmatrix} \quad \rightarrow \quad
+       \begin{bmatrix} \green{c} & \green{d} \\ \green{a} & \green{b} \end{bmatrix}$
+      \medskip
+      
+      \hspace*{-3em}{\small $\det A = ad-bc$} \quad {\footnotesize $\det B = bc-ad = -(ad-bc)$}
+      }
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Proof continued}
+  \smallskip
+
+  {\large \blue{Proof.}}
+
+    Let $A$ be an $n \times n$ matrix ($n\ge 2$), and let $B$ denote the matrix obtained from $A$ by
+    \vspace*{-.7em}
+    \begin{center}
+      \red{adding $k$ times row $r$ to row $s$}, OR \green{swapping rows $r$ and $s$}.
+    \end{center}
+    
+    Assume that \blue{$n>2$}. Let $i$ be a row \alert{other than} rows $r$ and $s$.
+    
+    We calculate the determinant of matrix $B$ by doing a cofactor expansion across row $i$.
+    
+    \begin{align*}
+      \det B &= \sum_{j=1}^n (-1)^{i+j} \, b_{ij} \, \det B_{ij}
+      \hspace*{15em} \ 
+    \end{align*}
+    
+    \pause
+    $B_{ij}$ is $A_{ij}$ with either \red{a multiple of a row added to another} or \green{two rows swapped}.
+    \medskip
+    
+    \qquad If a \red{multiple added}, then by induction $\det B_{ij} = \det A_{ij}$.  So $\det B=\det A$.
+    \medskip
+    
+    \pause
+    \qquad If \green{two rows swapped}, then by induction $\det B_{ij}=-\det A_{ij}$.  So $\det B=-\det A$.
+    
+    \hfill $\blue{\Box}$
+\end{frame}
+
+
+\begin{frame}{Example of Computing Determinant}
+%%% It would be good to show an example with scaling.
+
+  Compute the determinant of $\dsty A = \begin{bmatrix} 1 & -4 & 2  \\
+  -2 & 8 & -9 \\
+  -1 &  7  & 0 \end{bmatrix}$.
+  \bigskip
+
+  \pause
+  \alert{Row-reduce} $A$, tracking how the \green{elementary row ops} change the determinant.
+
+  \begin{align*}
+  \det \begin{bmatrix} 1 & -4 & 2  \\
+  -2 & 8 & -9 \\
+  -1 &  7  & 0 \end{bmatrix} &= 
+  \det  \begin{bmatrix} 1 & -4 & 2  \\
+  \alert{0} & \alert{0} & \alert{-5} \\
+  -1 &  7  & 0 \end{bmatrix}  = 
+  \det \begin{bmatrix} 1 & -4 & 2  \\
+  0 & 0 & -5 \\
+  \alert{0} &  \alert{3}  & \alert{2} \end{bmatrix} \\
+  &= 
+  - \det  \begin{bmatrix} 1 & -4 & 2  \\
+  \colorb{0} &  \colorb{3}  & \colorb{2} \\
+  \colorb{0} & \colorb{0} & \colorb{-5} \end{bmatrix}
+  =
+  - 3 \det  \begin{bmatrix} 1 & -4 & 2  \\
+  \green{0} &  \green{1}  & \green{\frac{2}{3}} \\
+  0 & 0 & -5 \end{bmatrix} \\
+  &=
+  15 \det  \begin{bmatrix} 1 & -4 & 2  \\
+  0 &  1  & \frac{2}{3} \\
+  \green{0} & \green{0} & \green{1} \end{bmatrix}
+  =15 \cdot 1
+  =15
+  \end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Example}
+  \bbox
+  A square matrix \alert{$A$ is invertible} if and only if \alert{$\det A \ne 0$}.
+  \ebox
+
+  Compute the determinant of $\dsty A =  \begin{bmatrix} 3 & -1 & 2 & -5\\
+  0 & 5 & -3 & -6\\
+  -6 & 7 & -7 & 4\\
+  -5 & -8 & 0 & 9 \end{bmatrix}$. \bs
+
+  \pause
+  \[ \det \begin{bmatrix} 3 & -1 & 2 & -5\\
+  0 & 5 & -3 & -6\\
+  -6 & 7 & -7 & 4\\
+  -5 & -8 & 0 & 9 \end{bmatrix} = 
+  \det  \begin{bmatrix} 3 & -1 & 2 & -5\\
+  0 & 5 & -3 & -6\\
+  0 & 5 & -3 & -6\\
+  -5 & -8 & 0 & 9 \end{bmatrix}  \]
+  \ms
+  
+  Since $A$ is \alert{not invertible}, we have $\det A = 0$.
+\end{frame}
+
+
+\begin{frame}{Elementary Matrices}
+
+\begin{columns}
+\column{0.3\tw}
+
+  \blue{Scaling a row:}
+  \medskip
+
+  $\det \begin{bmatrix} 1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  \blue{0} & \blue{0} & \blue{5} & \blue{0} \\
+  0 & 0 & 0 & 1 \end{bmatrix} = 5$
+
+\column{0.35\tw}
+
+  \red{Add mult of row to another:}
+  \medskip
+
+  $\det 
+    \begin{bmatrix} 1 & 0 & 0 & 0 \\ \red{0} & \red{1} & \red{3} & \red{0} \\  0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = 1$
+
+\column{0.3\tw}
+
+  \green{Swapping two rows:}
+  \medskip
+
+  $\det \begin{bmatrix} 1 & 0 & 0 & 0 \\
+  \green{0} & \green{0} & \green{0} & \green{1} \\
+  0 & 0 & 1 & 0 \\
+  \green{0} & \green{1} & \green{0} & \green{0} \end{bmatrix} = -1$
+
+\end{columns}
+  \vspace*{2em}
+
+  \bbox
+  If $E$ is an \blue{elementary matrix}, then $\det \left( E A \right) = \left( \det E \right) \left( \det A \right)$.
+  \ebox
+\end{frame}
+
+
+% \begin{frame}{What About Column Operations?}
+%   Since we can compute $\det A$ using a \alert{cofactor expansion across any row or down any column}, it follows that \alert{$\det A^T = \det A$}. Similarly:
+% 
+%   \begin{columns}[T]
+% 
+%   \column{0.5\tw}
+% 
+%   \bb
+%   \ii Take the transpose $A^T$.
+%   \ii Apply row operations to $A^T$.
+%   \ee
+% 
+%   \begin{align*} 
+%   \det \begin{bmatrix} 2 & -4 & 5 \\
+%   3 & -6 & 2 \\
+%   -1 & 7 & 3 \end{bmatrix} &= 
+%   \det  \begin{bmatrix} 2 & 3 & -1\\
+%   -4 & -6 & 7\\
+%   5 & 2 & 3\end{bmatrix} \\
+%   &= \det  \begin{bmatrix} 2 & 3 & -1\\
+%   0 & 0 & 5\\
+%   5 & 2 & 3\end{bmatrix} \\
+%   & = -5 \big( (2)(2) - (3)(5) \big) = 55
+%   \end{align*}
+% 
+%   \column{0.5\tw}
+% 
+%   This is equivalent to applying column operations to the original matrix:
+% 
+%   \begin{align*}
+%   \det \begin{bmatrix} 2 & -4 & 5 \\
+%   3 & -6 & 2 \\
+%   -1 & 7 & 3 \end{bmatrix} &= 
+%   \det  \begin{bmatrix} 2 & 0 & 5 \\
+%   3 & 0 & 2 \\
+%   -1 & 5 & 3 \end{bmatrix} \\
+%   &= -5\big( (2)(2) - (5)(3) \big) = 55
+%   \end{align*}
+% 
+%   \end{columns}
+% \end{frame}
+
+
+\begin{frame}{Product of Square Matrices}
+  \bbox
+  Let $A$ and $B$ denote $n \times n$ matrices. If \alert{$A$ is not invertible}, then \alert{$AB$ is not invertible.}
+  \ebox
+
+  We prove this statement using proof by contradiction.
+
+  \pause
+  \begin{proof}
+  Suppose \colorb{$A$ is not invertible} and \alert{$AB$ is invertible}. Since $AB$ is invertible, there exists an inverse matrix $M$ such that $(AB)M = I_n$.
+  \pause
+  Since there exists a matrix $D=BM$ such that $A(BM) = I_n$, by the Invertible Matrix Theorem, it follows that \blue{$A$ is invertible}. Thus, we have a contradiction, so our original assumption must not be correct. Therefore, if $A$ is not invertible, it must follow that $AB$ is not invertible.
+  \end{proof}
+
+  \pause
+  \bbox
+  If \alert{$AB$ is invertible}, then \alert{both $A$ and $B$ are invertible}.
+  \ebox
+\end{frame}
+
+\begin{frame}{Determinant of a Product $AB$}
+\bbox
+Let $A$ and $B$ denote two $n \times n$ matrices. Then \alert{$\det (AB) = (\det A) (\det B)$}.
+\ebox
+
+\pause
+{\small
+\begin{proof}
+\alert{Case 1: Suppose either $A$ or $B$ is not invertible.} Then we just showed that $AB$ is not invertible. In this case, $\det (AB) =0$ and $ (\det A) (\det B)=0$, so the property holds.
+
+\pause
+\alert{Case 2: Suppose both $A$ and $B$ are invertible.} This means $A$ is row equivalent to $I_n$. Thus, we have  $A = E_p \ldots E_2 E_1 I_n$ where each $E_i$ denotes an elementary matrix. 
+\pause
+Therefore we have 
+
+\vspace{-0.2in}
+
+\begin{align*}
+\alert{\det (AB)} = \det( E_p \ldots E_2 E_1 B) &= \det(E_p) \det(E_{p-1} \ldots E_2 E_1 B) \\
+& = \det(E_p) \det(E_{p-1}) \det(E_{p-2} \ldots E_2 E_1 B) \\
+&= \ldots \\
+&= \det(E_p) \det(E_{p-1}) \ldots (\det E_1) (\det B) \\
+&= \det( E_p E_{p-1} \ldots E_2 E_1) (\det B)\\
+&= \alert{(\det A) (\det B)}\qedhere
+\end{align*}
+\end{proof}
+}
+
+\end{frame}
+
+
+\begin{frame}{Determinants of $A$ and $A^{-1}$}
+
+\bbox
+If $A$ is an $n \times n$ invertible matrix with inverse $A^{-1}$, then \alert{$\dsty \det A^{-1} = \frac{1}{\det A}$.}
+\ebox
+
+\pause
+\begin{proof}
+Let $A$ be an invertible matrix with inverse $A^{-1}$. This means $AA^{-1} = I_n$. Then we have $\det \big( AA^{-1} \big) = \det I_n =1$. Using the previous result about the determinant for a product of matrices, we therefore have
+
+\[ 1 = \det \big( AA^{-1} \big) = \big( \det A \big)  \big( \det A^{-1} \big).\]
+
+Therefore we have \alert{$\dsty \det A^{-1} = \frac{1}{\det A}$}.
+\end{proof}
+\end{frame}
+
+\end{document}

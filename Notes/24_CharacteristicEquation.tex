@@ -1,0 +1,258 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{The Characteristic Equation}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Introduction}
+  \bigskip
+  
+  \begin{columns}[T]
+  \column{0.43\tw}
+  Find the eigenvalues of $A = \begin{bmatrix} 0 & 1  \\ -6 & 5 \end{bmatrix}$.
+
+  \onslide<4->{
+  \begin{align*}
+  \det  (A - \lambda I) &= \det \left( \begin{bmatrix} 0 & 1  \\ -6 & 5 \end{bmatrix} -  \begin{bmatrix} \lambda & 0  \\ 0 & \lambda \end{bmatrix} \right)\\
+  &= \det  \begin{bmatrix} 0-\lambda & 1  \\ -6 & 5-\lambda \end{bmatrix}\\
+  & = (0-\lambda)(5-\lambda)-(1)(-6)\\
+  & = \lambda^2 - 5 \lambda +6 
+  \end{align*}
+  }
+
+  \column{0.57\tw}
+  How do we find eigenvalues of matrix $A$?  For which values of $\lambda$:
+  \smallskip
+
+  \bi 
+  \onslide<2->{
+  \ii Does $A \mathbf{x} = \lambda \mathbf{x}$ have a \blue{nontrivial} solution?
+  \smallskip
+  \ii Does $(A - \lambda I) \mathbf{x} = \mathbf{0}$ have a nontrivial solution?
+  \smallskip
+  }
+  \onslide<3->{
+  \ii Is the matrix $(A - \lambda I)$ \alert{NOT invertible}?
+  \smallskip
+  }
+  \onslide<4->{
+  \ii Is $\det (A - \lambda I) =0$?
+  }
+  \ei
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{The Characteristic Equation}
+  \bigskip
+
+  Find the eigenvalues of $A = \begin{bmatrix} 0 & 1  \\ -6 & 5 \end{bmatrix}$.
+  \bigskip
+  
+  \pause
+  To find all eigenvalues, we solve the following equation:
+  \[ \alert{\det  (A - \lambda I)  = \lambda^2 - 5 \lambda +6  = 0.} \]
+  \vspace*{-1em}
+
+  \bbox
+  \bi 
+  \ii The scalar equation \alert{$\det (A - \lambda I)=0$} is called the \alert{characteristic equation} of $A$.
+  \smallskip
+  \ii The polynomial  \alert{$\det (A - \lambda I)$} is called the \alert{characteristic polynomial} of $A$.
+  \smallskip
+  \ii A scalar $\lambda$ is an \blue{eigenvalue} of $A$ if and only if $\lambda$ satisfies $\det (A - \lambda I)=0$.
+  \smallskip
+  \ei
+  \ebox
+\end{frame}
+
+
+\begin{frame}{Example}
+  \medskip
+
+  \begin{columns}[T]
+  \column{0.5\tw}
+  Find and solve the characteristic equation \\ \bigskip 
+  \qquad of $A =\begin{bmatrix} 1 & 2 & 1 \\ 0 & -5 & 0 \\ 1 & 8 & 1\end{bmatrix}$.
+
+  \pause
+  \column{0.5\tw}
+  \vspace*{-1em}
+  \begin{align*}
+  \blue{\det (A - \lambda I)}
+  &= \det \begin{bmatrix} 1-\lambda & 2 & 1 \\ 0 & -5-\lambda & 0 \\ 1 & 8 & 1-\lambda \end{bmatrix}\\
+  &= (-5-\lambda) \det \begin{bmatrix} 1 - \lambda & 1 \\ 1 & 1-\lambda \end{bmatrix} \\
+  &= -(5 + \lambda)\left[ (1-\lambda)^2 -1 \right] \\
+  &= -(5+\lambda) (\lambda^2-2\lambda)\\
+  &= \blue{-\lambda(5+\lambda) (\lambda-2)}
+  \end{align*}
+  \end{columns}
+  \bigskip
+
+  The \alert{characteristic equation} $ -\lambda (5+\lambda) (\lambda-2)=0$ has solutions $\lambda =0$, $-5$, and $2$.
+  \medskip
+  
+  So the eigenvalues of $A$ are $\lambda =0$, $-5$, and $2$.
+\end{frame}
+
+
+\begin{frame}{Invertible Matrix Theorem Continued, Even More!}
+  \medskip
+  
+  When is $0$ an eigenvalue of an $n\times n$ matrix $A$?
+  \medskip
+
+  \pause
+  \begin{itemize}
+  \item \alert{Zero is an eigenvalue} of $A$ if and only if there is a nonzero vector $\mathbf{x}$ such that $A \mathbf{x} = 0 \mathbf{x} = \mathbf{0}$, which happens if and only if $0 = \det(A - 0I) = \det A$.  \ms
+  \pause
+  \item $A \mathbf{x} = \mathbf{0}$ has a nontrivial solution if and only if $A$ is \alert{NOT invertible}. \ms
+  \item Hence $A$ is invertible if and only if $0$ is NOT an eigenvalue.
+  \end{itemize}
+  \bigskip
+  
+  \pause
+  \begin{theorem}[The Invertible Matrix Theorem (continued)]
+  Let $A$ be an $n \times n$ matrix. Then the following are equivalent statements:
+
+  \bb[(a)]
+  \ii $A$ is an invertible matrix.
+  \smallskip
+  \addtocounter{enumi}{16}
+  \ii The number \alert{$0$ is not an eigenvalue} of $A$.
+  \ee
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Eigenvalues of Triangular Matrices}
+  \smallskip
+
+  Find the eigenvalues of
+
+  $A = \begin{bmatrix}
+  1 & 0 & 0 & 0 & 0 & 0 \\
+  2 & 3 & 0 & 0 & 0 & 0 \\
+  3 & 4 & 5 & 0 & 0 & 0 \\
+  6 & 7 & 8 & 9 & 0 & 0 \\
+  -1 & -2 & -3 & -4 & -5 & 0 \\
+  -6 & -7 & -8 & -9 & -10 & 1 \end{bmatrix}.$
+
+  \vspace{0.2in}
+
+  \bbox
+  \bi
+  \ii If $A$ is a \alert{triangular matrix}, then the \alert{entries on the main diagonal} are the eigenvalues of $A$.
+  \ii The \alert{algebraic multiplicity of an eigenvalue} is the multiplicity of the corresponding root of the characteristic equation of $A$.
+  \ei
+  \ebox
+\end{frame}
+
+
+\begin{frame}{Similar Matrices}
+  \medskip
+  
+  \begin{definition}
+  If $A$ and $B$ are two $n \times n$ matrices, we say \alert{$A$ is similar to $B$} if there is an \blue{invertible} matrix $P$ such that \alert{$P^{-1}AP=B$}, or equivalently $A = PBP^{-1}$.
+  \end{definition}
+  \bi
+  \ii If $A$ is similar to $B$, then $B$ is similar to $A$.
+  %\ii The map $A \mapsto P^{-1}AP$ is called a \alert{similarity transformation}.  % Do we ever use this?
+  \ei
+  \vspace*{2em}
+
+  \pause
+  $\colorb{A = \begin{bmatrix} -13 & -8 & -4 \\ 12 & 7 & 4 \\ 24 & 16 & 7 \end{bmatrix}}$  is similar to $\alert{B = \begin{bmatrix} -1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & -1 \end{bmatrix}}$ since 
+  \[ P^{-1}\colorb{A}P  =
+  \begin{bmatrix} -6 & -4 & -1 \\ -3 & -2 & -1 \\ 5 & 3 & 1 \end{bmatrix}
+  \colorb{\begin{bmatrix} -13 & -8 & -4 \\ 12 & 7 & 4 \\ 24 & 16 & 7 \end{bmatrix} }
+  \begin{bmatrix} 1 & 1 & 2 \\ -2 & -1 & -3 \\ 1 & -2 & 0 \end{bmatrix}  =
+  \alert{\begin{bmatrix} -1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & -1 \end{bmatrix}} = \alert{B}. \]
+\end{frame}
+
+
+\begin{frame}{Eigenvalues of Similar Matrices}
+  \smallskip
+
+  \begin{theorem}
+    If $n \times n$ matrices $A$ and $B$ are \alert{similar}, then they have the \alert{same characteristic polynomial} and hence the \alert{same eigenvalues} (with the same algebraic multiplicities).
+  \end{theorem}
+  \smallskip
+
+  \pause
+  \blue{Proof.}
+  \begin{columns}[T]
+
+  \column{0.45\tw}
+  Let $A$ and $B$ be similar matrices.
+  
+  So $B=P^{-1}AP$ for some inv matrix $P$.
+  \pause
+  \begin{align*} B - \lambda I &= P^{-1}AP - \lambda \alert{P^{-1}P}\\
+  &= P^{-1}AP - P^{-1}(\lambda I) P \\
+  &= \alert{P^{-1}}(A - \lambda I ) \alert{P} .
+  \end{align*}
+
+  \column{0.4\tw}
+  \pause
+  This gives
+  \vspace*{-1.7em}
+  
+  \begin{align*}
+  \blue{\det (B- \lambda I)} &= \det \big( P^{-1}(A - \lambda I ) P \big)\\ 
+  &= (\det P^{-1}) (\det (A-\lambda I)) (\det P)\\
+  &= (\det P^{-1})(\det P)  (\det (A-\lambda I))\\
+  &= \alert{\det (A-\lambda I)}. \end{align*}
+  \end{columns}
+  \bigskip
+
+  \pause
+  Since  $\blue{\det (B- \lambda I)}  = \red{\det (A-\lambda I)}$, the two similar matrices have the same characteristic polynomial, and thus the same eigenvalues.
+  \hfill\blue{\qed}
+\end{frame}
+
+
+\begin{frame}{Example}
+  \bigskip
+
+  Find the eigenvalues of $A = \begin{bmatrix} -13 & -8 & -4 \\ 12 & 7 & 4 \\ 24 & 16 & 7 \end{bmatrix}$.
+  \vspace*{2em}
+  
+  \pause
+  Recall \blue{$A$} is similar to the diagonal matrix \alert{$B$} below.
+
+  \[ \begin{bmatrix} -6 & -4 & -1 \\ -3 & -2 & -1 \\ 5 & 3 & 1 \end{bmatrix}
+  \colorb{\begin{bmatrix} -13 & -8 & -4 \\ 12 & 7 & 4 \\ 24 & 16 & 7 \end{bmatrix} }
+  \begin{bmatrix} 1 & 1 & 2 \\ -2 & -1 & -3 \\ 1 & -2 & 0 \end{bmatrix}  =
+  \alert{\begin{bmatrix} -1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & -1 \end{bmatrix}}  \]
+  \medskip
+
+  Since $B$ is a triangular (diagonal) matrix, the eigenvalues of $B$ are $\lambda = -1 ,3$, where $\lambda = -1$ has multiplicity 2. Thus $A$ has eigenvalues $\lambda = -1 ,3$, where $\lambda = -1$ has multiplicity 2.
+\end{frame}
+
+
+\begin{frame}{Caution}
+  \medskip
+
+  \begin{itemize} 
+  \item If two matrices are similar, then they have the same eigenvalues. \alert{TRUE}
+  \medskip
+  \pause
+  \item If two matrices have the same eigenvalues, then the two matrices are similar.
+  \pause
+  \alert{FALSE!}
+  \end{itemize}
+  \bigskip
+
+  \begin{example}
+  \[ \begin{bmatrix} 1 & 0 \\ 0 & 5 \end{bmatrix} \quad \mbox{and} \quad \begin{bmatrix} 1 & 1 \\ 0 & 5 \end{bmatrix} \]
+  Both matrices have eigenvalues $\lambda = 1, 5$, however they are \alert{not similar} matrices.
+  \end{example}
+  \vspace*{1.5em}
+
+  Similarity is \alert{not} the same as row equivalence.
+  The two matrices above are row equivalent, but they are not similar since there is no matrix $P$ such that $P^{-1}AP=B$.
+\end{frame}
+
+\end{document}

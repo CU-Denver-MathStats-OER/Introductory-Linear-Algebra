@@ -1,0 +1,253 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{Complex Eigenvalues}
+
+\renewcommand{\Re}{\ensuremath{\text{Re }}}
+\renewcommand{\Im}{\ensuremath{\text{Im }}}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Roots of the Characteristic Equation}
+  \begin{example}
+  Compute the eigenvalues of the matrix $A = \begin{bmatrix} 4 & 5 \\ -1 & 2 \end{bmatrix}$.
+  \end{example}
+
+  \pause
+  We have
+  \[ \det (A - \lambda I) = \det \begin{bmatrix} 4-\lambda & 5 \\ -1 & 2 - \lambda \end{bmatrix} = (4-\lambda)(2-\lambda) - (5)(-1) = \alert{\lambda^2 - 6 \lambda + 13 = 0}. \]
+
+  \pause
+  Not easy to factor, so we use the \alert{quadratic formula}:
+  \[ \lambda = \frac{-b \pm \sqrt{b^2 -4ac}}{2a} = \frac{6 \pm \sqrt{6^2-4(1)(13)}}{2(1)} = \frac{6 \pm \alert{\sqrt{-16}}}{2}.\]
+  \vspace*{-.5em}
+
+  There are \blue{no real roots}, but there are \alert{complex roots}!
+\end{frame}
+
+\begin{frame}{Complex Numbers}
+  \begin{definition}
+  The \alert{imaginary number $i$} is defined to be the number that satisfies the relation $i^2 = -1$, or equivalently $\sqrt{-1} = i$.
+  \end{definition}
+  \bigskip
+
+  \blue{Example.}
+  $\sqrt{-16} = \sqrt{(16)(-1)}  = (\sqrt{16})( \sqrt{-1}) = 4i$.
+  \bigskip
+
+  \pause
+  \begin{definition}
+  A \alert{complex number} is a number that can be written in the form $z=a+bi$, where $a$ and $b$ are real numbers and $i$ denotes the imaginary number.
+  The set of complex numbers is denoted \alert{$\mathbb{C}$}.
+  \bi
+  \item The real number $a$ is called the \alert{real part} of $z$ and is denoted \alert{$\Re z$}.
+  \item The real number $b$ is called the \alert{imaginary part} of $z$ and is denoted \alert{$\Im z$}.
+  \ei
+  \end{definition}
+\end{frame}
+
+
+\begin{frame}{Solving Quadratic Equations}
+  \smallskip
+
+  Solutions to a quadratic equation $ax^2+bx+c=0$ can have the following form:
+  \bi
+  \ii \alert{Two distinct real roots.} For example, $x^2-x-6=(x-3)(x+2)=0$ has roots $x=3$ and $x=-2$.
+  \ii \alert{One repeated real root.} For example, $x^2-6x+9=(x-3)^2=0$ has root $x=3$ with multiplicity 2.
+  \ii \alert{Two complex (conjugate) roots.}
+  \ei
+  \smallskip
+
+  \pause
+  \begin{example}
+  Solve the quadratic equation $x^2-6x+13=0$.
+  \end{example}
+
+  Using the quadratic formula, we have
+
+  \[ x = \frac{6 \pm \sqrt{(-6)^2-4(1)(13)}}{2(1)} = \frac{6 \pm \alert{\sqrt{-16}}}{2} = \frac{6 \pm \alert{4i}}{2} = 3 + 2i \mbox{ and } 3-2i.\]
+
+\end{frame}
+
+
+\begin{frame}{Arithmetic with Complex Numbers}
+  \bbox
+  Let $z_1 = a + b i$ and $z_2 = c+d i$ be \blue{complex numbers}. We define the following operations.
+  \vspace*{-1em}
+  \bi
+  \ii $z_1 + z_2 = (a+c) + (b+d)i$. \ms
+  \ii If $e\in \mathbb{R}$, $e z_1 = (ea) + (eb)i$. \quad
+  \pause \blue{$\mathbb{C}$} is a \alert{vector space} over $\mathbb{R}$! \ms
+  \pause
+  \ii $z_1z_2 = (a+bi)(c+di) = ac + adi + bci + bdi^2 = (ac -bd) + (ad+bc)i$. \ms
+  \ii If $z_2\ne 0$, then we can divide by $z_2$: $z_1/z_2$. \ms
+  \pause
+  \ii The \alert{conjugate} $\overline{z_1}$ of $z_1$ is $\overline{z}_1 = a-bi$
+      (ie, $\Re \overline{z} = \Re z$ and $\Im \overline{z} = - \Im z$). \ms
+  \bi
+  \item $\overline{\overline{z}} = z$ and $(\overline{z_1}) (\overline{z_2}) = \overline{z_1z_2}$. \medskip
+  \item $z_1 \overline{z_1} = (a+bi)(a-bi) = a^2 - (bi)^2 = a^2 + b^2$, which is real. \medskip
+  \ei
+  \ei
+  \ebox
+\end{frame}
+
+
+\begin{frame}{Dividing Complex Numbers}
+  \bigskip
+  
+  Let $z_1 = a + b i$ and $z_2 = c+d i$ be \blue{complex numbers}.
+  We wish to compute $\displaystyle \frac{z_1}{z_2}$.
+  \begin{align*}
+    \frac{z_1}{z_2} = \onslide<2->{\frac{z_1}{z_2} \left( \frac{\overline{z_2}}{\overline{z_2}}\right)}
+    & \onslide<2->{= \left(\frac{a+bi}{c+di}\right) \left(\frac{c-di}{c-di}\right)}
+      \onslide<3->{= \frac{(a+bi)(c-di)}{c^2+d^2} } \\[1em]
+    & \onslide<4->{= \frac{(ac+bd)+(bc-ad)i}{c^2+d^2} }
+      \onslide<4->{= \left(\frac{ac+bd}{c^2+d^2}\right) + \left(\frac{bc-ad}{c^2+d^2}\right)i }
+  \end{align*}
+  
+  \pause\pause\pause\pause
+  \blue{Example.}
+  \begin{align*}
+    \frac{3+4i}{1-2i} 
+      \onslide<6->{ = \frac{3+4i}{1-2i} \left( \frac{1+2i}{1+2i} \right) }
+      \onslide<7->{ = \frac{(3+4i)(1+2i)}{1^2+2^2} 
+                    = \frac{(3-8)+(6+4)i}{5}
+                    = \frac{-5+10i}{5} = -1+2i }
+  \end{align*}
+  \vspace*{.01em}
+  
+  \pause\pause\pause
+  \hfill Calculations with complex numbers are best done by \alert{computer}!
+\end{frame}
+
+
+\begin{frame}{Finding a Basis for the Eigenspace of Complex Eigenvalues}
+  \begin{example}
+  Diagonalize $A = \begin{bmatrix} 4 & 5 \\ -1 & 2 \end{bmatrix}$.
+  \end{example}
+  \medskip
+
+  Matrix $A$ has two eigenvalues that we have already identified, namely \blue{$\lambda = 3 \pm 2 i$}.
+  
+  We solve $(A - \lambda I)\mathbf{x} = \mathbf{0}$ to find a basis for each eigenspace.
+  For $\lambda_1 = \blue{3-2i}$, we solve:
+
+  \[ (A - \lambda_1 I)\mathbf{x}
+  =\begin{bmatrix} 4-(\blue{3-2i}) & 5 \\ -1 & 2-(\blue{3-2i}) \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} 
+  =\begin{bmatrix} 1+2i & 5 \\ -1 & -1+2i \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} 
+  = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+  \]
+  \vspace*{-1em}
+  
+  \pause
+  \begin{columns}[T]
+  \column{.5\textwidth}
+  \[
+    \begin{bmatrix} 1+2i & 5 \\ -1 & -1+2i \end{bmatrix}
+    \xrightarrow{\text{RREF}}
+    \begin{bmatrix} 1 & 1-2i \\ 0 & 0 \end{bmatrix}
+  \]
+  \hfill $x_2$ is a \alert{free variable}. \hspace*{2em}
+  
+  \column{.5\textwidth}
+  \bigskip
+  
+  \pause
+  A \blue{basis} for the eigenspace is 
+  $\left\{ \begin{bmatrix} -1+2i \\ 1 \end{bmatrix} \right\}$.
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Continued: Eigenspace for Complex Eigenvalues}
+  \begin{example}
+  Diagonalize $A = \begin{bmatrix} 4 & 5 \\ -1 & 2 \end{bmatrix}$.
+  \end{example}
+
+  For $\lambda_2 = \blue{3+2i}$, we solve:
+
+  \[ (A - \lambda_2 I)\mathbf{x}
+  = \begin{bmatrix} 4-(\blue{3+2i}) & 5 \\ -1 & 2-(\blue{3+2i}) \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+  = \begin{bmatrix} 1-2i & 5 \\ -1 & -1-2i \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+  = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+  \]
+
+  \pause
+  \begin{columns}[T]
+  \column{.5\textwidth}
+  \[
+    \begin{bmatrix} 1-2i & 5 \\ -1 & -1-2i \end{bmatrix}
+    \xrightarrow{\text{RREF}}
+    \begin{bmatrix} 1 & 1+2i \\ 0 & 0 \end{bmatrix}
+  \]
+  \hfill $x_2$ is a \alert{free variable}. \hspace*{2em}
+  
+  \column{.5\textwidth}
+  \bigskip
+  
+  \pause
+  A \blue{basis} for the eigenspace is 
+  $\left\{ \begin{bmatrix} -1-2i \\ 1 \end{bmatrix} \right\}$.
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Continued: Eigenspace for Complex Eigenvalues}
+  \begin{example}
+  Diagonalize $A = \begin{bmatrix} 4 & 5 \\ -1 & 2 \end{bmatrix}$.
+  \end{example}
+  \bigskip
+  
+  Putting it all together, we have $P^{-1} A P = D$, where
+  
+  \[
+    D=\begin{bmatrix} 3-2i & 0 \\ 0 & 3+2i \end{bmatrix}
+    \quad \text{ and } \quad
+    P=\begin{bmatrix} -1+2i & -1-2i \\ 1 & 1 \end{bmatrix}.
+  \]
+  \smallskip
+  
+  \pause
+  Check:
+  \[
+    \underbrace{
+    \left[\begin{matrix}- \frac{i}{4} & \frac{1}{2} - \frac{i}{4}\\[.3em]
+    \frac{i}{4} & \frac{1}{2} + \frac{i}{4}\end{matrix}\right]}_{P^{-1}}
+    \underbrace{\begin{bmatrix} 4 & 5 \\ -1 & 2 \end{bmatrix}}_A
+    \underbrace{\begin{bmatrix} -1+2i & -1-2i \\ 1 & 1 \end{bmatrix}}_P
+    =
+    \underbrace{\begin{bmatrix} 3-2i & 0 \\ 0 & 3+2i \end{bmatrix}}_D.
+  \]
+  
+\end{frame}
+
+\begin{frame}{Rotation Matrices}
+  \medskip
+  
+  Let $A=\onslide<2->{\begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos\theta \end{bmatrix}}$ be the $2$-dimensional rotation matrix by $\theta$ radians.
+  \medskip
+  
+  \pause\pause
+  What are the \alert{eigenvalues} of $A$?
+  \begin{align*}
+    \det(A-\lambda I) = 
+    \begin{bmatrix} \cos\theta -\lambda & -\sin \theta \\ \sin \theta & \cos\theta -\lambda \end{bmatrix}
+    &= (\cos\theta-\lambda)^2+(\sin\theta)^2 \\
+    &= (\cos\theta)^2+(\sin\theta)^2 - 2\lambda\cos\theta +\lambda^2 \\
+    &= 1 - 2\lambda\cos\theta +\lambda^2.
+  \end{align*}
+  \pause
+  Solving the characteristic equation $\lambda^2 - (2\cos\theta)\lambda +1 = 0$,
+  \begin{align*}
+    \lambda =  \frac{2\cos\theta \pm \sqrt{4(\cos\theta)^2-4}}{2}
+            = \cos\theta \pm \sqrt{(\cos\theta)^2-1}
+  \end{align*}
+  Note that $(\cos\theta)^2\le 1$.
+  The eigenvalues are \alert{complex} when $(\cos\theta)^2 < 1$.
+  
+\end{frame}
+
+\end{document}

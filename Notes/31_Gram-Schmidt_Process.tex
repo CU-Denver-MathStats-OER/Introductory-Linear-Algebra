@@ -1,0 +1,297 @@
+\documentclass[xcolor=dvipsnames,aspectratio=169,t]{beamer}
+  % t means frames are vertically centered to the top
+\usepackage{slides-header}
+\title{The Gram--Schmidt Orthogonalization Process}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Introduction}
+  \smallskip
+
+  \bi
+  \ii We have seen that an orthogonal basis for a subspace $W$ of $\R^n$ is particularly nice.\smallskip
+  \bi
+  \ii For $\y$ in $\R^n$, we compute the \alert{orthogonal projection} of $\y$ onto $W$ by
+  \[ \hat{\y} = \proj_W \y = c_1 \u_1 + c_2 \u_2 + \ldots + c_p \u_p \quad \mbox{with weights} \ c_i = \frac{\y \cdot \u_i}{\u_i \cdot \u_i} .\]
+  \ei
+  \ii When we choose an \alert{orthonormal basis}, the calculations are even simpler.
+  \[ \hat{\y} = \proj_W \y = (UU^T) \y .\]
+  \vspace*{-1em}
+  \ii Recall $\hat{\y}$ is a useful vector to find as it is the \alert{best approximation} to $\y$ in the subspace $W$.
+  \ei
+
+  \pause
+  \begin{example}
+    Let $W  = \Span \left\{ \x_1 , \x_2 \right\}$ denote the subspace of $\R^3$ where $\x_1 = \begin{bmatrix} 3 \\ 6 \\ 0 \end{bmatrix}$ and $\x_2 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}$. \\
+    How can we find an \alert{orthogonal basis} for $W$?
+  \end{example}
+\end{frame}
+
+
+\begin{frame}
+  Let $W  = \Span \left\{ \x_1,\x_2 \right\}$ denote a subspace of $\R^3$ where
+  $\x_1 = \begin{bmatrix} 3 \\ 6 \\ 0 \end{bmatrix}$ and
+  $\x_2 = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}$.
+  \vspace*{-.75em}
+  
+  How can we find an \alert{orthogonal basis} for $W$?
+  \medskip
+
+  \pause
+  \begin{columns}[T]
+  \column{0.19\tw}
+  % a picture here would be nice
+
+  \column{0.81\tw}
+  We want orthogonal vectors $\v_1,\v_2$ such that
+    $\Span \left\{ \x_1,\x_2 \right\} = \Span \left\{ \v_1,\v_2 \right\}$.
+  \bi
+  \ii Let $\v_1 = \x_1$.
+  \pause
+  \ii Let $\v_2$ be the orth proj of $\x_2$ onto the orth compl of $Y=\Span\{\v_1\}$.
+  %Let $\v_2=\proj_{\Span\{\v_1\}^\perp} \x_2$.
+  \smallskip
+  
+  By the \blue{Orth Decomp Thm}, $\x_2 = \proj_Y \x_2 + \z$, where $\z$ is in $Y^\perp$.
+  
+  \hspace*{7em} $\proj_Y \x_2 = \proj_{\v_1} \x_2 =  \left( \frac{ \x_2 \cdot \v_1}{\v_1 \cdot \v_1} \right) \v_1 = \frac{15}{45} {\small \begin{bmatrix} 3 \\ 6 \\ 0 \end{bmatrix} }= 
+  {\small \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}}$.
+  \vspace*{-1em}
+  
+  \ii Hence $\v_2 = \z = \x_2 - \proj_{\v_1} \x_2 =
+  {\small \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}
+        - \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} =
+           \begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix}}$.
+  \pause
+  \ii Since $\v_2 = \x_2 - \proj_{\v_1} \x_2 = \x_2 + c \x_1$, $\v_2$ is in the subspace $W$.
+  \pause
+  \ii Thus $\left\{ \v_1 , \v_2 \right\} = \left\{ 
+    {\small \begin{bmatrix} 3 \\ 6 \\ 0 \end{bmatrix} , 
+            \begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix} } \right\}$ 
+    is an \alert{orthogonal basis} for $W$.
+  \ei
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{The Gram--Schmidt Orthogonalization Process}
+  \smallskip
+  
+  Given a \alert{basis} $\left\{ \x_1, \x_2 , \ldots , \x_p \right\}$ for a nonzero subspace $W$ of $\R^n$, define
+  \begin{align*}
+  \v_1 &= \x_1  & Y_1 &= \Span\{\v_1\} \\
+  \onslide<2->{
+  \v_2 &= \proj_{Y_1^\perp} \x_2 = \x_2 - \proj_{Y_1} \x_2 = \x_2 - \left( \textstyle \frac{ \x_2 \cdot \v_1}{\v_1 \cdot \v_1} \right) \v_1  & Y_2 &= \Span\{\v_1,\v_2\}\\
+  }
+  \onslide<3->{
+  \v_3 & = \proj_{Y_2^\perp} \x_3 = \x_3 - \proj_{Y_2} \x_3
+  = \x_3 - \left( \textstyle \frac{ \x_3 \cdot \v_1}{\v_1 \cdot \v_1} \right) \v_1 - \left( \textstyle \frac{ \x_3 \cdot \v_2}{\v_2 \cdot \v_2} \right) \v_2 
+  & Y_3 &= \Span\{\v_1,\v_2,\v_3\} \\
+  }
+  \onslide<4->{
+  & \vdots \\
+  \v_p & = \proj_{Y_{p-1}^\perp} \x_p = \x_p - \proj_{Y_{p-1}} \x_p \\
+  &= \x_p - \left( \textstyle \frac{ \x_p \cdot \v_1}{\v_1 \cdot \v_1} \right) \v_1 - \left( \textstyle \frac{ \x_p \cdot \v_2}{\v_2 \cdot \v_2} \right) \v_2 - \ldots - \left( \textstyle \frac{ \x_p \cdot \v_{p-1}}{\v_{p-1} \cdot \v_{p-1}} \right) \v_{p-1}.
+  & Y_p &= \Span\{\v_1,\v_2,\v_3,\ldots,\v_p\}
+  }
+  \end{align*}
+  \vspace*{-1em}
+
+  \onslide<5->{
+  \begin{theorem}
+    Then $\left\{ \v_1 , \v_2 , \ldots , \v_p \right\}$ is an \alert{orthogonal basis} for $W$.
+    \onslide<6->{
+    In addition,
+    \vspace*{-.75em}
+    
+    \[ \Span \left\{ \x_1 , \x_2 , \ldots , \x_k \right\} = Y_k = \Span \left\{ \v_1 , \v_2 , \ldots , \v_k \right\}  \quad \mbox{for } 1 \leq k \leq p. \]%
+    \vspace*{-1.3em}% I don't know why this is needed.  Something about the overlay messing up the spacing.
+    }%
+  \end{theorem}%
+  }%
+\end{frame}
+
+
+\begin{frame}{Example}
+  Find an \alert{orthogonal basis} for the subspace $W = \Span \left\{ 
+  {\small \begin{bmatrix} 1 \\ -4 \\ 0 \\ 1 \end{bmatrix},
+          \begin{bmatrix} 7 \\ -7 \\ -4 \\ 1 \end{bmatrix} } \right\}$ in $\R^4$.
+
+  \vspace{-0.2in}
+
+  \pause
+  We have  $\v_1 = \x_1 =  \begin{bmatrix} 1 \\ -4 \\ 0 \\ 1 \end{bmatrix}$. 
+  \vspace{-0.2em}
+
+  \pause
+  Then we find $ \v_2 = \x_2 - \left( \frac{ \x_2 \cdot \v_1}{\v_1 \cdot \v_1} \right) \v_1 = \begin{bmatrix} 7 \\ -7 \\ -4 \\ 1 \end{bmatrix} - \left( \displaystyle \frac{36}{18} \right)  \begin{bmatrix} 1 \\ -4 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 5 \\ 1 \\ -4 \\ -1 \end{bmatrix}.$
+  \bigskip
+
+  Thus an \alert{orthogonal basis} for $W$ is  $\left\{  \begin{bmatrix} 1 \\ -4 \\ 0 \\ 1 \end{bmatrix} ,  \begin{bmatrix} 5 \\ 1 \\ -4 \\ -1 \end{bmatrix} \right\}$.
+\end{frame}
+
+
+\begin{frame}{Example}
+  \smallskip
+  
+  Consider the matrix $A = \small \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix}$.
+  Find an \alert{orthogonal basis} for the column space of $A$.
+  \bigskip
+
+  \pause
+  First we find a basis for the column space by checking the reduced row echelon form of $A$:
+
+  \[ \small \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix} \xrightarrow{\text{RREF}} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0\\ 0 & 0 &  1 \\ 0 & 0 & 0 \end{bmatrix}, \mbox{ so a basis for $\Col A$ is}
+  \left\{ \begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix} , \begin{bmatrix} -5 \\ 1 \\ 5 \\ -7 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ -2 \\ 8 \end{bmatrix} \right\}. \]
+  \vspace*{2em}
+
+  Next we use the Gram--Schmidt Process to convert the basis into an \alert{orthogonal} basis.
+\end{frame}
+
+
+\begin{frame}{Example, continued}
+
+  \blue{ $\Col A = \Span \left\{ \small \begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix} , \begin{bmatrix} -5 \\ 1 \\ 5 \\ -7 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ -2 \\ 8 \end{bmatrix} \right\}$}.
+  We first define \alert{$\v_1 =  \begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix}$}.
+  \medskip
+
+  \pause
+  Then we continue with Gram--Schmidt process:
+  \begin{align*}
+  \colorg{\v_2} & = \colorb{\x_2} - \left( \frac{ \colorb{\x_2} \cdot \alert{\v_1}}{\alert{\v_1} \cdot \alert{\v_1}} \right) \alert{\v_1} = \colorb{\begin{bmatrix} -5 \\ 1 \\ 5 \\ -7 \end{bmatrix}} -  \left( \frac{-40}{20} \right) \alert{\begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix}} = \colorg{\begin{bmatrix}  1 \\ 3 \\ 3 \\ -1 \end{bmatrix}} \\[1em]
+  \onslide<3->{
+  \v_3 &= \colorb{\x_3} - \left( \frac{ \colorb{\x_3} \cdot \alert{\v_1}}{\alert{\v_1} \cdot \alert{\v_1}} \right) \alert{\v_1} - \left( \frac{ \colorb{\x_3} \cdot \colorg{\v_2}}{\colorg{\v_2} \cdot \colorg{\v_2}} \right) \colorg{\v_2} = \colorb{\begin{bmatrix} 1 \\ 1 \\ -2 \\ 8 \end{bmatrix}} - \left( \frac{30}{20} \right) \alert{\begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix}} - \frac{-10}{20} \colorg{\begin{bmatrix}  1 \\ 3 \\ 3 \\ -1 \end{bmatrix}} = \begin{bmatrix} -3 \\ 1 \\ 1 \\ 3 \end{bmatrix}
+  }
+  \end{align*}
+\end{frame}
+
+
+\begin{frame}{Normalizing the Basis}
+  \smallskip
+
+  For the $4 \times 3$ matrix $A = \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix}$, we therefore have
+  \medskip
+
+  \bi
+  %\ii An initial basis for $\Col A$ is  $\left\{ \begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix} , \begin{bmatrix} -5 \\ 1 \\ 5 \\ -7 \end{bmatrix}, \begin{bmatrix} 1 \\ 1 \\ -2 \\ 8 \end{bmatrix} \right\}$
+
+  \ii An \colorb{orthogonal basis} for $\Col A$ is  \colorb{$\left\{ \begin{bmatrix} 3\\ 1 \\ -1 \\ 3 \end{bmatrix} , \begin{bmatrix} 1 \\ 3 \\ 3 \\ -1 \end{bmatrix}, \begin{bmatrix} -3 \\ 1 \\ 1 \\ 3 \end{bmatrix} \right\}$}.
+
+  \bs
+
+  \pause
+  \ii An \alert{orthonormal basis} for $\Col A$ is  \alert{$\left\{ \begin{bmatrix} 3/\sqrt{20}\\ 1/\sqrt{20} \\ -1/\sqrt{20} \\ 3/\sqrt{20} \end{bmatrix} , \begin{bmatrix} 1/\sqrt{20} \\ 3/\sqrt{20} \\ 3/\sqrt{20} \\ -1/\sqrt{20} \end{bmatrix}, \begin{bmatrix} -3/\sqrt{20} \\ 1/\sqrt{20} \\ 1/\sqrt{20} \\ 3/\sqrt{20} \end{bmatrix} \right\}$}.
+  \ei
+\end{frame}
+
+\end{document}  % We are skipping QR factorization.
+
+\begin{frame}{The $QR$ Factorization}
+  Let 
+  $A = \small \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix}$.
+  We can construct a matrix $Q$ whose columns form an orthonormal basis for $\Col A$.
+
+  \vspace{-0.1in}
+
+  \alert{\[ Q =  \begin{bmatrix} 3/\sqrt{20} & 1/\sqrt{20} & -3/\sqrt{20} \\
+  1/\sqrt{20} & 2/\sqrt{20} & 1/\sqrt{20} \\
+  -1/\sqrt{20} & 3/\sqrt{20} & 1/\sqrt{20} \\
+  3/\sqrt{20} & -1/\sqrt{20} & 3/\sqrt{20} \end{bmatrix} \]}
+
+  \vspace{-0.1in}
+
+  Next we define
+
+  \vspace{-0.1in}
+
+  {\small \[ \colorb{R} = Q^T A = \begin{bmatrix} 3/\sqrt{20} & 1/\sqrt{20} & -1/\sqrt{20} & 3/\sqrt{20} \\
+  1/\sqrt{20} & 2/\sqrt{20} & 3/\sqrt{20} & -1/\sqrt{20} \\
+  -3/\sqrt{20} & 1/\sqrt{20} & 1/\sqrt{20} & 3/\sqrt{20} \end{bmatrix}  \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix} = \colorb{\begin{bmatrix} \sqrt{20} & -2\sqrt{20} & 3\sqrt{20}/2 \\
+  0 & \sqrt{20} & -\sqrt{20}/2 \\ 0 & 0 & \sqrt{20} \end{bmatrix}} \] }
+\end{frame}
+
+\begin{frame}
+
+In our previous example, $A = \begin{bmatrix} 3 & -5 & 1 \\ 1 & 1 & 1 \\ -1 & 5 & -2 \\ 3 & -7 & 8 \end{bmatrix}$.  Using Gram--Schmidt, we construct a matrix \alert{$Q$} whose columns form an orthonormal basis for $\Col A$ and \colorb{$R = Q^TA$}.
+
+\[ \alert{Q =  \begin{bmatrix} 3/\sqrt{20} & 1/\sqrt{20} & -3/\sqrt{20} \\
+1/\sqrt{20} & 2/\sqrt{20} & 1/\sqrt{20} \\
+-1/\sqrt{20} & 3/\sqrt{20} & 1/\sqrt{20} \\
+3/\sqrt{20} & -1/\sqrt{20} & 3/\sqrt{20} \end{bmatrix}} \quad \mbox{and} \quad
+ \colorb{R = \begin{bmatrix} \sqrt{20} & -2\sqrt{20} & 3\sqrt{20}/2 \\
+0 & \sqrt{20} & -\sqrt{20}/2 \\ 0 & 0 & \sqrt{20} \end{bmatrix}} \] 
+
+Taking the product of matrices $Q$ and $R$ gives
+$\alert{Q}\colorb{R} = \alert{Q} \colorb{Q^TA} = (\colorr{Q}\colorb{Q^T}) A$.
+The matrix $Q Q^T$ orthogonally projects vectors onto $\Col A$.
+Since each column of $A$ is in $\Col A$, $Q Q^T A = A$.
+\bigskip
+
+\pause
+In other words, given a matrix $A$ with linearly independent columns, we can express $A=\alert{Q}\colorb{R}$ as a product of two matrices, \alert{$Q$} (whose columns form an \alert{orthonormal basis for $\Col A$}) and an \colorb{upper-triangular} matrix \colorb{$R$} with positive entries along the main diagonal.
+\end{frame}
+
+
+\begin{frame}{The $QR$ Factorization}
+
+\begin{theorem}[$QR$ Factorization]
+If $A$ is an $m \times n$ matrix \colorg{with linearly independent columns}, then $A$ can be factored as $A = QR$ where:
+\bi
+\ii \alert{$Q$} is an $m \times n$ matrix whose \alert{columns form an orthonormal basis for $\Col A$}, and 
+\ii \colorb{$R$} is an \colorb{$n \times n$ upper-triangular matrix} with positive entries along the main diagonal \\(so \colorb{$R$ is invertible}).
+\ei
+\end{theorem}
+
+\pause
+We can compute $\colorb{R}=\colorr{Q^T} A$.  Why is $\colorb{R}$ upper-triangular?
+\bigskip
+
+Since $A=\colorr{Q}\colorb{R}$, we can write $\mathbf{a}_j=\colorr{Q} \colorb{\mathbf{r}_j}$ for $1\le j \le n$.
+
+Since
+$\Span \left\{ \a_1 , \ldots , \a_k \right\} =  \Span \left\{ \mathbf{q}_1 , \ldots , \mathbf{q}_k \right\}$ for $1 \leq k \leq n$,
+$\mathbf{a}_j$ is in $\Span\left\{ \mathbf{q}_1 , \ldots , \mathbf{q}_j \right\}$.
+
+Thus $\colorb{\mathbf{r}_j}$ can be chosen such that $\colorb{r_{ij}}=0$ for $i>j$.
+\bigskip
+
+The fact that $\colorb{R}$ has nonzero entries along the main diagonal comes from the fact that $\colorb{R}$ is invertible (which follows from the fact that $A$ has linearly independent columns).
+
+%This factorization is widely used in computer algorithms for various computations, such as linear regression, where we want to find the best fitting model corresponding to a dataset.
+\end{frame}
+
+\begin{frame}{Steps for Finding a $QR$ Factorization}
+
+{\small Find the $QR$ factorization for $\colorg{A = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}}$.
+\pause
+$\Col A = \Span \left\{ \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \\ 1 \\ 1 \end{bmatrix} \right\}$.}
+\medskip
+
+\bb
+\ii Find an orthogonal basis using the Gram--Schmidt Process.
+
+{\small \[ \Col A = \Span \left\{ 
+\begin{bmatrix} 1 \\ 1 \\ 1\\ 1 \end{bmatrix},
+\begin{bmatrix} -3/4 \\ 1/4 \\ 1/4 \\ 1/4 \end{bmatrix},
+\begin{bmatrix} 0 \\ -2/3 \\ 1/3 \\ 1/3 \end{bmatrix} \right\}. 
+\quad
+\onslide<3->{
+\alert{Q = \begin{bmatrix} 1/2 & -3/\sqrt{12} & 0 \\
+1/2 & 1/\sqrt{12} & -2/\sqrt{6} \\
+1/2 & 1/\sqrt{12} & 1/\sqrt{6} \\
+1/2 & 1/\sqrt{12} & 1/\sqrt{6} \end{bmatrix}}.} \]}
+
+\pause
+\ii Normalize each vector to find \alert{$Q$}.
+
+\pause
+\ii Find {\small $\colorb{R} = \alert{Q}^T\colorg{A} = \alert{\begin{bmatrix} 1/2 & 1/2 & 1/2 & 1/2 \\
+-3/\sqrt{12} & 1/\sqrt{12} & 1/\sqrt{12} & 1/\sqrt{12} \\
+ 0 & -2/\sqrt{6} &  1/\sqrt{6}  & 1/\sqrt{6}    \end{bmatrix}}\colorg{\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}} = \colorb{\begin{bmatrix} 2 & 3/2 & 1 \\ 0 & 3/\sqrt{12} & 2/\sqrt{12} \\ 0 & 0 & 2/\sqrt{6} \end{bmatrix}}.$}
+\ee
+
+\end{frame}
+
+\end{document}
+
