@@ -1,0 +1,149 @@
+
+% Standard header for Linear Algebra slides.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{slides-header}[2022/08/29 Header for teaching-related files]
+% the package description *must* start with the date in this format.
+
+% for configuring Beamer slides
+\usetheme{Boadilla}
+\usecolortheme{whale}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[default]
+\definecolor{LightGray}{RGB}{217,217,217}
+\definecolor{LighterGray}{RGB}{242,242,242}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}  % nested lists have same size
+
+% When switching theme from CambridgeUS to Boadilla, some of the slides are too long.
+% So we move things up closer to the frame title.
+% See:
+% https://latex.org/forum/viewtopic.php?t=15137
+% https://tex.stackexchange.com/questions/110229/beamer-full-width-image-aligned-to-top-with-a-frame-title
+\addtobeamertemplate{frametitle}{\vspace*{-.1cm}}{\vspace*{-0.3cm}}
+% There's also a problem that ``Proof.'' is larger than the previous slides.  Something to fix later.
+
+\author{Linear Algebra}
+\institute[]{
+\vspace*{10em}
+
+\tiny{
+These materials were created by Adam Spiegler, Stephen Hartke, and others,
+and are licensed under
+
+a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+\medskip
+
+This work was initially funded by an Institutional OER Grant from the Colorado Department of Higher Education (CDHE).
+For similar OER materials in other courses funded by this project in the Department of Mathematical and Statistical Sciences at the University of Colorado Denver, visit
+
+\url{https://github.com/CU-Denver-MathStats-OER}
+}
+}
+\date{}
+%\title{Reduced Row Echelon Form}  % title should be set in main file
+
+
+% Require some standard packages.
+\RequirePackage{enumerate,tasks,multicol,tcolorbox,hyperref}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+
+% for Python code
+\definecolor{DarkGreen}{rgb}{0.0,0.2,0.13}
+\definecolor{CadmiumGreen}{rgb}{0.0,0.42,0.24}
+\RequirePackage{listings}
+\lstset{language=Python,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+   otherkeywords={0,1,2,3,4,5,6,7,8,9},
+   morekeywords={TRUE,FALSE,as},
+    deletekeywords={data,frame,length,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{CadmiumGreen},
+}
+
+
+% Labeled statement environments from amsthm (included in beamer).
+\newcounter{results}
+\setbeamertemplate{theorems}[normal font]  % do not italicize statements
+\theoremstyle{definition}
+\newtheorem{thm}[results]{Theorem}
+\newtheorem{cor}[results]{Corollary}
+\newtheorem{lem}[results]{Lemma}
+\newtheorem{prop}[results]{Proposition}
+\newtheorem{conj}[results]{Conjecture}
+\newtheorem{defn}[results]{Definition}
+\newtheorem{rem}[results]{Remark}
+\newtheorem{ex}[results]{Example}
+
+\newcommand{\remark}[1]{}
+\renewcommand{\remark}[1]{\emph{Remark.} #1}
+
+
+% Some abbreviations for common things.
+\def \ee {\end{enumerate}}
+\def \bb {\begin{enumerate}}
+\def \ii {\item}
+\def \ei {\end{itemize}}
+\def \bi {\begin{itemize}}
+\def \lb {\lbrack}
+\def \rb {\rbrack}
+\def \d {\displaystyle}
+\def \p {\pause}
+\def\tw {\textwidth}
+\def \bs {\bigskip}
+\def \ms {\medskip}
+\def \ss {\smallskip}
+\def \bbox {\begin{tcolorbox}}
+\def \ebox {\end{tcolorbox}}
+\def \dsty {\displaystyle}
+\def \colorb{\textcolor{blue}}
+\def \blue{\textcolor{blue}}
+\def \colorr{\textcolor{Red}}  % darker than red
+\def \red{\textcolor{Red}}  % darker than red
+\setbeamercolor{alerted text}{fg=Red}
+\def \colorg{\textcolor{Green}}
+\def \green{\textcolor{Green}}
+\def \colorp{\textcolor{Purple}}
+\def \purple{\textcolor{Purple}}
+\def\P{\mathcal{P}}
+\def \SE {\mbox{SE}\lb T \rb}
+\def \SEhat {\hat{\mbox{SE}}\lb T \rb}
+\def \Exp {\mbox{E}}
+\def \Var{\mbox{Var}}
+\def \bR {\begin{lstlisting} }
+\def \eR {\end{lstlisting} }
+\def\MLE {\mathbf{\hat{\theta}_{\rm MLE}}}
+\def\mbf {\mathbf}
+\def \bbm {\begin{bmatrix}}
+\def \ebm {\end{bmatrix}}
+
+\def \Nul {\mbox{Null }}
+\def \Col {\mbox{Col }}
+\def \Row {\mbox{Row }}
+\def \dim {\mbox{dim}}
+\def \B {\mathcal{B}}
+
+\def \Re {\mbox{Re }}
+\def \Im {\mbox{Im }}
+
+% vectors
+\def \v {\mathbf{v}}
+\def \u {\mathbf{u}}
+\def \w {\mathbf{w}}
+\def \x {\mathbf{x}}
+\def \y {\mathbf{y}}
+\def \z {\mathbf{z}}
+\def \a {\mathbf{a}}
+\def \b {\mathbf{b}}
+\def \c {\mathbf{c}}
+\def \e {\mathbf{e}}
+\def \d {\mathbf{d}}
+
+\newcommand{\R}{\mathbb{R}}  % set of real numbers
+\newcommand{\C}{\mathbb{C}}  % set of complex numbers
+
+\def \Span {\mbox{Span}}
+\def \proj {\mbox{proj}}
+\def \adj {\mbox{adj}\,}
