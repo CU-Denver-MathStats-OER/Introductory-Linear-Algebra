@@ -168,26 +168,46 @@ Consider the linear transformation given by $\dsty T(\mathbf{x}) = A \mathbf{x} 
 \end{frame}
 
 \begin{frame}{Rotations}
+\medskip
 
-Consider the linear transformation $T$ of $\mathbb{R}^2$ that rotates by the angle $\theta$.
-What is the associated matrix of $T$?
-\bigskip
-
-\pause
-\begin{columns}
-\column{0.6\tw}
-  \begin{center}
-  \includegraphics[width=0.7\tw]{images/fig-rotation.png}
-  \end{center}
-
-\column{0.4\tw}
-  \vspace*{3em}
+  Consider the linear transformation $T$ of $\mathbb{R}^2$ that rotates by the angle $\theta$.
+  What is the associated matrix of $T$?
   
-  $T(\mathbf{x})= A\mathbf{x}= 
-  \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin\theta & \cos\theta \end{bmatrix}\mathbf{x}$
-\end{columns}
-\end{frame}
+  \pause
+  \begin{columns}
+  \column{0.65\tw}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.6]
+      \draw (-1.25,0)--(1.75,0);
+      \draw (0,-1.25,0)--(0,1.5);
+      \draw[blue,thick] (0,0) circle (1);
+      % theta is 20 degrees
+      \draw[red,very thick,->] (0,0)--(0.9396926207859084,0.3420201433256687);
+      \node[anchor=south west] at (0.9396926207859084,0.3420201433256687) {$(\cos \theta,\sin \theta)=A\e_1$};
+      \node at (.5,.085) {$\theta$};
+      \node at (1.75,.1) {$x_1$};
+      \node[anchor=north west] at (1,-.05) {$(1,0)=\e_1$};
+      \node at (1,0)[circle,fill,inner sep=1.5pt]{};
+      
+      \onslide<3->{
+      \draw[red,very thick,->] (0,0)--(-0.3420201433256687,0.9396926207859084);
+      \node[anchor=south east] at (-0.3420201433256687,0.9396926207859084) {$A\e_2=(-\sin \theta,\cos \theta)$};
+      \node at (-.085,.5) {$\theta$};
+      \node[anchor=south east] at (0,1.35) {$x_2$};
+      \node[anchor=south west] at (.05,1) {$(0,1)=\e_2$};
+      \node at (0,1)[circle,fill,inner sep=1.5pt]{};
+      }
+    \end{tikzpicture}
+    \end{center}
 
+  \column{0.35\tw}
+    \vspace*{3em}
+    
+    $T(\mathbf{x})= A\mathbf{x}= 
+    \begin{bmatrix} \cos \theta & \onslide<3->{ -\sin \theta } \\ 
+                    \sin\theta & \onslide<3->{\cos\theta} \end{bmatrix}\mathbf{x}$
+  \end{columns}
+\end{frame}
 
 
 \begin{frame}{Properties of Linear Transformations}
