@@ -41,7 +41,23 @@
   \pause
   \begin{columns}[T]
   \column{0.19\tw}
-  % a picture here would be nice
+  \vspace*{3em}
+  
+  \begin{tikzpicture}
+    \coordinate (v1) at (1.75,0.5) {};
+    \node[anchor=west] at (v1) {$\v_1=\x_1$};
+    \draw[very thick,blue,-latex,inner sep=0pt] (0,0)--(v1);  % latex or stealth arrowhead
+    \coordinate (x2) at (1,1) {};
+    \node[anchor=south west] at (x2) {$\x_2$};
+    \draw[very thick,black,-latex] (0,0)--(x2);
+    \coordinate (p) at (1.18867924528302,0.339622641509434) {};
+    \node[anchor=north west] at (p) {$\proj_{\v_1} \x_2$};
+    \draw[thick,dotted] (1,1)--(p);
+    \draw[very thick,red,-latex] (0,0)--(p);
+    \coordinate (v2) at (-0.188679245283019,0.660377358490566) {};
+    \node[anchor=south] at (v2) {$\v_2$};
+    \draw[very thick,blue,-latex] (0,0)--(v2);
+  \end{tikzpicture}
 
   \column{0.81\tw}
   We want orthogonal vectors $\v_1,\v_2$ such that
