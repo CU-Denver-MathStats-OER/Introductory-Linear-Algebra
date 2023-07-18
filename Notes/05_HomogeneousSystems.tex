@@ -183,8 +183,8 @@ Notice \colorb{$x_3$ is a free variable}, and the solution set can therefore be 
 
 
 \begin{frame}{Comparing Homogeneous and Nonhomogeneous Solutions}
-
-  \vspace*{-1.5em}
+  \vspace*{-2em}
+  
   \begin{columns}
 \column{0.45\tw}
 
@@ -196,7 +196,7 @@ Notice \colorb{$x_3$ is a free variable}, and the solution set can therefore be 
 
 \[ \mathbf{x} =  x_3 \bbm 2 \\ -3 \\ 1 \ebm = t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]
 
-    \column{0.55\tw}
+    \column{0.55\tw}  % why are the columns not vertically aligned since they have the same number of lines?
 
 \[   \begin{array}{ccccccc}
      x_1 & + & 3x_2 & + &7 x_3&=&4\\
@@ -204,16 +204,39 @@ Notice \colorb{$x_3$ is a free variable}, and the solution set can therefore be 
     -2x_1 & - & 4x_2 & - & 8x_3 &=& 2
 \end{array}  \]
 
-\[ \mathbf{x} =  \alert{\bbm -11 \\ 5 \\ 0 \ebm} +  x_3 \bbm 2 \\ -3 \\ 1 \ebm =\alert{\mathbf{p}} + t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]
-
+\[ \mathbf{x} =  \alert{\bbm -11 \\ 5 \\ 0 \ebm} +  x_3 \bbm 2 \\ -3 \\ 1 \ebm =\alert{\mathbf{p}} + t \mbf{v} \ \ (t \mbox{ in } \mathbb{R}) . \]%
   \end{columns}
 
   \begin{center}
-    \includegraphics[width=3in]{images/fig-translate.png}
+    \begin{tikzpicture}
+      \draw (-1,0)--(5,0);
+      \draw (0,-1)--(0,3);
+      \draw[very thick,blue] (-1,-.5)--(4,2);
+      \node[anchor=west] at (4,2) {$A\x=0$};  % has slope .5
+      \draw[very thick,red] (-1,.5)--(4,3);
+      \node[anchor=west] at (4,3) {$A\x=\b$};  % has equation y=.5*x+1
+      
+      \coordinate (p) at (1,1.5);
+      \node[anchor=south] at (p) {$\mathbf{p}$};
+      \draw[very thick,red,-latex] (0,0)--(p);
+      \node[circle,fill,inner sep=1.5pt] at (p) {};
+      
+      \coordinate (v) at (1.5,.75);
+      \node[anchor=north] at (v) {$\v$};
+      \node[circle,fill,inner sep=1.5pt] at (v) {};
+      
+      \coordinate (tv) at (2.25,1.125);
+      \node[anchor=north] at (tv) {$t\v$};
+      \node[circle,fill,inner sep=1.5pt] at (tv) {};
+      
+      \coordinate (pplustv) at (3.25,2.625);
+      \node[anchor=south east] at (pplustv) {$\mathbf{p}+t\v$};
+      \node[circle,fill,inner sep=1.5pt] at (pplustv) {};
+      \draw[very thick,black,-latex] (tv)--(pplustv);
+    \end{tikzpicture}
   \end{center}
-  
-  
-  \end{frame}
+\end{frame}
+
 
 \begin{frame}
 
