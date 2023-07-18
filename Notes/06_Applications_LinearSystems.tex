@@ -44,24 +44,34 @@
   \column{0.35\tw}
 
   \includegraphics[width=0.95\tw]{images/fig-social-network.png}
-
-  \includegraphics[width=0.95\tw]{images/fig-node.png}
+  \smallskip
   
+  \begin{tikzpicture}[scale=.7]
+    \node[anchor=east] (v) at (-2,0) {$25$};
+    \node[anchor=west] (x1) at (2,1) {$x_1$};
+    \node[anchor=west] (x2) at (2,-1) {$x_2$};
+    \draw[very thick,-stealth] (v)--(0,0);
+    \draw[very thick,-stealth] (0,0)--(0,1)--(x1);
+    \draw[very thick,-stealth] (0,0)--(0,-1)--(x2);
+    \node[circle,fill,inner sep=1.5pt] at (0,0) {};
+  \end{tikzpicture}
+
   \end{columns}
 
   \end{frame}
 
 \begin{frame}{Traffic Flow in Baltimore}
 
-  The network in the figure shows the flow of traffic (in vehicles per hour) over several one way streets in downtown Baltimore during a typical early afternoon. Determine the general flow pattern for the network.
+  The network in the figure shows the flow of traffic (in vehicles per hour) over several one way streets in downtown Baltimore during a typical early afternoon.
+  Determine the general flow pattern for the network.
 
   \begin{columns}
-    \column{0.4\tw}
-    
-  \includegraphics[width=0.8\tw]{images/fig-traffic-network.png}
+  \column{0.4\tw}
+  \vspace*{-2em}
+  
+  \input{images/fig-traffic-network}
 
   \column{0.6\tw}
-  
   \begin{tabular}{crcl}
     \hline
     Intersection & Flow in & & Flow out\\
@@ -93,8 +103,8 @@
 
   \begin{columns}[T]
     \column{0.3\tw}
-
-    \includegraphics[width=0.8\tw]{images/fig-traffic-network.png}
+    
+    \hspace*{2em}\scalebox{0.65}{\input{images/fig-traffic-network}}
     
       \column{0.7\tw}
 \[   \begin{array}{ccccccccccc}
@@ -106,6 +116,7 @@
 \end{array} \]
 
 \end{columns}
+  \medskip
 
    We have an augmented matrix
 
