@@ -191,46 +191,64 @@
   \end{columns}
 \end{frame}
 
+
 \begin{frame}{Modeling Election Outcomes}
 
-\begin{columns}[T]
+  \begin{columns}[T]
 
-\column{0.5\tw}
+  \column{0.5\tw}
 
-Consider the following model:
+  Consider the following model:
 
-\begin{center}
-\includegraphics[width=0.7\tw]{images/fig-voting.png}
-\end{center}
+  \begin{center}
+    \begin{tikzpicture}[scale=.9]
+      \node[draw,fill=red!5,align=center] (D) at (-2,2) {Democratic\\vote};
+      \node[draw,fill=red!5,align=center] (R) at (2,2) {Republican\\vote};
+      \node[draw,fill=red!5,align=center] (O) at (0,-.5) {Other\\vote};
+      
+      \draw[very thick,-stealth,blue] (D) to[out=5,in=175] node[pos=.5,anchor=south,black] () {$.20$} (R);
+      \draw[very thick,stealth-,blue] (D) to[out=-5,in=-175] node[pos=.5,anchor=north,black] () {$.10$} (R);
+      
+      \draw[very thick,-stealth,blue] (D) to[out=-60,in=140] node[pos=.5,anchor=west,black] () {$.10$} (O);
+      \draw[very thick,stealth-,blue] (D) to[out=-90,in=180] node[pos=.5,anchor=east,black] () {$.30$} (O);
+      
+      \draw[very thick,-stealth,blue] (R) to[out=-120,in=40] node[pos=.5,anchor=east,black] () {$.10$} (O);
+      \draw[very thick,stealth-,blue] (R) to[out=-90,in=0] node[pos=.5,anchor=west,black] () {$.30$} (O);
+      
+      \path[very thick,-stealth,blue] (D) edge [loop above] node[black] {$0.70$} (D);
+      \path[very thick,-stealth,blue] (R) edge [loop above] node[black] {$0.80$} (R);
+      \path[very thick,-stealth,blue] (O) edge [loop below] node[black] {$0.40$} (O);
+    \end{tikzpicture}
+  \end{center}
 
-\vspace{-0.7in}
+  \vspace{-0.475in}
 
-\[ \mbox{With initial state vector } \quad \x_0 = \begin{bmatrix} 0.50 \\ 0.45 \\ 0.05 \end{bmatrix} \]
-
-
-\column{0.5\tw}
-
-\bb
-\ii What is the predicted outcome in the next election cycle? 
-\ii What is the predicted outcome in two election cycles?
-\ee
+  \[ \mbox{With initial state vector } \x_0 = \begin{bmatrix} 0.50 \\ 0.45 \\ 0.05 \end{bmatrix} \]
 
 
-\[  \begin{bmatrix}
-0.7 & 0.1 & 0.3 \\
-0.2 & 0.8 & 0.3 \\
-0.1 & 0.1 & 0.4 \end{bmatrix} \begin{bmatrix} 0.5 \\ 0.45 \\ 0.05 \end{bmatrix}  = 
-\begin{bmatrix} 0.41 \\ 0.475 \\ 0.115 \end{bmatrix} \]
+  \column{0.5\tw}
 
-\[  \begin{bmatrix}
-0.7 & 0.1 & 0.3 \\
-0.2 & 0.8 & 0.3 \\
-0.1 & 0.1 & 0.4 \end{bmatrix} \begin{bmatrix} 0.41 \\ 0.475 \\ 0.115 \end{bmatrix} = 
-\begin{bmatrix} 0.369 \\ 0.4965 \\ 0.1345 \end{bmatrix} \]
+  \bb
+  \ii What is the predicted outcome in the next election cycle? 
+  \ii What is the predicted outcome in two election cycles?
+  \ee
 
-\end{columns}
 
+  \[  \begin{bmatrix}
+  0.7 & 0.1 & 0.3 \\
+  0.2 & 0.8 & 0.3 \\
+  0.1 & 0.1 & 0.4 \end{bmatrix} \begin{bmatrix} 0.5 \\ 0.45 \\ 0.05 \end{bmatrix}  = 
+  \begin{bmatrix} 0.41 \\ 0.475 \\ 0.115 \end{bmatrix} \]
+
+  \[  \begin{bmatrix}
+  0.7 & 0.1 & 0.3 \\
+  0.2 & 0.8 & 0.3 \\
+  0.1 & 0.1 & 0.4 \end{bmatrix} \begin{bmatrix} 0.41 \\ 0.475 \\ 0.115 \end{bmatrix} = 
+  \begin{bmatrix} 0.369 \\ 0.4965 \\ 0.1345 \end{bmatrix} \]
+
+  \end{columns}
 \end{frame}
+
 
 \begin{frame}{Long Term Predictions}
   \smallskip
