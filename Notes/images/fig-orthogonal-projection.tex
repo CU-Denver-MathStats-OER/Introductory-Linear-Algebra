@@ -1,0 +1,27 @@
+
+% picture of orthogonal projection onto subspace W
+
+  \begin{tikzpicture}
+    \draw[fill=black!5] (-1.5,-.25)--(.25,.75)--(2.25,-.25)--(.5,-1.25)--cycle;
+    \node[anchor=north] at (-1,-.5) {$W$};
+  
+    \coordinate (origin) at (0,0);
+    \node[anchor=north east] at (origin) {$0$};
+    
+    \coordinate (y) at (1,1);
+    \draw[very thick,black] (origin)--(y);
+    \node[anchor=west] at (y) {$\y$};
+    \node[circle,fill,inner sep=1.5pt] at (y) {};
+    
+    \coordinate (yhat) at (1,-.5);
+    \draw[very thick,red] (origin)--(yhat);
+    \draw[dashed] (y)--(yhat);
+    \draw[thick,black] (.8,-.40)--(.8,-.20)--(1,-.30);
+    \node[anchor=west] at (yhat) {$\hat\y=\proj_W \y$};
+    \node[circle,fill,inner sep=1.5pt] at (yhat) {};
+    
+    \coordinate (z) at (0,1.5);
+    \draw[very thick,blue] (origin)--(z);
+    \node[anchor=south west] at (z) {$\z=\y-\hat\y$};
+    \node[circle,fill,inner sep=1.5pt] at (z) {};
+  \end{tikzpicture}
