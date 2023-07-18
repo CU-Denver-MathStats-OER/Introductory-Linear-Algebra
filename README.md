@@ -1,5 +1,6 @@
 # Introductory-Linear-Algebra
 Course materials for an introductory undergraduate course on Linear Algebra.
+These materials are used for MATH 3191 Applied Linear Algebra at the University of Colorado Denver.
 
 These materials were created by Adam Spiegler, Stephen Hartke, and others,
 and are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
